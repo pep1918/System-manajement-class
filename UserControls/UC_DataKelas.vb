@@ -1,7 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class UC_DataKelas
-
+    Inherits System.Windows.Forms.UserControl
 
     Public Sub New()
         InitializeComponent()
@@ -71,6 +71,10 @@ Public Class UC_DataKelas
     End Sub
 
     Private Sub cmbWali_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWali.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
 
     End Sub
 End Class

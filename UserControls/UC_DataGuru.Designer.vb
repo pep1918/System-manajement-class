@@ -1,27 +1,28 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_DataGuru
-    Inherits System.Windows.Forms.Form
+        Inherits System.Windows.Forms.UserControl
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+        'Form overrides dispose to clean up the component list.
+        <System.Diagnostics.DebuggerNonUserCode()>
+        Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+            Try
+                If disposing AndAlso components IsNot Nothing Then
+                    components.Dispose()
+                End If
+            Finally
+                MyBase.Dispose(disposing)
+            End Try
+        End Sub
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
-    Private Sub InitializeComponent()
+        'Required by the Windows Form Designer
+        Private components As System.ComponentModel.IContainer
+
+        'NOTE: The following procedure is required by the Windows Form Designer
+        'It can be modified using the Windows Form Designer.  
+        'Do not modify it using the code editor.
+        <System.Diagnostics.DebuggerStepThrough()>
+        Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_DataGuru))
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lbjudul = New System.Windows.Forms.Label()
@@ -255,23 +256,23 @@ Partial Class UC_DataGuru
     End Sub
 
     Friend WithEvents Label6 As Label
-    Friend WithEvents lbjudul As Label
-    Friend WithEvents lbMotif As Label
-    Friend WithEvents btnSimpan As Button
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents cmbKelas As ComboBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents txtHp As TextBox
-    Friend WithEvents txtAlamat As TextBox
-    Friend WithEvents txtNama As TextBox
-    Friend WithEvents txtNIP As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents btnHapus As Button
-    Friend WithEvents btn_Batal As Button
-    Friend WithEvents btn_Ubah As Button
-    Friend WithEvents btn_Tambah As Button
-    Friend WithEvents dgvGuru As DataGridView
-End Class
+        Friend WithEvents lbjudul As Label
+        Friend WithEvents lbMotif As Label
+        Friend WithEvents btnSimpan As Button
+        Friend WithEvents GroupBox1 As GroupBox
+        Friend WithEvents cmbKelas As ComboBox
+        Friend WithEvents Label5 As Label
+        Friend WithEvents txtHp As TextBox
+        Friend WithEvents txtAlamat As TextBox
+        Friend WithEvents txtNama As TextBox
+        Friend WithEvents txtNIP As TextBox
+        Friend WithEvents Label4 As Label
+        Friend WithEvents Label3 As Label
+        Friend WithEvents Label2 As Label
+        Friend WithEvents Label1 As Label
+        Friend WithEvents btnHapus As Button
+        Friend WithEvents btn_Batal As Button
+        Friend WithEvents btn_Ubah As Button
+        Friend WithEvents btn_Tambah As Button
+        Friend WithEvents dgvGuru As DataGridView
+    End Class

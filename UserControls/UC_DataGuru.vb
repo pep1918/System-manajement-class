@@ -1,15 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class UC_DataGuru
-
+    Inherits System.Windows.Forms.UserControl
 
     Public Sub New()
         InitializeComponent()
     End Sub
 
     Dim id_edit As Integer = 0
-
-
 
     Private Sub UC_DataGuru_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             tampilData()
@@ -76,5 +74,7 @@ Public Class UC_DataGuru
             setAwal()
         End Sub
 
+    Private Sub lbjudul_Click(sender As Object, e As EventArgs) Handles lbjudul.Click
 
+    End Sub
 End Class

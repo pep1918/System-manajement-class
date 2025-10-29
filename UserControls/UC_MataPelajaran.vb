@@ -1,13 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class UC_MataPelajaran
-
+    Inherits System.Windows.Forms.UserControl
+     
     Public Sub New()
         InitializeComponent()
     End Sub
 
     Dim id_edit As Integer = 0
-
 
 
     Private Sub UC_MataPelajaran_Load(sender As Object, e As EventArgs) Handles MyBase.Load

@@ -122,36 +122,48 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.Designer.vb">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FormLogin.Designer.vb">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UC_DataGuru.Designer.vb">
+    <Compile Include="UserControls\UC_DataGuru.Designer.vb">
       <DependentUpon>UC_DataGuru.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_DataGuru.vb">
-      <SubType>Form</SubType>
+    <Compile Include="UserControls\UC_DataGuru.vb">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_DataKelas.Designer.vb">
+    <Compile Include="UserControls\UC_DataKelas.Designer.vb">
       <DependentUpon>UC_DataKelas.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_DataKelas.vb" />
-    <Compile Include="UC_DataSiswa.Designer.vb">
+    <Compile Include="UserControls\UC_DataKelas.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_DataSiswa.Designer.vb">
       <DependentUpon>UC_DataSiswa.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_DataSiswa.vb">
-      <SubType>Form</SubType>
+    <Compile Include="UserControls\UC_DataSiswa.vb">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_ManajemenPelajaran.Designer.vb">
+    <Compile Include="UserControls\UC_ManajemenPelajaran.Designer.vb">
       <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_ManajemenPelajaran.vb" />
-    <Compile Include="UC_MataPelajaran.Designer.vb">
+    <Compile Include="UserControls\UC_ManajemenPelajaran.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UC_MataPelajaran.Designer.vb">
       <DependentUpon>UC_MataPelajaran.vb</DependentUpon>
     </Compile>
-    <Compile Include="UC_MataPelajaran.vb" />
+    <Compile Include="UserControls\UC_MataPelajaran.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
     </Compile>
@@ -180,19 +192,19 @@
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_DataGuru.resx">
+    <EmbeddedResource Include="UserControls\UC_DataGuru.resx">
       <DependentUpon>UC_DataGuru.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_DataKelas.resx">
+    <EmbeddedResource Include="UserControls\UC_DataKelas.resx">
       <DependentUpon>UC_DataKelas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_DataSiswa.resx">
+    <EmbeddedResource Include="UserControls\UC_DataSiswa.resx">
       <DependentUpon>UC_DataSiswa.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_ManajemenPelajaran.resx">
+    <EmbeddedResource Include="UserControls\UC_ManajemenPelajaran.resx">
       <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_MataPelajaran.resx">
+    <EmbeddedResource Include="UserControls\UC_MataPelajaran.resx">
       <DependentUpon>UC_MataPelajaran.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
@@ -218,8 +230,6 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

@@ -1,9 +1,10 @@
 ﻿Imports MySql.Data.MySqlClient
 
+
 Public Class UC_DataSiswa
+        Inherits System.Windows.Forms.UserControl
 
-
-    Public Sub New()
+        Public Sub New()
         InitializeComponent()
     End Sub
 

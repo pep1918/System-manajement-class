@@ -1,6 +1,6 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
 Partial Class UC_DataKelas
-    Inherits System.Windows.Forms.Form
+    Inherits System.Windows.Forms.UserControl
 
     'Form overrides dispose to clean up the component list.
     <System.Diagnostics.DebuggerNonUserCode()> _
@@ -29,10 +29,10 @@ Partial Class UC_DataKelas
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtNamaKelas = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnHapus = New System.Windows.Forms.Button()
+        Me.btnBatal = New System.Windows.Forms.Button()
+        Me.btnUbah = New System.Windows.Forms.Button()
+        Me.btnTambah = New System.Windows.Forms.Button()
         Me.dgvKelas = New System.Windows.Forms.DataGridView()
         Me.lbjudul = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
@@ -63,10 +63,10 @@ Partial Class UC_DataKelas
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtNamaKelas)
         Me.GroupBox1.Controls.Add(Me.Label2)
-        Me.GroupBox1.Controls.Add(Me.Button4)
-        Me.GroupBox1.Controls.Add(Me.Button3)
-        Me.GroupBox1.Controls.Add(Me.Button2)
-        Me.GroupBox1.Controls.Add(Me.Button1)
+        Me.GroupBox1.Controls.Add(Me.btnHapus)
+        Me.GroupBox1.Controls.Add(Me.btnBatal)
+        Me.GroupBox1.Controls.Add(Me.btnUbah)
+        Me.GroupBox1.Controls.Add(Me.btnTambah)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 93)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(256, 396)
@@ -107,41 +107,41 @@ Partial Class UC_DataKelas
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Kelas:"
         '
-        'Button4
+        'btnHapus
         '
-        Me.Button4.Location = New System.Drawing.Point(21, 356)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 23)
-        Me.Button4.TabIndex = 3
-        Me.Button4.Text = "Hapus"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnHapus.Location = New System.Drawing.Point(21, 356)
+        Me.btnHapus.Name = "btnHapus"
+        Me.btnHapus.Size = New System.Drawing.Size(75, 23)
+        Me.btnHapus.TabIndex = 3
+        Me.btnHapus.Text = "Hapus"
+        Me.btnHapus.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnBatal
         '
-        Me.Button3.Location = New System.Drawing.Point(116, 356)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 23)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Batal"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnBatal.Location = New System.Drawing.Point(116, 356)
+        Me.btnBatal.Name = "btnBatal"
+        Me.btnBatal.Size = New System.Drawing.Size(75, 23)
+        Me.btnBatal.TabIndex = 2
+        Me.btnBatal.Text = "Batal"
+        Me.btnBatal.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnUbah
         '
-        Me.Button2.Location = New System.Drawing.Point(116, 327)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Ubah"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnUbah.Location = New System.Drawing.Point(116, 327)
+        Me.btnUbah.Name = "btnUbah"
+        Me.btnUbah.Size = New System.Drawing.Size(75, 23)
+        Me.btnUbah.TabIndex = 1
+        Me.btnUbah.Text = "Ubah"
+        Me.btnUbah.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnTambah
         '
-        Me.Button1.Location = New System.Drawing.Point(21, 327)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Tambah"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnTambah.Location = New System.Drawing.Point(21, 327)
+        Me.btnTambah.Name = "btnTambah"
+        Me.btnTambah.Size = New System.Drawing.Size(75, 23)
+        Me.btnTambah.TabIndex = 0
+        Me.btnTambah.Text = "Tambah"
+        Me.btnTambah.UseVisualStyleBackColor = True
         '
         'dgvKelas
         '
@@ -166,14 +166,13 @@ Partial Class UC_DataKelas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1045, 541)
         Me.Controls.Add(Me.lbjudul)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.btnSimpan)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvKelas)
         Me.Name = "UC_DataKelas"
-        Me.Text = "DataKelas"
+        Me.Size = New System.Drawing.Size(1045, 541)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.dgvKelas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -189,10 +188,10 @@ Partial Class UC_DataKelas
     Friend WithEvents Label5 As Label
     Friend WithEvents txtNamaKelas As TextBox
     Friend WithEvents Label2 As Label
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnHapus As Button
+    Friend WithEvents btnBatal As Button
+    Friend WithEvents btnUbah As Button
+    Friend WithEvents btnTambah As Button
     Friend WithEvents dgvKelas As DataGridView
     Friend WithEvents lbjudul As Label
 End Class

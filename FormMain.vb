@@ -27,11 +27,11 @@ Public Class FormMain
     End Sub
 
     Private Sub btnKelas_Click(sender As Object, e As EventArgs) Handles btnKelas.Click
-        'ShowUC(New UC_DataKelas)
+        ShowUC(New UC_DataKelas)
     End Sub
 
     Private Sub btnMapel_Click(sender As Object, e As EventArgs) Handles btnMapel.Click
-        'ShowUC(New UC_MataPelajaran)
+        ShowUC(New UC_MataPelajaran)
     End Sub
 
     Private Sub btnManajemen_Click(sender As Object, e As EventArgs) Handles btnManajemen.Click
