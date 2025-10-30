@@ -77,4 +77,8 @@ Public Class UC_DataKelas
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
 
     End Sub
+
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+
+    End Sub
 End Class

@@ -118,4 +118,7 @@ Public Class UC_ManajemenPelajaran
         ' Tambah fitur lain di sini kalau butuh edit/hapus
     End Sub
 
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
 End Class

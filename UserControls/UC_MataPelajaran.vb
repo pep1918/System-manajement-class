@@ -56,4 +56,8 @@ Public Class UC_MataPelajaran
     Private Sub lbjudul_Click(sender As Object, e As EventArgs) Handles lbjudul.Click
 
     End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
 End Class

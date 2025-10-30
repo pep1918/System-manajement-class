@@ -40,7 +40,6 @@ Partial Class UC_DataSiswa
         Me.btn_Ubah = New System.Windows.Forms.Button()
         Me.btn_Tambah = New System.Windows.Forms.Button()
         Me.btnSimpan = New System.Windows.Forms.Button()
-        Me.lbMotif = New System.Windows.Forms.Label()
         Me.lbjudul = New System.Windows.Forms.Label()
         CType(Me.dgvSiswa, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -48,6 +47,7 @@ Partial Class UC_DataSiswa
         '
         'dgvSiswa
         '
+        Me.dgvSiswa.BackgroundColor = System.Drawing.Color.SaddleBrown
         Me.dgvSiswa.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvSiswa.Location = New System.Drawing.Point(274, 94)
         Me.dgvSiswa.Name = "dgvSiswa"
@@ -58,6 +58,7 @@ Partial Class UC_DataSiswa
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.SaddleBrown
         Me.GroupBox1.Controls.Add(Me.cmbKelas)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtNoHp)
@@ -77,7 +78,6 @@ Partial Class UC_DataSiswa
         Me.GroupBox1.Size = New System.Drawing.Size(256, 396)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
         '
         'cmbKelas
         '
@@ -90,6 +90,7 @@ Partial Class UC_DataSiswa
         'Label5
         '
         Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.Color.White
         Me.Label5.Location = New System.Drawing.Point(21, 190)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(41, 16)
@@ -127,6 +128,7 @@ Partial Class UC_DataSiswa
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.Color.White
         Me.Label4.Location = New System.Drawing.Point(21, 162)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(52, 16)
@@ -136,6 +138,7 @@ Partial Class UC_DataSiswa
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.Color.White
         Me.Label3.Location = New System.Drawing.Point(21, 122)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(49, 16)
@@ -145,81 +148,79 @@ Partial Class UC_DataSiswa
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(21, 84)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(50, 16)
+        Me.Label2.Size = New System.Drawing.Size(47, 16)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Nama :"
+        Me.Label2.Text = "Nama "
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(21, 52)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(45, 16)
+        Me.Label1.Size = New System.Drawing.Size(42, 16)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = "NISN :"
+        Me.Label1.Text = "NISN "
         '
         'btnHapus
         '
-        Me.btnHapus.Location = New System.Drawing.Point(21, 356)
+        Me.btnHapus.Location = New System.Drawing.Point(26, 320)
         Me.btnHapus.Name = "btnHapus"
-        Me.btnHapus.Size = New System.Drawing.Size(75, 23)
+        Me.btnHapus.Size = New System.Drawing.Size(75, 39)
         Me.btnHapus.TabIndex = 3
         Me.btnHapus.Text = "Hapus"
         Me.btnHapus.UseVisualStyleBackColor = True
         '
         'btnBatal
         '
-        Me.btnBatal.Location = New System.Drawing.Point(116, 356)
+        Me.btnBatal.Location = New System.Drawing.Point(123, 320)
         Me.btnBatal.Name = "btnBatal"
-        Me.btnBatal.Size = New System.Drawing.Size(75, 23)
+        Me.btnBatal.Size = New System.Drawing.Size(84, 39)
         Me.btnBatal.TabIndex = 2
         Me.btnBatal.Text = "Batal"
         Me.btnBatal.UseVisualStyleBackColor = True
         '
         'btn_Ubah
         '
-        Me.btn_Ubah.Location = New System.Drawing.Point(116, 327)
+        Me.btn_Ubah.Location = New System.Drawing.Point(123, 264)
         Me.btn_Ubah.Name = "btn_Ubah"
-        Me.btn_Ubah.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Ubah.Size = New System.Drawing.Size(84, 41)
         Me.btn_Ubah.TabIndex = 1
         Me.btn_Ubah.Text = "Ubah"
         Me.btn_Ubah.UseVisualStyleBackColor = True
         '
         'btn_Tambah
         '
-        Me.btn_Tambah.Location = New System.Drawing.Point(21, 327)
+        Me.btn_Tambah.Location = New System.Drawing.Point(26, 264)
         Me.btn_Tambah.Name = "btn_Tambah"
-        Me.btn_Tambah.Size = New System.Drawing.Size(75, 23)
+        Me.btn_Tambah.Size = New System.Drawing.Size(75, 41)
         Me.btn_Tambah.TabIndex = 0
         Me.btn_Tambah.Text = "Tambah"
         Me.btn_Tambah.UseVisualStyleBackColor = True
         '
         'btnSimpan
         '
-        Me.btnSimpan.Location = New System.Drawing.Point(891, 506)
+        Me.btnSimpan.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnSimpan.ForeColor = System.Drawing.Color.White
+        Me.btnSimpan.Location = New System.Drawing.Point(900, 496)
         Me.btnSimpan.Name = "btnSimpan"
-        Me.btnSimpan.Size = New System.Drawing.Size(75, 23)
+        Me.btnSimpan.Size = New System.Drawing.Size(87, 35)
         Me.btnSimpan.TabIndex = 2
         Me.btnSimpan.Text = "Simpan"
-        Me.btnSimpan.UseVisualStyleBackColor = True
-        '
-        'lbMotif
-        '
-        Me.lbMotif.AutoSize = True
-        Me.lbMotif.Location = New System.Drawing.Point(763, 509)
-        Me.lbMotif.Name = "lbMotif"
-        Me.lbMotif.Size = New System.Drawing.Size(48, 16)
-        Me.lbMotif.TabIndex = 3
-        Me.lbMotif.Text = "Label6"
+        Me.btnSimpan.UseVisualStyleBackColor = False
         '
         'lbjudul
         '
         Me.lbjudul.AutoSize = True
-        Me.lbjudul.Location = New System.Drawing.Point(30, 26)
+        Me.lbjudul.BackColor = System.Drawing.Color.Transparent
+        Me.lbjudul.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbjudul.ForeColor = System.Drawing.Color.White
+        Me.lbjudul.Location = New System.Drawing.Point(4, 29)
         Me.lbjudul.Name = "lbjudul"
-        Me.lbjudul.Size = New System.Drawing.Size(75, 16)
+        Me.lbjudul.Size = New System.Drawing.Size(271, 48)
         Me.lbjudul.TabIndex = 9
         Me.lbjudul.Text = "Data Siswa"
         '
@@ -228,14 +229,12 @@ Partial Class UC_DataSiswa
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.ClientSize = New System.Drawing.Size(1045, 541)
         Me.Controls.Add(Me.lbjudul)
-        Me.Controls.Add(Me.lbMotif)
         Me.Controls.Add(Me.btnSimpan)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvSiswa)
         Me.Name = "UC_DataSiswa"
-        Me.Text = "DataSiswa"
+        Me.Size = New System.Drawing.Size(1045, 541)
         CType(Me.dgvSiswa, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -261,6 +260,5 @@ Partial Class UC_DataSiswa
     Friend WithEvents btnBatal As Button
     Friend WithEvents btn_Ubah As Button
     Friend WithEvents btn_Tambah As Button
-    Friend WithEvents lbMotif As Label
     Friend WithEvents lbjudul As Label
 End Class
