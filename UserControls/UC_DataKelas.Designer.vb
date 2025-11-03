@@ -25,7 +25,9 @@ Partial Class UC_DataKelas
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_DataKelas))
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cmbWali = New System.Windows.Forms.ComboBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtTahunAjaran = New System.Windows.Forms.TextBox()
+        Me.cmbWaliKelas = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtNamaKelas = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -34,9 +36,9 @@ Partial Class UC_DataKelas
         Me.btnUbah = New System.Windows.Forms.Button()
         Me.btnTambah = New System.Windows.Forms.Button()
         Me.dgvKelas = New System.Windows.Forms.DataGridView()
-        Me.lbjudul = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblJudulUC = New System.Windows.Forms.Label()
+        Me.txtCariKelas = New System.Windows.Forms.TextBox()
+        Me.Cari = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvKelas, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -56,8 +58,8 @@ Partial Class UC_DataKelas
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.SaddleBrown
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Controls.Add(Me.cmbWali)
+        Me.GroupBox1.Controls.Add(Me.txtTahunAjaran)
+        Me.GroupBox1.Controls.Add(Me.cmbWaliKelas)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtNamaKelas)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -72,13 +74,30 @@ Partial Class UC_DataKelas
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "\"
         '
-        'cmbWali
+        'Label1
         '
-        Me.cmbWali.FormattingEnabled = True
-        Me.cmbWali.Location = New System.Drawing.Point(107, 111)
-        Me.cmbWali.Name = "cmbWali"
-        Me.cmbWali.Size = New System.Drawing.Size(100, 24)
-        Me.cmbWali.TabIndex = 13
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(18, 24)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(41, 16)
+        Me.Label1.TabIndex = 15
+        Me.Label1.Text = "Kelas"
+        '
+        'txtTahunAjaran
+        '
+        Me.txtTahunAjaran.Location = New System.Drawing.Point(116, 65)
+        Me.txtTahunAjaran.Name = "txtTahunAjaran"
+        Me.txtTahunAjaran.Size = New System.Drawing.Size(100, 22)
+        Me.txtTahunAjaran.TabIndex = 14
+        '
+        'cmbWaliKelas
+        '
+        Me.cmbWaliKelas.FormattingEnabled = True
+        Me.cmbWaliKelas.Location = New System.Drawing.Point(107, 111)
+        Me.cmbWaliKelas.Name = "cmbWaliKelas"
+        Me.cmbWaliKelas.Size = New System.Drawing.Size(100, 24)
+        Me.cmbWaliKelas.TabIndex = 13
         '
         'Label5
         '
@@ -92,7 +111,7 @@ Partial Class UC_DataKelas
         '
         'txtNamaKelas
         '
-        Me.txtNamaKelas.Location = New System.Drawing.Point(107, 62)
+        Me.txtNamaKelas.Location = New System.Drawing.Point(116, 24)
         Me.txtNamaKelas.Name = "txtNamaKelas"
         Me.txtNamaKelas.Size = New System.Drawing.Size(100, 22)
         Me.txtNamaKelas.TabIndex = 9
@@ -103,9 +122,9 @@ Partial Class UC_DataKelas
         Me.Label2.ForeColor = System.Drawing.Color.White
         Me.Label2.Location = New System.Drawing.Point(18, 68)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(44, 16)
+        Me.Label2.Size = New System.Drawing.Size(87, 16)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Kelas:"
+        Me.Label2.Text = "Tahun Ajaran"
         '
         'btnHapus
         '
@@ -151,49 +170,51 @@ Partial Class UC_DataKelas
         Me.dgvKelas.Name = "dgvKelas"
         Me.dgvKelas.RowHeadersWidth = 51
         Me.dgvKelas.RowTemplate.Height = 24
-        Me.dgvKelas.Size = New System.Drawing.Size(759, 396)
+        Me.dgvKelas.Size = New System.Drawing.Size(944, 396)
         Me.dgvKelas.TabIndex = 4
         '
-        'lbjudul
+        'lblJudulUC
         '
-        Me.lbjudul.AutoSize = True
-        Me.lbjudul.BackColor = System.Drawing.Color.Transparent
-        Me.lbjudul.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbjudul.ForeColor = System.Drawing.Color.White
-        Me.lbjudul.Location = New System.Drawing.Point(6, 29)
-        Me.lbjudul.Name = "lbjudul"
-        Me.lbjudul.Size = New System.Drawing.Size(262, 48)
-        Me.lbjudul.TabIndex = 9
-        Me.lbjudul.Text = "Data Kelas"
+        Me.lblJudulUC.AutoSize = True
+        Me.lblJudulUC.BackColor = System.Drawing.Color.Transparent
+        Me.lblJudulUC.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJudulUC.ForeColor = System.Drawing.Color.White
+        Me.lblJudulUC.Location = New System.Drawing.Point(6, 29)
+        Me.lblJudulUC.Name = "lblJudulUC"
+        Me.lblJudulUC.Size = New System.Drawing.Size(262, 48)
+        Me.lblJudulUC.TabIndex = 9
+        Me.lblJudulUC.Text = "Data Kelas"
         '
-        'TextBox1
+        'txtCariKelas
         '
-        Me.TextBox1.Location = New System.Drawing.Point(107, 21)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 22)
-        Me.TextBox1.TabIndex = 14
+        Me.txtCariKelas.Location = New System.Drawing.Point(933, 65)
+        Me.txtCariKelas.Name = "txtCariKelas"
+        Me.txtCariKelas.Size = New System.Drawing.Size(100, 22)
+        Me.txtCariKelas.TabIndex = 16
         '
-        'Label1
+        'Cari
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(18, 24)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(71, 16)
-        Me.Label1.TabIndex = 15
-        Me.Label1.Text = "ID KELAS :"
+        Me.Cari.AutoSize = True
+        Me.Cari.Location = New System.Drawing.Point(784, 71)
+        Me.Cari.Name = "Cari"
+        Me.Cari.Size = New System.Drawing.Size(31, 16)
+        Me.Cari.TabIndex = 17
+        Me.Cari.Text = "Cari"
         '
         'UC_DataKelas
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.Controls.Add(Me.lbjudul)
+        Me.Controls.Add(Me.Cari)
+        Me.Controls.Add(Me.txtCariKelas)
+        Me.Controls.Add(Me.lblJudulUC)
         Me.Controls.Add(Me.btnSimpan)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvKelas)
         Me.Name = "UC_DataKelas"
-        Me.Size = New System.Drawing.Size(1045, 541)
+        Me.Size = New System.Drawing.Size(1241, 541)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.dgvKelas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -203,7 +224,7 @@ Partial Class UC_DataKelas
     End Sub
     Friend WithEvents btnSimpan As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents cmbWali As ComboBox
+    Friend WithEvents cmbWaliKelas As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents txtNamaKelas As TextBox
     Friend WithEvents Label2 As Label
@@ -212,7 +233,9 @@ Partial Class UC_DataKelas
     Friend WithEvents btnUbah As Button
     Friend WithEvents btnTambah As Button
     Friend WithEvents dgvKelas As DataGridView
-    Friend WithEvents lbjudul As Label
+    Friend WithEvents lblJudulUC As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtTahunAjaran As TextBox
+    Friend WithEvents txtCariKelas As TextBox
+    Friend WithEvents Cari As Label
 End Class

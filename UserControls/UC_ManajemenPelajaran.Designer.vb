@@ -23,51 +23,61 @@ Partial Class UC_ManajemenPelajaran
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_ManajemenPelajaran))
-        Me.bt_simpan = New System.Windows.Forms.Button()
+        Me.btnSimpan = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.cmbMapel = New System.Windows.Forms.ComboBox()
-        Me.Mapel = New System.Windows.Forms.Label()
-        Me.cmbKelas = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnTambah = New System.Windows.Forms.Button()
-        Me.dgvManage = New System.Windows.Forms.DataGridView()
-        Me.lbjudul = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbHariJadwal = New System.Windows.Forms.ComboBox()
+        Me.dtpJamSelesai = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.dtpJamMulai = New System.Windows.Forms.DateTimePicker()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbGuruJadwal = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.txtNama = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.cmbMapelJadwal = New System.Windows.Forms.ComboBox()
+        Me.Mapel = New System.Windows.Forms.Label()
+        Me.cmbKelasJadwal = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnHapus = New System.Windows.Forms.Button()
+        Me.btnBatal = New System.Windows.Forms.Button()
+        Me.btnUbah = New System.Windows.Forms.Button()
+        Me.btnTambah = New System.Windows.Forms.Button()
+        Me.dgvJadwal = New System.Windows.Forms.DataGridView()
+        Me.lblJudulUC = New System.Windows.Forms.Label()
+        Me.cmbFilterKelas = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.dgvManage, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvJadwal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'bt_simpan
+        'btnSimpan
         '
-        Me.bt_simpan.BackColor = System.Drawing.Color.SaddleBrown
-        Me.bt_simpan.ForeColor = System.Drawing.Color.White
-        Me.bt_simpan.Location = New System.Drawing.Point(898, 493)
-        Me.bt_simpan.Name = "bt_simpan"
-        Me.bt_simpan.Size = New System.Drawing.Size(89, 35)
-        Me.bt_simpan.TabIndex = 6
-        Me.bt_simpan.Text = "Simpan"
-        Me.bt_simpan.UseVisualStyleBackColor = False
+        Me.btnSimpan.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnSimpan.ForeColor = System.Drawing.Color.White
+        Me.btnSimpan.Location = New System.Drawing.Point(898, 493)
+        Me.btnSimpan.Name = "btnSimpan"
+        Me.btnSimpan.Size = New System.Drawing.Size(89, 35)
+        Me.btnSimpan.TabIndex = 6
+        Me.btnSimpan.Text = "Simpan"
+        Me.btnSimpan.UseVisualStyleBackColor = False
         '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.SaddleBrown
-        Me.GroupBox1.Controls.Add(Me.txtNama)
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
+        Me.GroupBox1.Controls.Add(Me.cmbHariJadwal)
+        Me.GroupBox1.Controls.Add(Me.dtpJamSelesai)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.dtpJamMulai)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.cmbGuruJadwal)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.cmbMapel)
+        Me.GroupBox1.Controls.Add(Me.cmbMapelJadwal)
         Me.GroupBox1.Controls.Add(Me.Mapel)
-        Me.GroupBox1.Controls.Add(Me.cmbKelas)
+        Me.GroupBox1.Controls.Add(Me.cmbKelasJadwal)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Button4)
-        Me.GroupBox1.Controls.Add(Me.Button3)
-        Me.GroupBox1.Controls.Add(Me.Button2)
+        Me.GroupBox1.Controls.Add(Me.btnHapus)
+        Me.GroupBox1.Controls.Add(Me.btnBatal)
+        Me.GroupBox1.Controls.Add(Me.btnUbah)
         Me.GroupBox1.Controls.Add(Me.btnTambah)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 91)
         Me.GroupBox1.Name = "GroupBox1"
@@ -75,13 +85,88 @@ Partial Class UC_ManajemenPelajaran
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
-        'cmbMapel
+        'cmbHariJadwal
         '
-        Me.cmbMapel.FormattingEnabled = True
-        Me.cmbMapel.Location = New System.Drawing.Point(91, 76)
-        Me.cmbMapel.Name = "cmbMapel"
-        Me.cmbMapel.Size = New System.Drawing.Size(100, 24)
-        Me.cmbMapel.TabIndex = 16
+        Me.cmbHariJadwal.FormattingEnabled = True
+        Me.cmbHariJadwal.Items.AddRange(New Object() {"Senin", "Selasa", "Rabu", "Kamis", "Juma't"})
+        Me.cmbHariJadwal.Location = New System.Drawing.Point(91, 155)
+        Me.cmbHariJadwal.Name = "cmbHariJadwal"
+        Me.cmbHariJadwal.Size = New System.Drawing.Size(100, 24)
+        Me.cmbHariJadwal.TabIndex = 25
+        '
+        'dtpJamSelesai
+        '
+        Me.dtpJamSelesai.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpJamSelesai.Location = New System.Drawing.Point(109, 213)
+        Me.dtpJamSelesai.Name = "dtpJamSelesai"
+        Me.dtpJamSelesai.ShowUpDown = True
+        Me.dtpJamSelesai.Size = New System.Drawing.Size(96, 22)
+        Me.dtpJamSelesai.TabIndex = 24
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.Color.White
+        Me.Label6.Location = New System.Drawing.Point(30, 218)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(82, 16)
+        Me.Label6.TabIndex = 23
+        Me.Label6.Text = "Jam Selesai"
+        '
+        'dtpJamMulai
+        '
+        Me.dtpJamMulai.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.dtpJamMulai.Location = New System.Drawing.Point(109, 188)
+        Me.dtpJamMulai.Name = "dtpJamMulai"
+        Me.dtpJamMulai.ShowUpDown = True
+        Me.dtpJamMulai.Size = New System.Drawing.Size(96, 22)
+        Me.dtpJamMulai.TabIndex = 22
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.Color.White
+        Me.Label3.Location = New System.Drawing.Point(30, 193)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(68, 16)
+        Me.Label3.TabIndex = 21
+        Me.Label3.Text = "Jam Mulai"
+        '
+        'cmbGuruJadwal
+        '
+        Me.cmbGuruJadwal.FormattingEnabled = True
+        Me.cmbGuruJadwal.Location = New System.Drawing.Point(91, 116)
+        Me.cmbGuruJadwal.Name = "cmbGuruJadwal"
+        Me.cmbGuruJadwal.Size = New System.Drawing.Size(100, 24)
+        Me.cmbGuruJadwal.TabIndex = 19
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.Color.White
+        Me.Label2.Location = New System.Drawing.Point(30, 163)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(32, 16)
+        Me.Label2.TabIndex = 18
+        Me.Label2.Text = "Hari"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.Color.White
+        Me.Label1.Location = New System.Drawing.Point(30, 120)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(38, 16)
+        Me.Label1.TabIndex = 17
+        Me.Label1.Text = "Guru "
+        '
+        'cmbMapelJadwal
+        '
+        Me.cmbMapelJadwal.FormattingEnabled = True
+        Me.cmbMapelJadwal.Location = New System.Drawing.Point(91, 76)
+        Me.cmbMapelJadwal.Name = "cmbMapelJadwal"
+        Me.cmbMapelJadwal.Size = New System.Drawing.Size(100, 24)
+        Me.cmbMapelJadwal.TabIndex = 16
         '
         'Mapel
         '
@@ -93,13 +178,13 @@ Partial Class UC_ManajemenPelajaran
         Me.Mapel.TabIndex = 15
         Me.Mapel.Text = "Mapel"
         '
-        'cmbKelas
+        'cmbKelasJadwal
         '
-        Me.cmbKelas.FormattingEnabled = True
-        Me.cmbKelas.Location = New System.Drawing.Point(91, 33)
-        Me.cmbKelas.Name = "cmbKelas"
-        Me.cmbKelas.Size = New System.Drawing.Size(100, 24)
-        Me.cmbKelas.TabIndex = 13
+        Me.cmbKelasJadwal.FormattingEnabled = True
+        Me.cmbKelasJadwal.Location = New System.Drawing.Point(91, 33)
+        Me.cmbKelasJadwal.Name = "cmbKelasJadwal"
+        Me.cmbKelasJadwal.Size = New System.Drawing.Size(100, 24)
+        Me.cmbKelasJadwal.TabIndex = 13
         '
         'Label5
         '
@@ -111,32 +196,32 @@ Partial Class UC_ManajemenPelajaran
         Me.Label5.TabIndex = 12
         Me.Label5.Text = "Kelas"
         '
-        'Button4
+        'btnHapus
         '
-        Me.Button4.Location = New System.Drawing.Point(48, 305)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 41)
-        Me.Button4.TabIndex = 3
-        Me.Button4.Text = "Hapus"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.btnHapus.Location = New System.Drawing.Point(48, 305)
+        Me.btnHapus.Name = "btnHapus"
+        Me.btnHapus.Size = New System.Drawing.Size(75, 41)
+        Me.btnHapus.TabIndex = 3
+        Me.btnHapus.Text = "Hapus"
+        Me.btnHapus.UseVisualStyleBackColor = True
         '
-        'Button3
+        'btnBatal
         '
-        Me.Button3.Location = New System.Drawing.Point(130, 305)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 41)
-        Me.Button3.TabIndex = 2
-        Me.Button3.Text = "Batal"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.btnBatal.Location = New System.Drawing.Point(130, 305)
+        Me.btnBatal.Name = "btnBatal"
+        Me.btnBatal.Size = New System.Drawing.Size(75, 41)
+        Me.btnBatal.TabIndex = 2
+        Me.btnBatal.Text = "Batal"
+        Me.btnBatal.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnUbah
         '
-        Me.Button2.Location = New System.Drawing.Point(129, 237)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(76, 48)
-        Me.Button2.TabIndex = 1
-        Me.Button2.Text = "Ubah"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnUbah.Location = New System.Drawing.Point(129, 237)
+        Me.btnUbah.Name = "btnUbah"
+        Me.btnUbah.Size = New System.Drawing.Size(76, 48)
+        Me.btnUbah.TabIndex = 1
+        Me.btnUbah.Text = "Ubah"
+        Me.btnUbah.UseVisualStyleBackColor = True
         '
         'btnTambah
         '
@@ -147,96 +232,86 @@ Partial Class UC_ManajemenPelajaran
         Me.btnTambah.Text = "Tambah"
         Me.btnTambah.UseVisualStyleBackColor = True
         '
-        'dgvManage
+        'dgvJadwal
         '
-        Me.dgvManage.BackgroundColor = System.Drawing.Color.SaddleBrown
-        Me.dgvManage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvManage.Location = New System.Drawing.Point(274, 91)
-        Me.dgvManage.Name = "dgvManage"
-        Me.dgvManage.RowHeadersWidth = 51
-        Me.dgvManage.RowTemplate.Height = 24
-        Me.dgvManage.Size = New System.Drawing.Size(759, 396)
-        Me.dgvManage.TabIndex = 4
+        Me.dgvJadwal.BackgroundColor = System.Drawing.Color.SaddleBrown
+        Me.dgvJadwal.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvJadwal.Location = New System.Drawing.Point(274, 91)
+        Me.dgvJadwal.Name = "dgvJadwal"
+        Me.dgvJadwal.RowHeadersWidth = 51
+        Me.dgvJadwal.RowTemplate.Height = 24
+        Me.dgvJadwal.Size = New System.Drawing.Size(948, 396)
+        Me.dgvJadwal.TabIndex = 4
         '
-        'lbjudul
+        'lblJudulUC
         '
-        Me.lbjudul.AutoSize = True
-        Me.lbjudul.BackColor = System.Drawing.Color.Transparent
-        Me.lbjudul.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbjudul.ForeColor = System.Drawing.Color.Transparent
-        Me.lbjudul.Location = New System.Drawing.Point(4, 23)
-        Me.lbjudul.Name = "lbjudul"
-        Me.lbjudul.Size = New System.Drawing.Size(512, 48)
-        Me.lbjudul.TabIndex = 9
-        Me.lbjudul.Text = "Manajemen Pelajaran"
+        Me.lblJudulUC.AutoSize = True
+        Me.lblJudulUC.BackColor = System.Drawing.Color.Transparent
+        Me.lblJudulUC.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJudulUC.ForeColor = System.Drawing.Color.Transparent
+        Me.lblJudulUC.Location = New System.Drawing.Point(4, 23)
+        Me.lblJudulUC.Name = "lblJudulUC"
+        Me.lblJudulUC.Size = New System.Drawing.Size(512, 48)
+        Me.lblJudulUC.TabIndex = 9
+        Me.lblJudulUC.Text = "Manajemen Pelajaran"
         '
-        'Label1
+        'cmbFilterKelas
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.Color.White
-        Me.Label1.Location = New System.Drawing.Point(30, 120)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(32, 16)
-        Me.Label1.TabIndex = 17
-        Me.Label1.Text = "Hari"
+        Me.cmbFilterKelas.FormattingEnabled = True
+        Me.cmbFilterKelas.Location = New System.Drawing.Point(933, 47)
+        Me.cmbFilterKelas.Name = "cmbFilterKelas"
+        Me.cmbFilterKelas.Size = New System.Drawing.Size(100, 24)
+        Me.cmbFilterKelas.TabIndex = 23
         '
-        'Label2
+        'Label4
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(30, 163)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(33, 16)
-        Me.Label2.TabIndex = 18
-        Me.Label2.Text = "Jam"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(91, 116)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(100, 24)
-        Me.ComboBox1.TabIndex = 19
-        '
-        'txtNama
-        '
-        Me.txtNama.Location = New System.Drawing.Point(91, 160)
-        Me.txtNama.Name = "txtNama"
-        Me.txtNama.Size = New System.Drawing.Size(100, 22)
-        Me.txtNama.TabIndex = 20
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(848, 55)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(41, 16)
+        Me.Label4.TabIndex = 24
+        Me.Label4.Text = "Kelas"
         '
         'UC_ManajemenPelajaran
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
-        Me.Controls.Add(Me.lbjudul)
-        Me.Controls.Add(Me.bt_simpan)
+        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.cmbFilterKelas)
+        Me.Controls.Add(Me.lblJudulUC)
+        Me.Controls.Add(Me.btnSimpan)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.dgvManage)
+        Me.Controls.Add(Me.dgvJadwal)
         Me.Name = "UC_ManajemenPelajaran"
-        Me.Size = New System.Drawing.Size(1045, 541)
+        Me.Size = New System.Drawing.Size(1241, 541)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.dgvManage, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvJadwal, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents bt_simpan As Button
+    Friend WithEvents btnSimpan As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents cmbKelas As ComboBox
+    Friend WithEvents cmbKelasJadwal As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnHapus As Button
+    Friend WithEvents btnBatal As Button
+    Friend WithEvents btnUbah As Button
     Friend WithEvents btnTambah As Button
-    Friend WithEvents dgvManage As DataGridView
-    Friend WithEvents lbjudul As Label
+    Friend WithEvents dgvJadwal As DataGridView
+    Friend WithEvents lblJudulUC As Label
     Friend WithEvents Mapel As Label
-    Friend WithEvents cmbMapel As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmbMapelJadwal As ComboBox
+    Friend WithEvents cmbGuruJadwal As ComboBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtNama As TextBox
+    Friend WithEvents dtpJamMulai As DateTimePicker
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cmbFilterKelas As ComboBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents dtpJamSelesai As DateTimePicker
+    Friend WithEvents Label6 As Label
+    Friend WithEvents cmbHariJadwal As ComboBox
 End Class

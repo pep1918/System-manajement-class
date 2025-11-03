@@ -31,6 +31,7 @@ Partial Class FormLogin
         Me.cmbRole = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.BtnBatal = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'Label1
@@ -49,7 +50,7 @@ Partial Class FormLogin
         Me.btnLogin.BackColor = System.Drawing.Color.Chocolate
         Me.btnLogin.Font = New System.Drawing.Font("Verdana", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.Black
-        Me.btnLogin.Location = New System.Drawing.Point(599, 430)
+        Me.btnLogin.Location = New System.Drawing.Point(736, 427)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Size = New System.Drawing.Size(118, 33)
         Me.btnLogin.TabIndex = 1
@@ -113,6 +114,18 @@ Partial Class FormLogin
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "LOGIN"
         '
+        'BtnBatal
+        '
+        Me.BtnBatal.BackColor = System.Drawing.Color.Chocolate
+        Me.BtnBatal.Font = New System.Drawing.Font("Verdana", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.BtnBatal.ForeColor = System.Drawing.Color.Black
+        Me.BtnBatal.Location = New System.Drawing.Point(599, 427)
+        Me.BtnBatal.Name = "BtnBatal"
+        Me.BtnBatal.Size = New System.Drawing.Size(118, 33)
+        Me.BtnBatal.TabIndex = 8
+        Me.BtnBatal.Text = "Batal"
+        Me.BtnBatal.UseVisualStyleBackColor = False
+        '
         'FormLogin
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -120,6 +133,7 @@ Partial Class FormLogin
         Me.BackColor = System.Drawing.SystemColors.ControlDark
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(1045, 537)
+        Me.Controls.Add(Me.BtnBatal)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.cmbRole)
@@ -143,4 +157,5 @@ Partial Class FormLogin
     Friend WithEvents cmbRole As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents BtnBatal As Button
 End Class

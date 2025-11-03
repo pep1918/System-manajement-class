@@ -1,53 +1,77 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Windows.Forms  ' <-- INI BENAR. JANGAN DIHAPUS.
+﻿' Tidak perlu 'Imports MySql.Data.MySqlClient' di sini
+' karena form ini tidak berinteraksi langsung dengan database.
+
 Public Class FormMain
-    Public roleUser As String
 
-    Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If roleUser = "siswa" Then
-            btnGuru.Enabled = False
-            btnKelas.Enabled = False
-            btnMapel.Enabled = False
-            btnManajemen.Enabled = False
-        End If
-    End Sub
-
-    Private Sub ShowUC(uc As UserControl)
+    ' =========================================================================
+    ' PROSEDUR BANTUAN (HELPER)
+    ' Tugas: Membersihkan PanelUtama dan memuat User Control yang baru ke dalamnya.
+    ' =========================================================================
+    Private Sub LoadUserControl(control As UserControl)
+        ' 1. Hapus kontrol apa pun yang sedang ada di panel
         PanelUtama.Controls.Clear()
-        uc.Dock = DockStyle.Fill
-        PanelUtama.Controls.Add(uc)
+
+        ' 2. Atur agar User Control memenuhi seluruh area panel
+        control.Dock = DockStyle.Fill
+
+        ' 3. Tambahkan User Control baru ke panel
+        PanelUtama.Controls.Add(control)
     End Sub
 
-    Private Sub btnSiswa_Click(sender As Object, e As EventArgs) Handles btnSiswa.Click
-        ShowUC(New UC_DataSiswa)
+
+
+    ' =========================================================================
+    ' EVENT HANDLER UNTUK TOMBOL MENU NAVIGASI
+    ' Setiap tombol akan membuat instance baru dari UC-nya masing-masing
+    ' dan memanggil prosedur LoadUserControl.
+    ' =========================================================================
+
+    Private Sub btnDataSiswa_Click(sender As Object, e As EventArgs) Handles btnDataSiswa.Click
+        ' Muat UC Data Siswa
+        Dim uc As New UC_DataSiswa()
+        LoadUserControl(uc)
     End Sub
 
-    Private Sub btnGuru_Click(sender As Object, e As EventArgs) Handles btnGuru.Click
-        ShowUC(New UC_DataGuru)
+    Private Sub btnDataGuru_Click(sender As Object, e As EventArgs) Handles btnDataGuru.Click
+        ' Muat UC Data Guru
+        Dim uc As New UC_DataGuru()
+        LoadUserControl(uc)
     End Sub
 
-    Private Sub btnKelas_Click(sender As Object, e As EventArgs) Handles btnKelas.Click
-        ShowUC(New UC_DataKelas)
+    Private Sub btnDataKelas_Click(sender As Object, e As EventArgs) Handles btnDataKelas.Click
+        ' Muat UC Data Kelas
+        Dim uc As New UC_DataKelas()
+        LoadUserControl(uc)
     End Sub
 
-    Private Sub btnMapel_Click(sender As Object, e As EventArgs) Handles btnMapel.Click
-        ShowUC(New UC_MataPelajaran)
+    Private Sub btnMataPelajaran_Click(sender As Object, e As EventArgs) Handles btnMataPelajaran.Click
+        ' Muat UC Mata Pelajaran
+        Dim uc As New UC_MataPelajaran()
+        LoadUserControl(uc)
     End Sub
 
-    Private Sub btnManajemen_Click(sender As Object, e As EventArgs) Handles btnManajemen.Click
-        ShowUC(New UC_ManajemenPelajaran)
+    Private Sub btnManajemenPelajaran_Click(sender As Object, e As EventArgs) Handles btnManajemenPelajaran.Click
+        ' Muat UC Manajemen Pelajaran (Jadwal)
+        Dim uc As New UC_ManajemenPelajaran()
+        LoadUserControl(uc)
     End Sub
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        FormLogin.Show()
-        Me.Hide()
-    End Sub
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
+    ' =========================================================================
+    ' EVENT PENUTUP FORM
+    ' =========================================================================
+    Private Sub FormMain_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
+        ' Baris ini WAJIB ada.
+        ' Karena FormLogin hanya di-Hide (disembunyikan),
+        ' kita harus menutup seluruh aplikasi secara paksa saat FormMain ditutup.
+        Application.Exit()
     End Sub
 
     Private Sub PanelUtama_Paint(sender As Object, e As PaintEventArgs) Handles PanelUtama.Paint
+
+    End Sub
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs)
 
     End Sub
 End Class
