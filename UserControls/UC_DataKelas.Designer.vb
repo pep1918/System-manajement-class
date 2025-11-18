@@ -22,7 +22,6 @@ Partial Class UC_DataKelas
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_DataKelas))
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -94,7 +93,7 @@ Partial Class UC_DataKelas
         'cmbWaliKelas
         '
         Me.cmbWaliKelas.FormattingEnabled = True
-        Me.cmbWaliKelas.Location = New System.Drawing.Point(107, 111)
+        Me.cmbWaliKelas.Location = New System.Drawing.Point(116, 111)
         Me.cmbWaliKelas.Name = "cmbWaliKelas"
         Me.cmbWaliKelas.Size = New System.Drawing.Size(100, 24)
         Me.cmbWaliKelas.TabIndex = 13
@@ -137,7 +136,7 @@ Partial Class UC_DataKelas
         '
         'btnBatal
         '
-        Me.btnBatal.Location = New System.Drawing.Point(132, 308)
+        Me.btnBatal.Location = New System.Drawing.Point(141, 308)
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Size = New System.Drawing.Size(75, 47)
         Me.btnBatal.TabIndex = 2
@@ -146,7 +145,7 @@ Partial Class UC_DataKelas
         '
         'btnUbah
         '
-        Me.btnUbah.Location = New System.Drawing.Point(132, 243)
+        Me.btnUbah.Location = New System.Drawing.Point(141, 243)
         Me.btnUbah.Name = "btnUbah"
         Me.btnUbah.Size = New System.Drawing.Size(75, 49)
         Me.btnUbah.TabIndex = 1
@@ -206,7 +205,7 @@ Partial Class UC_DataKelas
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.AutoSize = True
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackColor = System.Drawing.Color.Peru
         Me.Controls.Add(Me.Cari)
         Me.Controls.Add(Me.txtCariKelas)
         Me.Controls.Add(Me.lblJudulUC)

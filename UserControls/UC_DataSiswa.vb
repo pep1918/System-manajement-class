@@ -29,6 +29,10 @@ Public Class UC_DataSiswa
 
     End Sub
 
+    Private Sub txtNIS_TextChanged(sender As Object, e As EventArgs) Handles txtNIS.TextChanged
+
+    End Sub
+
 #End Region
 
 End Class

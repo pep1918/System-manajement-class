@@ -1,6 +1,8 @@
 ﻿' Tidak perlu 'Imports MySql.Data.MySqlClient' di sini
 ' karena form ini tidak berinteraksi langsung dengan database.
 
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel
+
 Public Class FormMain
 
     ' =========================================================================
@@ -72,6 +74,19 @@ Public Class FormMain
     End Sub
 
     Private Sub GroupBox1_Enter(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub FormMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
 
     End Sub
 End Class
