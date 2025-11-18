@@ -99,6 +99,7 @@
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -129,6 +130,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ModulKoneksi.vb" />
+    <Compile Include="UserControls\UC_Beranda.Designer.vb">
+      <DependentUpon>UC_Beranda.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_Beranda.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UserControls\UC_DataGuru.Designer.vb">
       <DependentUpon>UC_DataGuru.vb</DependentUpon>
     </Compile>
@@ -185,6 +192,9 @@
   <ItemGroup>
     <EmbeddedResource Include="FormLogin.resx">
       <DependentUpon>FormLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_Beranda.resx">
+      <DependentUpon>UC_Beranda.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UC_DataGuru.resx">
       <DependentUpon>UC_DataGuru.vb</DependentUpon>

@@ -22,7 +22,6 @@ Partial Class UC_DataSiswa
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_DataSiswa))
         Me.dgvSiswa = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -193,7 +192,7 @@ Partial Class UC_DataSiswa
         '
         'btnHapus
         '
-        Me.btnHapus.Location = New System.Drawing.Point(26, 320)
+        Me.btnHapus.Location = New System.Drawing.Point(36, 320)
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Size = New System.Drawing.Size(75, 39)
         Me.btnHapus.TabIndex = 3
@@ -202,7 +201,7 @@ Partial Class UC_DataSiswa
         '
         'btnBatal
         '
-        Me.btnBatal.Location = New System.Drawing.Point(123, 320)
+        Me.btnBatal.Location = New System.Drawing.Point(139, 320)
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Size = New System.Drawing.Size(84, 39)
         Me.btnBatal.TabIndex = 2
@@ -211,7 +210,7 @@ Partial Class UC_DataSiswa
         '
         'btnEdit
         '
-        Me.btnEdit.Location = New System.Drawing.Point(123, 264)
+        Me.btnEdit.Location = New System.Drawing.Point(139, 264)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(84, 41)
         Me.btnEdit.TabIndex = 1
@@ -220,7 +219,7 @@ Partial Class UC_DataSiswa
         '
         'btn_Tambah
         '
-        Me.btn_Tambah.Location = New System.Drawing.Point(26, 264)
+        Me.btn_Tambah.Location = New System.Drawing.Point(36, 264)
         Me.btn_Tambah.Name = "btn_Tambah"
         Me.btn_Tambah.Size = New System.Drawing.Size(75, 41)
         Me.btn_Tambah.TabIndex = 0
@@ -270,7 +269,7 @@ Partial Class UC_DataSiswa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackColor = System.Drawing.Color.Peru
         Me.Controls.Add(Me.Cari)
         Me.Controls.Add(Me.txtCariSiswa)
         Me.Controls.Add(Me.lbjudul)

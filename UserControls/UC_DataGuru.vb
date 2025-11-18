@@ -278,6 +278,14 @@ Public Class UC_DataGuru
         ' Biarkan kosong
     End Sub
 
+    Private Sub cmbJenisKelamin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJenisKelamin.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub txtNIP_TextChanged(sender As Object, e As EventArgs) Handles txtNIP.TextChanged
+
+    End Sub
+
 #End Region
 
 End Class

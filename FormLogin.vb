@@ -55,4 +55,7 @@ Public Class FormLogin
         Application.Exit()
     End Sub
 
+    Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

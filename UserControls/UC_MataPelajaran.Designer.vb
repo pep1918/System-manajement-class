@@ -23,7 +23,6 @@ Partial Class UC_MataPelajaran
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(UC_MataPelajaran))
         Me.Label6 = New System.Windows.Forms.Label()
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -205,7 +204,7 @@ Partial Class UC_MataPelajaran
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackColor = System.Drawing.Color.Peru
         Me.Controls.Add(Me.txtCariMapel)
         Me.Controls.Add(Me.lblJudulUC)
         Me.Controls.Add(Me.Label6)
