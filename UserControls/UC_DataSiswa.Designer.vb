@@ -251,7 +251,7 @@ Partial Class UC_DataSiswa
         '
         'txtCariSiswa
         '
-        Me.txtCariSiswa.Location = New System.Drawing.Point(841, 66)
+        Me.txtCariSiswa.Location = New System.Drawing.Point(795, 69)
         Me.txtCariSiswa.Name = "txtCariSiswa"
         Me.txtCariSiswa.Size = New System.Drawing.Size(192, 22)
         Me.txtCariSiswa.TabIndex = 17
@@ -259,7 +259,8 @@ Partial Class UC_DataSiswa
         'Cari
         '
         Me.Cari.AutoSize = True
-        Me.Cari.Location = New System.Drawing.Point(773, 69)
+        Me.Cari.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Cari.Location = New System.Drawing.Point(758, 72)
         Me.Cari.Name = "Cari"
         Me.Cari.Size = New System.Drawing.Size(31, 16)
         Me.Cari.TabIndex = 18
@@ -269,7 +270,7 @@ Partial Class UC_DataSiswa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Peru
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Controls.Add(Me.Cari)
         Me.Controls.Add(Me.txtCariSiswa)
         Me.Controls.Add(Me.lbjudul)

@@ -257,15 +257,15 @@ Partial Class UC_ManajemenPelajaran
         'cmbFilterKelas
         '
         Me.cmbFilterKelas.FormattingEnabled = True
-        Me.cmbFilterKelas.Location = New System.Drawing.Point(933, 47)
+        Me.cmbFilterKelas.Location = New System.Drawing.Point(795, 61)
         Me.cmbFilterKelas.Name = "cmbFilterKelas"
-        Me.cmbFilterKelas.Size = New System.Drawing.Size(100, 24)
+        Me.cmbFilterKelas.Size = New System.Drawing.Size(192, 24)
         Me.cmbFilterKelas.TabIndex = 23
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(848, 55)
+        Me.Label4.Location = New System.Drawing.Point(748, 64)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(41, 16)
         Me.Label4.TabIndex = 24
@@ -275,7 +275,7 @@ Partial Class UC_ManajemenPelajaran
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Peru
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.cmbFilterKelas)
         Me.Controls.Add(Me.lblJudulUC)

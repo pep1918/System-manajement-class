@@ -253,7 +253,7 @@ Partial Class UC_DataGuru
         'Cari
         '
         Me.Cari.AutoSize = True
-        Me.Cari.Location = New System.Drawing.Point(751, 74)
+        Me.Cari.Location = New System.Drawing.Point(782, 74)
         Me.Cari.Name = "Cari"
         Me.Cari.Size = New System.Drawing.Size(31, 16)
         Me.Cari.TabIndex = 20
@@ -270,7 +270,7 @@ Partial Class UC_DataGuru
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Peru
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Controls.Add(Me.Cari)
         Me.Controls.Add(Me.txtCariGuru)
         Me.Controls.Add(Me.btnSimpan)
