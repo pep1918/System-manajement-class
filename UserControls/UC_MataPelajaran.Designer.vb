@@ -47,7 +47,7 @@ Partial Class UC_MataPelajaran
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(735, 44)
+        Me.Label6.Location = New System.Drawing.Point(743, 60)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(31, 16)
         Me.Label6.TabIndex = 7
@@ -57,9 +57,9 @@ Partial Class UC_MataPelajaran
         '
         Me.btnSimpan.BackColor = System.Drawing.Color.SaddleBrown
         Me.btnSimpan.ForeColor = System.Drawing.Color.White
-        Me.btnSimpan.Location = New System.Drawing.Point(890, 487)
+        Me.btnSimpan.Location = New System.Drawing.Point(890, 497)
         Me.btnSimpan.Name = "btnSimpan"
-        Me.btnSimpan.Size = New System.Drawing.Size(81, 41)
+        Me.btnSimpan.Size = New System.Drawing.Size(81, 29)
         Me.btnSimpan.TabIndex = 6
         Me.btnSimpan.Text = "Simpan"
         Me.btnSimpan.UseVisualStyleBackColor = False
@@ -195,16 +195,16 @@ Partial Class UC_MataPelajaran
         '
         'txtCariMapel
         '
-        Me.txtCariMapel.Location = New System.Drawing.Point(808, 43)
+        Me.txtCariMapel.Location = New System.Drawing.Point(780, 57)
         Me.txtCariMapel.Name = "txtCariMapel"
-        Me.txtCariMapel.Size = New System.Drawing.Size(100, 22)
+        Me.txtCariMapel.Size = New System.Drawing.Size(191, 22)
         Me.txtCariMapel.TabIndex = 17
         '
         'UC_MataPelajaran
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.Peru
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Controls.Add(Me.txtCariMapel)
         Me.Controls.Add(Me.lblJudulUC)
         Me.Controls.Add(Me.Label6)
