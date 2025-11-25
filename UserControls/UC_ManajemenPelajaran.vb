@@ -1,342 +1,325 @@
-﻿' Impor pustaka konektor MySQL
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
+Imports System.IO
 
 Public Class UC_ManajemenPelajaran
-    ' Variabel untuk menyimpan ID Jadwal yang dipilih
-    Private selectedIDJadwal As Integer = 0
+    Inherits UserControl
+    Private selectedID As String = ""
 
-#Region "Prosedur Bantuan (Hak Akses, Loaders, Tampil, Kosongkan)"
+#Region "Load & Helper"
 
-    ' (READ-ONLY) Prosedur untuk mengatur hak akses
-    Private Sub AturHakAkses()
-        If ModuleKoneksi.CurrentUserLevel = "Siswa" Then
-            ' === MODE BACA-SAJA (READ-ONLY) UNTUK SISWA ===
-            cmbKelasJadwal.Enabled = False
-            cmbMapelJadwal.Enabled = False
-            cmbGuruJadwal.Enabled = False
-            cmbHariJadwal.Enabled = False
-            dtpJamMulai.Enabled = False
-            dtpJamSelesai.Enabled = False
+    Private Sub UC_ManajemenPelajaran_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadComboBoxes()
 
-            ' <<< PERUBAHAN DI SINI >>>
-            btnTambah.Enabled = False
-            btnUbah.Enabled = False
-            btnHapus.Enabled = False
-            btnBatal.Enabled = False
+        ' Default Filter
+        If cmbFilterKelas.Items.Count > 0 Then cmbFilterKelas.SelectedIndex = 0
 
-            cmbFilterKelas.Enabled = True
-            lblJudulUC.Text = "MELIHAT JADWAL PELAJARAN (Mode Siswa)"
-        Else
-            lblJudulUC.Text = "MANAJEMEN JADWAL PELAJARAN"
-        End If
-    End Sub
-
-    ' (READ) Menampilkan data ke DataGridView
-    Private Sub TampilData(Optional filterKelasID As Integer = -1)
-        Try
-            BukaKoneksi()
-            Dim query As String = "SELECT ID_Jadwal, Tbl_Kelas.Nama_Kelas, Tbl_Mapel.Nama_Mapel, Tbl_Guru.Nama_Guru, " &
-                                  "Hari, Jam_Mulai, Jam_Selesai, " &
-                                  "Tbl_Jadwal.ID_Kelas, Tbl_Jadwal.Kode_Mapel, Tbl_Jadwal.NIP_Guru " &
-                                  "FROM Tbl_Jadwal " &
-                                  "LEFT JOIN Tbl_Kelas ON Tbl_Jadwal.ID_Kelas = Tbl_Kelas.ID_Kelas " &
-                                  "LEFT JOIN Tbl_Mapel ON Tbl_Jadwal.Kode_Mapel = Tbl_Mapel.Kode_Mapel " &
-                                  "LEFT JOIN Tbl_Guru ON Tbl_Jadwal.NIP_Guru = Tbl_Guru.NIP "
-
-            If filterKelasID <> -1 Then
-                query &= " WHERE Tbl_Jadwal.ID_Kelas = @IDKelas"
-            End If
-            query &= " ORDER BY Tbl_Kelas.Nama_Kelas, FIELD(Hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'), Jam_Mulai"
-
-            Da = New MySqlDataAdapter(query, Conn)
-
-            If filterKelasID <> -1 Then
-                Da.SelectCommand.Parameters.AddWithValue("@IDKelas", filterKelasID)
-            End If
-
-            Ds = New DataSet()
-            Da.Fill(Ds, "Jadwal")
-            dgvJadwal.DataSource = Ds.Tables("Jadwal")
-
-            dgvJadwal.Columns("ID_Kelas").Visible = False
-            dgvJadwal.Columns("Kode_Mapel").Visible = False
-            dgvJadwal.Columns("NIP_Guru").Visible = False
-            dgvJadwal.Columns("ID_Jadwal").HeaderText = "ID"
-
-        Catch ex As Exception
-            MsgBox("Gagal menampilkan data jadwal: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-    End Sub
-
-    ' (READ Helper 1) Load Kelas ke ComboBox Form dan ComboBox Filter
-    Private Sub LoadKelasJadwal()
-        Try
-            BukaKoneksi()
-            Dim query As String = "SELECT ID_Kelas, Nama_Kelas FROM Tbl_Kelas ORDER BY Nama_Kelas"
-            Da = New MySqlDataAdapter(query, Conn)
-            Dim dt As New DataTable()
-            Da.Fill(dt)
-
-            cmbKelasJadwal.DataSource = dt
-            cmbKelasJadwal.DisplayMember = "Nama_Kelas"
-            cmbKelasJadwal.ValueMember = "ID_Kelas"
-
-            Dim dtFilter As DataTable = dt.Copy()
-            Dim dr As DataRow = dtFilter.NewRow()
-            dr("ID_Kelas") = -1
-            dr("Nama_Kelas") = "-- Tampilkan Semua Kelas --"
-            dtFilter.Rows.InsertAt(dr, 0)
-
-            cmbFilterKelas.DataSource = dtFilter
-            cmbFilterKelas.DisplayMember = "Nama_Kelas"
-            cmbFilterKelas.ValueMember = "ID_Kelas"
-
-        Catch ex As Exception
-            MsgBox("Gagal memuat data kelas: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-    End Sub
-
-    ' (READ Helper 2) Load Mapel ke ComboBox Form
-    Private Sub LoadMapelJadwal()
-        Try
-            BukaKoneksi()
-            Dim query As String = "SELECT Kode_Mapel, Nama_Mapel FROM Tbl_Mapel ORDER BY Nama_Mapel"
-            Da = New MySqlDataAdapter(query, Conn)
-            Dim dt As New DataTable()
-            Da.Fill(dt)
-            cmbMapelJadwal.DataSource = dt
-            cmbMapelJadwal.DisplayMember = "Nama_Mapel"
-            cmbMapelJadwal.ValueMember = "Kode_Mapel"
-        Catch ex As Exception
-            MsgBox("Gagal memuat data mapel: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-    End Sub
-
-    ' (READ Helper 3) Load Guru ke ComboBox Form
-    Private Sub LoadGuruJadwal()
-        Try
-            BukaKoneksi()
-            Dim query As String = "SELECT NIP, Nama_Guru FROM Tbl_Guru ORDER BY Nama_Guru"
-            Da = New MySqlDataAdapter(query, Conn)
-            Dim dt As New DataTable()
-            Da.Fill(dt)
-            cmbGuruJadwal.DataSource = dt
-            cmbGuruJadwal.DisplayMember = "Nama_Guru"
-            cmbGuruJadwal.ValueMember = "NIP"
-        Catch ex As Exception
-            MsgBox("Gagal memuat data guru: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-    End Sub
-
-    ' Membersihkan form input
-    Private Sub KosongkanForm()
-        cmbKelasJadwal.SelectedIndex = -1
-        cmbMapelJadwal.SelectedIndex = -1
-        cmbGuruJadwal.SelectedIndex = -1
-        cmbHariJadwal.SelectedIndex = -1
-
-        Dim hariIni As Date = Date.Now
-        dtpJamMulai.Value = New Date(hariIni.Year, hariIni.Month, hariIni.Day, 7, 0, 0)
-        dtpJamSelesai.Value = New Date(hariIni.Year, hariIni.Month, hariIni.Day, 8, 30, 0)
-
-        selectedIDJadwal = 0
-
-        ' <<< PERUBAHAN DI SINI >>>
-        If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-            btnTambah.Enabled = True  ' Tombol Tambah AKTIF
-            btnUbah.Enabled = False   ' Tombol Ubah nonaktif
-            btnHapus.Enabled = False  ' Tombol Hapus nonaktif
-        End If
-    End Sub
-#End Region
-
-#Region "Event Handler CRUD"
-
-    Private Sub UC_ManajemenPelajaran_Load(sender As Object, e As EventArgs) Handles Me.Load
-        AturHakAkses()
-        LoadKelasJadwal()
-        LoadMapelJadwal()
-        LoadGuruJadwal()
         TampilData()
-        KosongkanForm()
+        Bersih()
     End Sub
 
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Tambah" >>>
-    ' (CREATE) Tombol Tambah: Hanya untuk menyimpan data BARU (INSERT)
-    ' ==========================================================
-    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
-        ' (Logika ini diambil dari btnSimpan Anda yang lama)
-        If cmbKelasJadwal.SelectedValue Is Nothing OrElse
-           cmbMapelJadwal.SelectedValue Is Nothing OrElse
-           cmbGuruJadwal.SelectedValue Is Nothing OrElse
-           cmbHariJadwal.SelectedIndex = -1 Then
-            MsgBox("Semua field (Kelas, Mapel, Guru, Hari) wajib diisi!", vbExclamation)
-            Return
-        End If
+    Sub Bersih()
+        selectedID = ""
+        cmbKelas.SelectedIndex = -1
+        cmbGuru.SelectedIndex = -1
+        cmbMapel.SelectedIndex = -1
+        cmbRuangan.SelectedIndex = -1
+        cmbHari.SelectedIndex = -1
+        cmbSemester.SelectedIndex = -1
+        txtTahunAjaran.Clear()
+        dtpMulai.Value = DateTime.Now
+        dtpSelesai.Value = DateTime.Now.AddHours(1)
 
+        btnSimpan.Text = "Simpan"
+        btnHapus.Enabled = False
+    End Sub
+
+    Sub LoadComboBoxes()
         Try
-            BukaKoneksi()
-            Dim query As String = "INSERT INTO Tbl_Jadwal (ID_Kelas, Kode_Mapel, NIP_Guru, Hari, Jam_Mulai, Jam_Selesai) " &
-                                  "VALUES (@IDKelas, @KodeMapel, @NIP, @Hari, @JamMulai, @JamSelesai)"
-            Cmd = New MySqlCommand(query, Conn)
+            ' 1. Kelas (Untuk Input)
+            IsiCombo("SELECT Nama_Kelas FROM tbl_kelas ORDER BY Nama_Kelas", cmbKelas)
 
-            Cmd.Parameters.AddWithValue("@IDKelas", cmbKelasJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@KodeMapel", cmbMapelJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@NIP", cmbGuruJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@Hari", cmbHariJadwal.Text)
-            Cmd.Parameters.AddWithValue("@JamMulai", dtpJamMulai.Value.ToString("HH:mm:ss"))
-            Cmd.Parameters.AddWithValue("@JamSelesai", dtpJamSelesai.Value.ToString("HH:mm:ss"))
+            ' 2. Guru
+            IsiCombo("SELECT Nama_Guru FROM tbl_guru ORDER BY Nama_Guru", cmbGuru)
 
-            Cmd.ExecuteNonQuery()
-            MsgBox("Jadwal baru berhasil disimpan.", vbInformation)
+            ' 3. Mapel
+            IsiCombo("SELECT Nama_Mapel FROM tbl_mapel ORDER BY Nama_Mapel", cmbMapel)
+
+            ' 4. Filter Kelas (PENTING: Gunakan Rd Terpisah/Tutup Rd sebelumnya)
+            ModuleKoneksi.BukaKoneksi()
+            ModuleKoneksi.Cmd = New MySqlCommand("SELECT Nama_Kelas FROM tbl_kelas ORDER BY Nama_Kelas", ModuleKoneksi.Conn)
+            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
+
+            cmbFilterKelas.Items.Clear()
+            cmbFilterKelas.Items.Add("Semua")
+
+            While ModuleKoneksi.Rd.Read()
+                cmbFilterKelas.Items.Add(ModuleKoneksi.Rd("Nama_Kelas").ToString())
+            End While
+            ModuleKoneksi.Rd.Close() ' WAJIB TUTUP
 
         Catch ex As Exception
-            MsgBox("Error saat menyimpan: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
+            If ModuleKoneksi.Rd IsNot Nothing AndAlso Not ModuleKoneksi.Rd.IsClosed Then ModuleKoneksi.Rd.Close()
         End Try
-
-        TampilData(CInt(cmbFilterKelas.SelectedValue))
-        KosongkanForm()
     End Sub
 
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Ubah" >>>
-    ' (UPDATE) Tombol Ubah: Hanya untuk menyimpan data EDITAN (UPDATE)
-    ' ==========================================================
-    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
-        If selectedIDJadwal = 0 Then
-            MsgBox("Pilih data jadwal dari tabel yang ingin diubah.", vbExclamation)
-            Return
-        End If
-
+    ' Helper Isi Combo (Menggunakan Global Rd)
+    Sub IsiCombo(query As String, cmb As ComboBox)
         Try
-            BukaKoneksi()
-            Dim query As String = "UPDATE Tbl_Jadwal SET ID_Kelas = @IDKelas, Kode_Mapel = @KodeMapel, " &
-                                  "NIP_Guru = @NIP, Hari = @Hari, Jam_Mulai = @JamMulai, Jam_Selesai = @JamSelesai " &
-                                  "WHERE ID_Jadwal = @ID"
-            Cmd = New MySqlCommand(query, Conn)
+            ModuleKoneksi.BukaKoneksi()
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
 
-            Cmd.Parameters.AddWithValue("@IDKelas", cmbKelasJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@KodeMapel", cmbMapelJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@NIP", cmbGuruJadwal.SelectedValue)
-            Cmd.Parameters.AddWithValue("@Hari", cmbHariJadwal.Text)
-            Cmd.Parameters.AddWithValue("@JamMulai", dtpJamMulai.Value.ToString("HH:mm:ss"))
-            Cmd.Parameters.AddWithValue("@JamSelesai", dtpJamSelesai.Value.ToString("HH:mm:ss"))
-            Cmd.Parameters.AddWithValue("@ID", selectedIDJadwal) ' Kunci utama
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Jadwal berhasil diupdate.", vbInformation)
-
+            cmb.Items.Clear()
+            While ModuleKoneksi.Rd.Read()
+                cmb.Items.Add(ModuleKoneksi.Rd(0).ToString())
+            End While
+            ModuleKoneksi.Rd.Close() ' WAJIB TUTUP SEBELUM KELUAR
         Catch ex As Exception
-            MsgBox("Error saat mengupdate jadwal: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
+            If ModuleKoneksi.Rd IsNot Nothing AndAlso Not ModuleKoneksi.Rd.IsClosed Then ModuleKoneksi.Rd.Close()
         End Try
-
-        TampilData(CInt(cmbFilterKelas.SelectedValue))
-        KosongkanForm()
-    End Sub
-
-    ' (DELETE) Tombol Hapus (Logika sudah benar)
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        If selectedIDJadwal = 0 Then
-            MsgBox("Pilih data jadwal dari tabel yang ingin dihapus.", vbExclamation)
-            Return
-        End If
-
-        If MsgBox("Apakah Anda yakin ingin menghapus jadwal ini?", vbQuestion + vbYesNo, "Konfirmasi Hapus") = vbNo Then
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "DELETE FROM Tbl_Jadwal WHERE ID_Jadwal = @ID"
-            Cmd = New MySqlCommand(query, Conn)
-            Cmd.Parameters.AddWithValue("@ID", selectedIDJadwal)
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data jadwal berhasil dihapus.", vbInformation)
-
-        Catch ex As Exception
-            MsgBox("Error saat menghapus: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-
-        TampilData(CInt(cmbFilterKelas.SelectedValue))
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Batal" >>>
-    ' (BATAL) Tombol untuk membersihkan form
-    ' ==========================================================
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
-        KosongkanForm()
-    End Sub
-
-    ' --- Tombol yang tidak terpakai lagi ---
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        ' KOSONGKAN ATAU HAPUS
     End Sub
 
 #End Region
 
-#Region "Event GridView dan Filter"
+#Region "Logika Inti & Deteksi Bentrok"
 
-    ' Ini adalah bagian dari logika "Button Ubah"
+    Private Function CekJadwalBentrok(guru As String, ruangan As String, hari As String, mulai As String, selesai As String, currentID As String) As String
+        Dim pesanError As String = ""
+        Try
+            ModuleKoneksi.BukaKoneksi()
+
+            Dim query As String = "SELECT * FROM tbl_jadwal WHERE " &
+                                  "(id_guru = @guru OR id_ruangan = @ruang) " &
+                                  "AND hari = @hari " &
+                                  "AND (@mulai < jam_selesai AND @selesai > jam_mulai)"
+
+            If currentID <> "" Then
+                query &= " AND id_jadwal != " & currentID
+            End If
+
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@guru", guru)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@ruang", ruangan)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@hari", hari)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@mulai", mulai)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@selesai", selesai)
+
+            ' Gunakan Rd Global
+            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
+
+            If ModuleKoneksi.Rd.Read() Then
+                Dim guruBentrok As String = ModuleKoneksi.Rd("id_guru").ToString()
+                Dim ruangBentrok As String = ModuleKoneksi.Rd("id_ruangan").ToString()
+
+                If guruBentrok = guru Then
+                    pesanError = "Guru ini sudah mengajar di kelas lain pada jam tersebut!"
+                ElseIf ruangBentrok = ruangan Then
+                    pesanError = "Ruangan ini sedang dipakai kelas lain pada jam tersebut!"
+                End If
+            End If
+            ModuleKoneksi.Rd.Close() ' WAJIB TUTUP
+
+        Catch ex As Exception
+            pesanError = "Error Cek Bentrok: " & ex.Message
+            If ModuleKoneksi.Rd IsNot Nothing AndAlso Not ModuleKoneksi.Rd.IsClosed Then ModuleKoneksi.Rd.Close()
+        End Try
+
+        Return pesanError
+    End Function
+
+    Private Sub TampilData()
+        Try
+            ModuleKoneksi.BukaKoneksi()
+
+            Dim query As String = "SELECT id_jadwal, hari, jam_mulai, jam_selesai, id_kelas, id_mapel, id_guru, id_ruangan FROM tbl_jadwal WHERE 1=1 "
+
+            ' FILTER KELAS
+            If cmbFilterKelas.SelectedIndex > 0 AndAlso cmbFilterKelas.Text <> "Semua" Then
+                query &= " AND id_kelas = '" & cmbFilterKelas.Text & "'"
+            End If
+
+            query &= " ORDER BY FIELD(hari, 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'), jam_mulai ASC"
+
+            ' Gunakan Cmd & Da Global
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Da = New MySqlDataAdapter(ModuleKoneksi.Cmd)
+
+            Dim dt As New DataTable()
+            ModuleKoneksi.Da.Fill(dt)
+            dgvJadwal.DataSource = dt
+
+            dgvJadwal.Columns("id_jadwal").Visible = False
+            dgvJadwal.Columns("jam_mulai").DefaultCellStyle.Format = "hh\:mm"
+            dgvJadwal.Columns("jam_selesai").DefaultCellStyle.Format = "hh\:mm"
+
+        Catch ex As Exception
+            MessageBox.Show("Gagal Tampil Data: " & ex.Message)
+        End Try
+    End Sub
+
+#End Region
+
+#Region "CRUD Operations"
+
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        If cmbKelas.Text = "" Or cmbGuru.Text = "" Or cmbHari.Text = "" Then
+            MessageBox.Show("Lengkapi semua data jadwal!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim jamMulai As String = dtpMulai.Value.ToString("HH:mm:ss")
+        Dim jamSelesai As String = dtpSelesai.Value.ToString("HH:mm:ss")
+
+        If TimeSpan.Parse(jamMulai) >= TimeSpan.Parse(jamSelesai) Then
+            MessageBox.Show("Jam selesai harus lebih besar dari jam mulai!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim statusBentrok As String = CekJadwalBentrok(cmbGuru.Text, cmbRuangan.Text, cmbHari.Text, jamMulai, jamSelesai, selectedID)
+        If statusBentrok <> "" Then
+            MessageBox.Show("BENTROK: " & vbCrLf & statusBentrok, "Gagal Simpan", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Return
+        End If
+
+        Try
+            ModuleKoneksi.BukaKoneksi()
+            Dim query As String
+
+            If selectedID = "" Then
+                query = "INSERT INTO tbl_jadwal (id_kelas, id_guru, id_mapel, id_ruangan, hari, jam_mulai, jam_selesai, tahun_ajaran, semester) " &
+                        "VALUES (@kls, @guru, @mapel, @ruang, @hari, @mulai, @selesai, @thn, @sem)"
+            Else
+                query = "UPDATE tbl_jadwal SET id_kelas=@kls, id_guru=@guru, id_mapel=@mapel, id_ruangan=@ruang, " &
+                        "hari=@hari, jam_mulai=@mulai, jam_selesai=@selesai, tahun_ajaran=@thn, semester=@sem WHERE id_jadwal=@id"
+            End If
+
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kls", cmbKelas.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@guru", cmbGuru.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@mapel", cmbMapel.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@ruang", cmbRuangan.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@hari", cmbHari.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@mulai", jamMulai)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@selesai", jamSelesai)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@thn", txtTahunAjaran.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@sem", cmbSemester.Text)
+
+            If selectedID <> "" Then ModuleKoneksi.Cmd.Parameters.AddWithValue("@id", selectedID)
+
+            ModuleKoneksi.Cmd.ExecuteNonQuery()
+
+            MessageBox.Show("Jadwal berhasil disimpan!", "Sukses")
+            Bersih()
+
+            ' Reset Filter agar sesuai
+            If cmbFilterKelas.Items.Contains(cmbKelas.Text) Then
+                cmbFilterKelas.Text = cmbKelas.Text
+            End If
+
+            TampilData()
+        Catch ex As Exception
+            MessageBox.Show("Error Simpan: " & ex.Message)
+        End Try
+    End Sub
+
     Private Sub dgvJadwal_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJadwal.CellClick
         If e.RowIndex >= 0 Then
-            Dim baris As DataGridViewRow = dgvJadwal.Rows(e.RowIndex)
+            Dim row As DataGridViewRow = dgvJadwal.Rows(e.RowIndex)
+            selectedID = row.Cells("id_jadwal").Value.ToString()
 
-            ' Ambil ID untuk Hapus/Ubah
-            selectedIDJadwal = CInt(baris.Cells("ID_Jadwal").Value)
+            cmbHari.Text = row.Cells("hari").Value.ToString()
+            cmbKelas.Text = row.Cells("id_kelas").Value.ToString()
+            cmbGuru.Text = row.Cells("id_guru").Value.ToString()
+            cmbMapel.Text = row.Cells("id_mapel").Value.ToString()
+            cmbRuangan.Text = row.Cells("id_ruangan").Value.ToString()
 
-            ' Isi form (untuk referensi)
-            cmbKelasJadwal.SelectedValue = baris.Cells("ID_Kelas").Value
-            cmbMapelJadwal.SelectedValue = baris.Cells("Kode_Mapel").Value
-            cmbGuruJadwal.SelectedValue = baris.Cells("NIP_Guru").Value
-            cmbHariJadwal.Text = baris.Cells("Hari").Value.ToString()
-            dtpJamMulai.Value = CDate(baris.Cells("Jam_Mulai").Value)
-            dtpJamSelesai.Value = CDate(baris.Cells("Jam_Selesai").Value)
+            dtpMulai.Value = DateTime.Parse(row.Cells("jam_mulai").Value.ToString())
+            dtpSelesai.Value = DateTime.Parse(row.Cells("jam_selesai").Value.ToString())
 
-            ' <<< PERUBAHAN DI SINI >>>
-            If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-                btnTambah.Enabled = False ' Tombol Tambah nonaktif
-                btnUbah.Enabled = True    ' Tombol Ubah AKTIF
-                btnHapus.Enabled = True   ' Tombol Hapus AKTIF
-            End If
+            btnSimpan.Text = "Update"
+            btnHapus.Enabled = True
         End If
     End Sub
 
-    ' (READ / Filter) (Logika sudah benar)
-    Private Sub cmbFilterKelas_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilterKelas.SelectedIndexChanged
-        If cmbFilterKelas.SelectedItem IsNot Nothing Then
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If selectedID = "" Then Return
+        If MessageBox.Show("Hapus jadwal ini?", "Konfirmasi", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Try
-                Dim drv As DataRowView = CType(cmbFilterKelas.SelectedItem, DataRowView)
-                Dim filterID As Integer = CInt(drv.Row("ID_Kelas"))
-                TampilData(filterID)
+                ModuleKoneksi.BukaKoneksi()
+                Dim cmd As New MySqlCommand("DELETE FROM tbl_jadwal WHERE id_jadwal = '" & selectedID & "'", ModuleKoneksi.Conn)
+                cmd.ExecuteNonQuery()
+                Bersih()
+                TampilData()
             Catch ex As Exception
-                MsgBox("Error saat memfilter data: " & ex.Message)
+                MessageBox.Show("Error Hapus: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    ' EVENT FILTER
+    Private Sub Filter_Changed(sender As Object, e As EventArgs) Handles cmbFilterKelas.SelectedIndexChanged
+        TampilData()
+    End Sub
+
+#End Region
+
+#Region "Export PDF"
+
+    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "PDF Files|*.pdf"
+        sfd.FileName = "JadwalPelajaran_" & DateTime.Now.ToString("yyyyMMdd")
+
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Try
+                Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+                Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(sfd.FileName, FileMode.Create))
+                doc.Open()
+
+                Dim strJudul As String = "JADWAL PELAJARAN"
+                If cmbFilterKelas.SelectedIndex > 0 AndAlso cmbFilterKelas.Text <> "Semua" Then
+                    strJudul &= " KELAS " & cmbFilterKelas.Text
+                End If
+
+                Dim p As New Paragraph(strJudul)
+                p.Alignment = Element.ALIGN_CENTER
+                doc.Add(p)
+                doc.Add(New Paragraph(" "))
+
+                Dim table As New PdfPTable(dgvJadwal.Columns.Count - 1)
+                table.WidthPercentage = 100
+
+                For Each col As DataGridViewColumn In dgvJadwal.Columns
+                    If col.Visible Then
+                        Dim cell As New PdfPCell(New Phrase(col.HeaderText))
+                        cell.BackgroundColor = BaseColor.LIGHT_GRAY
+                        table.AddCell(cell)
+                    End If
+                Next
+
+                For Each row As DataGridViewRow In dgvJadwal.Rows
+                    For Each cell As DataGridViewCell In row.Cells
+                        If dgvJadwal.Columns(cell.ColumnIndex).Visible Then
+                            table.AddCell(If(cell.Value IsNot Nothing, cell.Value.ToString(), ""))
+                        End If
+                    Next
+                Next
+
+                doc.Add(table)
+                doc.Close()
+                MessageBox.Show("Jadwal berhasil diexport ke PDF!")
+            Catch ex As Exception
+                MessageBox.Show("Gagal Export PDF: " & ex.Message)
             End Try
         End If
     End Sub
 
     Private Sub dgvJadwal_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvJadwal.CellContentClick
-        ' Biarkan kosong
     End Sub
 
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
 
     End Sub
 

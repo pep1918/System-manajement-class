@@ -1,61 +1,43 @@
-﻿' Impor pustaka konektor MySQL
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class FormLogin
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        If String.IsNullOrWhiteSpace(txtUsername.Text) OrElse String.IsNullOrWhiteSpace(txtPassword.Text) Then
-            MsgBox("Username dan Password tidak boleh kosong!", vbExclamation)
+        If txtUsername.Text = "" Or txtPassword.Text = "" Then
+            MsgBox("Isi Username dan Password!", vbExclamation)
             Return
         End If
 
         Try
-            BukaKoneksi() ' Memanggil dari ModuleKoneksi
+            ModuleKoneksi.BukaKoneksi()
 
-            Dim query As String = "SELECT * FROM Tbl_User WHERE Username = @Username AND Password = @Password"
-            Cmd = New MySqlCommand(query, Conn)
-            Cmd.Parameters.AddWithValue("@Username", txtUsername.Text)
-            Cmd.Parameters.AddWithValue("@Password", txtPassword.Text)
+            ' Ambil kolom Level juga
+            Dim query As String = "SELECT * FROM tbl_user WHERE Username=@u AND Password=@p"
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@u", txtUsername.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@p", txtPassword.Text)
 
-            ' DataReader (Rd) dibuka di sini
-            Rd = Cmd.ExecuteReader()
-            Rd.Read()
+            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
 
-            If Rd.HasRows Then
-                ' Jika data ditemukan (login berhasil)
-                Dim namaLengkap As String = Rd.Item("Nama_Lengkap").ToString()
-                Dim userLevel As String = Rd.Item("Level").ToString()
+            If ModuleKoneksi.Rd.Read() Then
+                ' 1. SIMPAN LEVEL USER KE VARIABEL GLOBAL
+                ModuleKoneksi.CurrentUser = ModuleKoneksi.Rd("Nama_Lengkap").ToString()
+                ModuleKoneksi.CurrentUserLevel = ModuleKoneksi.Rd("Level").ToString() ' <--- PENTING
 
-                ' Simpan level pengguna ke variabel global
-                ModuleKoneksi.CurrentUserLevel = userLevel
+                MsgBox("Login Berhasil sebagai " & ModuleKoneksi.CurrentUserLevel)
 
-                MsgBox("Login Berhasil! Selamat Datang, " & namaLengkap, vbInformation, "Sukses")
-
-                Dim frmMain As New FormMain()
+                ModuleKoneksi.Rd.Close()
                 Me.Hide()
-                frmMain.Show()
+                FormMain.Show()
             Else
-                ' Jika data tidak ditemukan
-                MsgBox("Username atau Password salah!", vbExclamation, "Gagal Login")
-                txtPassword.Clear()
-                txtUsername.Focus()
+                ModuleKoneksi.Rd.Close()
+                MsgBox("Login Gagal")
             End If
 
         Catch ex As Exception
-            MsgBox("Terjadi error saat login: " & ex.Message, vbCritical)
-        Finally
-            ' Bagian ini akan memanggil 'TutupKoneksi()' yang sudah diperbarui.
-            ' 'TutupKoneksi()' akan menutup 'Rd' dan 'Conn' secara otomatis.
-            TutupKoneksi()
+            MsgBox("Error: " & ex.Message)
         End Try
     End Sub
 
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles BtnBatal.Click
-        ' Menutup seluruh aplikasi
-        Application.Exit()
-    End Sub
-
-    Private Sub FormLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
+    ' ... (kode lain tetap sama) ...
 End Class

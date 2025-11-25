@@ -1,291 +1,278 @@
-﻿' Impor pustaka konektor MySQL
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
+Imports System.IO
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
 
+' Pastikan nama Class sama dengan nama File
 Public Class UC_DataGuru
-    ' Variabel untuk menyimpan NIP yang dipilih saat mengedit/menghapus
+    Inherits UserControl ' <--- BARIS INI SANGAT PENTING AGAR TIDAK ERROR
+
     Private selectedNIP As String = ""
 
-#Region "Prosedur Bantuan (Hak Akses, Tampil, Kosongkan)"
+    ' ==========================================
+    ' 1. SAAT LOAD HALAMAN
+    ' ==========================================
+    Private Sub UC_DataGuru_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Cek apakah kita sedang dalam Mode Desain atau Running
+        If Me.DesignMode Then Return
 
-    ' (READ-ONLY) Prosedur baru untuk mengatur hak akses
-    Private Sub AturHakAkses()
-        If ModuleKoneksi.CurrentUserLevel = "Siswa" Then
-            txtNIP.Enabled = False
-            txtNamaGuru.Enabled = False
-            cmbJenisKelamin.Enabled = False
-            txtAlamat.Enabled = False
-            txtTelepon.Enabled = False
-            txtEmail.Enabled = False
-
-            ' <<< PERUBAHAN DI SINI >>>
-            ' Sesuaikan dengan tombol-tombol baru Anda
-            btnTambah.Enabled = False
-            btnUbah.Enabled = False
-            btnHapus.Enabled = False
-            btnBatal.Enabled = False
-
-            lbLJudulUC.Text = "MELIHAT DATA GURU (Mode Siswa)"
-        Else
-            lbLJudulUC.Text = "MANAJEMEN DATA GURU"
-        End If
-    End Sub
-
-    ' (READ) Menampilkan data ke DataGridView
-    Private Sub TampilData()
         Try
-            BukaKoneksi()
-            Dim query As String = "SELECT NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email FROM Tbl_Guru"
+            TampilData()
+            IsiComboMapel()
+            Bersih()
 
-            Da = New MySqlDataAdapter(query, Conn)
-            Ds = New DataSet()
-            Da.Fill(Ds, "Guru")
-            dgvGuru.DataSource = Ds.Tables("Guru")
-
+            ' Isi manual combo status & pendidikan jika kosong
+            If cmbStatus.Items.Count = 0 Then
+                cmbStatus.Items.AddRange(New String() {"PNS", "GTY", "Honorer", "Tetap Yayasan"})
+            End If
+            If cmbPendidikan.Items.Count = 0 Then
+                cmbPendidikan.Items.AddRange(New String() {"D3", "S1", "S2", "S3"})
+            End If
         Catch ex As Exception
-            MsgBox("Gagal menampilkan data guru: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
+            ' Abaikan error saat loading awal desain
         End Try
     End Sub
 
-    ' Membersihkan form input dan mengatur ulang tombol
-    ' Ini adalah fungsi untuk "Button Batal"
-    Private Sub KosongkanForm()
+    ' Mengisi Pilihan Mapel dari Database
+    Sub IsiComboMapel()
+        Try
+            ModuleKoneksi.BukaKoneksi()
+            ModuleKoneksi.Cmd = New MySqlCommand("SELECT Nama_Mapel FROM tbl_mapel ORDER BY Nama_Mapel", ModuleKoneksi.Conn)
+            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
+
+            cmbMapelPengampu.Items.Clear()
+            cmbFilterMapel.Items.Clear()
+            cmbFilterMapel.Items.Add("Semua")
+
+            While ModuleKoneksi.Rd.Read()
+                cmbMapelPengampu.Items.Add(ModuleKoneksi.Rd("Nama_Mapel").ToString())
+                cmbFilterMapel.Items.Add(ModuleKoneksi.Rd("Nama_Mapel").ToString())
+            End While
+            ModuleKoneksi.Rd.Close()
+        Catch ex As Exception
+            If ModuleKoneksi.Rd IsNot Nothing AndAlso Not ModuleKoneksi.Rd.IsClosed Then ModuleKoneksi.Rd.Close()
+        End Try
+    End Sub
+
+    ' ==========================================
+    ' 2. BERSIHKAN INPUT
+    ' ==========================================
+    Sub Bersih()
         txtNIP.Clear()
-        txtNamaGuru.Clear()
+        txtNama.Clear()
         cmbJenisKelamin.SelectedIndex = -1
         txtAlamat.Clear()
         txtTelepon.Clear()
         txtEmail.Clear()
 
+        cmbStatus.SelectedIndex = -1
+        cmbPendidikan.SelectedIndex = -1
+        cmbMapelPengampu.SelectedIndex = -1
+
+        txtNIP.Enabled = True
         selectedNIP = ""
 
-        ' <<< PERUBAHAN DI SINI >>>
-        ' Atur status tombol untuk mode "Tambah Data Baru"
-        If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-            txtNIP.Enabled = True
-            btnTambah.Enabled = True  ' Tombol Tambah AKTIF
-            btnUbah.Enabled = False   ' Tombol Ubah nonaktif
-            btnHapus.Enabled = False  ' Tombol Hapus nonaktif
-        End If
-
-        txtNIP.Focus()
+        btnTambah.Enabled = True
+        btnUbah.Enabled = False
+        btnHapus.Enabled = False
     End Sub
 
-#End Region
-
-#Region "Event Handler CRUD"
-
-    ' Event Load saat UC pertama kali dibuka
-    Private Sub UC_DataGuru_Load(sender As Object, e As EventArgs) Handles Me.Load
-        AturHakAkses()
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Tambah" >>>
-    ' (CREATE) Tombol Tambah: Hanya untuk menyimpan data BARU (INSERT)
-    ' ==========================================================
-    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
-        ' (Logika ini diambil dari btnSimpan Anda yang lama)
-        If String.IsNullOrWhiteSpace(txtNIP.Text) OrElse String.IsNullOrWhiteSpace(txtNamaGuru.Text) Then
-            MsgBox("NIP dan Nama Guru wajib diisi!", vbExclamation)
-            Return
-        End If
-
+    ' ==========================================
+    ' 3. TAMPIL DATA
+    ' ==========================================
+    Sub TampilData()
         Try
-            BukaKoneksi()
-            Dim query As String = "INSERT INTO Tbl_Guru (NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email) " &
-                                  "VALUES (@NIP, @Nama, @JK, @Alamat, @Telp, @Email)"
-            Cmd = New MySqlCommand(query, Conn)
+            ModuleKoneksi.BukaKoneksi()
 
-            Cmd.Parameters.AddWithValue("@NIP", txtNIP.Text)
-            Cmd.Parameters.AddWithValue("@Nama", txtNamaGuru.Text)
-            Cmd.Parameters.AddWithValue("@JK", cmbJenisKelamin.Text)
-            Cmd.Parameters.AddWithValue("@Alamat", txtAlamat.Text)
-            Cmd.Parameters.AddWithValue("@Telp", txtTelepon.Text)
-            Cmd.Parameters.AddWithValue("@Email", txtEmail.Text)
+            Dim query As String = "SELECT NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu FROM tbl_guru WHERE 1=1 "
 
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data guru baru berhasil disimpan.", vbInformation)
-
-        Catch ex As MySqlException
-            If ex.Number = 1062 Then ' Duplikat NIP
-                MsgBox("NIP " & txtNIP.Text & " sudah terdaftar.", vbCritical)
-            Else
-                MsgBox("Error MySQL saat menyimpan: " & ex.Message, vbCritical)
+            If txtCari.Text <> "" Then
+                query &= " AND (Nama_Guru LIKE '%" & txtCari.Text & "%' OR NIP LIKE '%" & txtCari.Text & "%')"
             End If
-        Catch ex As Exception
-            MsgBox("Error umum: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
 
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Ubah" >>>
-    ' (UPDATE) Tombol Ubah: Hanya untuk menyimpan data EDITAN (UPDATE)
-    ' Ganti nama 'btnEdit' di desainer Anda menjadi 'btnUbah'
-    ' ==========================================================
-    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
-        ' (Logika ini diambil dari btnEdit Anda yang lama)
-        If String.IsNullOrWhiteSpace(selectedNIP) Then
-            MsgBox("Pilih data guru dari tabel terlebih dahulu.", vbExclamation)
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "UPDATE Tbl_Guru SET Nama_Guru = @Nama, Jenis_Kelamin = @JK, Alamat = @Alamat, " &
-                                  "Telepon = @Telp, Email = @Email " &
-                                  "WHERE NIP = @NIP"
-            Cmd = New MySqlCommand(query, Conn)
-
-            Cmd.Parameters.AddWithValue("@Nama", txtNamaGuru.Text)
-            Cmd.Parameters.AddWithValue("@JK", cmbJenisKelamin.Text)
-            Cmd.Parameters.AddWithValue("@Alamat", txtAlamat.Text)
-            Cmd.Parameters.AddWithValue("@Telp", txtTelepon.Text)
-            Cmd.Parameters.AddWithValue("@Email", txtEmail.Text)
-            Cmd.Parameters.AddWithValue("@NIP", selectedNIP) ' Ambil dari variabel global
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data guru berhasil diupdate.", vbInformation)
-
-        Catch ex As Exception
-            MsgBox("Error saat mengupdate: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' (DELETE) Tombol Hapus (Logika sudah benar)
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        If String.IsNullOrWhiteSpace(selectedNIP) Then
-            MsgBox("Pilih data guru dari tabel terlebih dahulu.", vbExclamation)
-            Return
-        End If
-
-        If MsgBox("Apakah Anda yakin ingin menghapus data guru " & txtNamaGuru.Text & "?", vbQuestion + vbYesNo, "Konfirmasi Hapus") = vbNo Then
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "DELETE FROM Tbl_Guru WHERE NIP = @NIP"
-            Cmd = New MySqlCommand(query, Conn)
-            Cmd.Parameters.AddWithValue("@NIP", selectedNIP)
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data guru berhasil dihapus.", vbInformation)
-
-        Catch ex As MySqlException
-            If ex.Number = 1451 Then ' Error Foreign Key
-                MsgBox("Gagal menghapus! Guru ini masih terdaftar sebagai Wali Kelas atau Pengajar di Jadwal.", vbCritical)
-            Else
-                MsgBox("Error MySQL saat menghapus: " & ex.Message, vbCritical)
+            If cmbFilterMapel.SelectedIndex > 0 And cmbFilterMapel.Text <> "Semua" Then
+                query &= " AND Mapel_Pengampu = '" & cmbFilterMapel.Text & "'"
             End If
+
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Da = New MySqlDataAdapter(ModuleKoneksi.Cmd)
+
+            Dim dt As New DataTable()
+            ModuleKoneksi.Da.Fill(dt)
+            dgvGuru.DataSource = dt
+
         Catch ex As Exception
-            MsgBox("Error umum: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
+            MessageBox.Show("Gagal Tampil: " & ex.Message)
         End Try
+    End Sub
 
+    Private Sub txtCari_TextChanged(sender As Object, e As EventArgs) Handles txtCari.TextChanged
         TampilData()
-        KosongkanForm()
     End Sub
 
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Batal" >>>
-    ' (BATAL) Tombol untuk membersihkan form
-    ' Pastikan Anda punya tombol bernama 'btnBatal' di desainer
-    ' ==========================================================
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
-        KosongkanForm()
+    Private Sub cmbFilterMapel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFilterMapel.SelectedIndexChanged
+        TampilData()
     End Sub
 
-    ' --- Tombol yang tidak terpakai lagi ---
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        ' KOSONGKAN ATAU HAPUS. Logika sudah dipindah ke btnTambah dan btnUbah
-    End Sub
-
-    ' Jika Anda masih punya 'btnTambah' lama yang event-nya kosong, hapus saja
-    ' Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
-    '    ' Logika lama (KosongkanForm) dipindah ke btnBatal_Click
-    ' End Sub
-
-#End Region
-
-#Region "Event GridView dan Pencarian"
-
-    ' Event saat baris di DataGridView di-klik
-    ' Ini adalah bagian dari logika "Button Ubah" Anda
+    ' ==========================================
+    ' 4. PILIH DATA
+    ' ==========================================
     Private Sub dgvGuru_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvGuru.CellClick
         If e.RowIndex >= 0 Then
-            Dim baris As DataGridViewRow = dgvGuru.Rows(e.RowIndex)
+            Dim row As DataGridViewRow = dgvGuru.Rows(e.RowIndex)
+            selectedNIP = row.Cells("NIP").Value.ToString()
 
-            ' Ambil data dari Grid dan masukkan ke Form
-            selectedNIP = baris.Cells("NIP").Value.ToString()
-            txtNIP.Text = selectedNIP
-            txtNamaGuru.Text = baris.Cells("Nama_Guru").Value.ToString()
-            cmbJenisKelamin.Text = baris.Cells("Jenis_Kelamin").Value.ToString()
-            txtAlamat.Text = baris.Cells("Alamat").Value.ToString()
-            txtTelepon.Text = baris.Cells("Telepon").Value.ToString()
-            txtEmail.Text = baris.Cells("Email").Value.ToString()
+            txtNIP.Text = row.Cells("NIP").Value.ToString()
+            txtNama.Text = row.Cells("Nama_Guru").Value.ToString()
 
-            ' <<< PERUBAHAN DI SINI >>>
-            ' Atur tombol untuk mode "Ubah"
-            If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-                txtNIP.Enabled = False ' Primary Key tidak boleh diedit
-                btnTambah.Enabled = False ' Tombol Tambah nonaktif
-                btnUbah.Enabled = True    ' TomTbol Ubah AKTIF
-                btnHapus.Enabled = True   ' Tombol Hapus AKTIF
-            End If
+            cmbJenisKelamin.Text = If(IsDBNull(row.Cells("Jenis_Kelamin").Value), "", row.Cells("Jenis_Kelamin").Value.ToString())
+            txtAlamat.Text = If(IsDBNull(row.Cells("Alamat").Value), "", row.Cells("Alamat").Value.ToString())
+            txtTelepon.Text = If(IsDBNull(row.Cells("Telepon").Value), "", row.Cells("Telepon").Value.ToString())
+            txtEmail.Text = If(IsDBNull(row.Cells("Email").Value), "", row.Cells("Email").Value.ToString())
+
+            cmbStatus.Text = If(IsDBNull(row.Cells("Status_Kepegawaian").Value), "", row.Cells("Status_Kepegawaian").Value.ToString())
+            cmbPendidikan.Text = If(IsDBNull(row.Cells("Pendidikan_Terakhir").Value), "", row.Cells("Pendidikan_Terakhir").Value.ToString())
+            cmbMapelPengampu.Text = If(IsDBNull(row.Cells("Mapel_Pengampu").Value), "", row.Cells("Mapel_Pengampu").Value.ToString())
+
+            txtNIP.Enabled = False
+            btnTambah.Enabled = False
+            btnUbah.Enabled = True
+            btnHapus.Enabled = True
         End If
     End Sub
 
-    ' (READ / Search) (Logika sudah benar)
-    Private Sub txtCariGuru_TextChanged(sender As Object, e As EventArgs) Handles txtCariGuru.TextChanged
+    ' ==========================================
+    ' 5. CRUD
+    ' ==========================================
+    Sub JalankanQuery(query As String, pesan As String)
         Try
-            BukaKoneksi()
-            Dim query As String = "SELECT * FROM Tbl_Guru WHERE Nama_Guru LIKE @Search OR NIP LIKE @Search"
+            ModuleKoneksi.BukaKoneksi()
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
 
-            Da = New MySqlDataAdapter(query, Conn)
-            Da.SelectCommand.Parameters.AddWithValue("@Search", "%" & txtCariGuru.Text & "%")
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@nip", txtNIP.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@nama", txtNama.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@jk", cmbJenisKelamin.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@telp", txtTelepon.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@email", txtEmail.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@stat", cmbStatus.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@didik", cmbPendidikan.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@mapel", cmbMapelPengampu.Text)
 
-            Ds = New DataSet()
-            Da.Fill(Ds, "GuruCari")
-            dgvGuru.DataSource = Ds.Tables("GuruCari")
-
+            ModuleKoneksi.Cmd.ExecuteNonQuery()
+            MessageBox.Show("Data Berhasil " & pesan)
+            Bersih()
+            TampilData()
         Catch ex As Exception
-        Finally
-            TutupKoneksi()
+            MessageBox.Show("Gagal Eksekusi: " & ex.Message)
         End Try
     End Sub
 
-    ' Event handler di bawah ini bisa Anda hapus jika tidak ada isinya
-    Private Sub dgvGuru_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvGuru.CellContentClick
-        ' Biarkan kosong
+    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
+        If txtNIP.Text = "" Or txtNama.Text = "" Then
+            MessageBox.Show("NIP dan Nama wajib diisi!")
+            Return
+        End If
+        Dim query As String = "INSERT INTO tbl_guru (NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu) VALUES (@nip, @nama, @jk, @alamat, @telp, @email, @stat, @didik, @mapel)"
+        JalankanQuery(query, "Ditambahkan")
     End Sub
 
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
-        ' Biarkan kosong
+    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
+        If selectedNIP = "" Then Return
+        Dim query As String = "UPDATE tbl_guru SET Nama_Guru=@nama, Jenis_Kelamin=@jk, Alamat=@alamat, Telepon=@telp, Email=@email, Status_Kepegawaian=@stat, Pendidikan_Terakhir=@didik, Mapel_Pengampu=@mapel WHERE NIP=@nip"
+        JalankanQuery(query, "Diubah")
     End Sub
 
-    Private Sub cmbJenisKelamin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJenisKelamin.SelectedIndexChanged
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If selectedNIP = "" Then Return
+        If MessageBox.Show("Hapus Guru ini?", "Konfirmasi", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Try
+                ModuleKoneksi.BukaKoneksi()
+                ModuleKoneksi.Cmd = New MySqlCommand("DELETE FROM tbl_guru WHERE NIP=@nip", ModuleKoneksi.Conn)
+                ModuleKoneksi.Cmd.Parameters.AddWithValue("@nip", selectedNIP)
+                ModuleKoneksi.Cmd.ExecuteNonQuery()
 
+                MessageBox.Show("Data Berhasil Dihapus")
+                Bersih()
+                TampilData()
+            Catch ex As Exception
+                MessageBox.Show("Gagal Hapus: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
+        Bersih()
+    End Sub
+
+    ' ==========================================
+    ' 6. EXPORT PDF
+    ' ==========================================
+    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "PDF Files|*.pdf"
+        sfd.FileName = "DataGuru_" & DateTime.Now.ToString("yyyyMMdd")
+
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Try
+                Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+                Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(sfd.FileName, FileMode.Create))
+                doc.Open()
+
+                Dim p As New Paragraph("LAPORAN DATA GURU")
+                p.Alignment = Element.ALIGN_CENTER
+                doc.Add(p)
+                doc.Add(New Paragraph(" "))
+
+                Dim table As New PdfPTable(dgvGuru.Columns.Count)
+                table.WidthPercentage = 100
+
+                For Each col As DataGridViewColumn In dgvGuru.Columns
+                    Dim cell As New PdfPCell(New Phrase(col.HeaderText))
+                    cell.BackgroundColor = BaseColor.LIGHT_GRAY
+                    table.AddCell(cell)
+                Next
+
+                For Each row As DataGridViewRow In dgvGuru.Rows
+                    For Each cell As DataGridViewCell In row.Cells
+                        table.AddCell(If(cell.Value Is Nothing, "", cell.Value.ToString()))
+                    Next
+                Next
+
+                doc.Add(table)
+                doc.Close()
+                MessageBox.Show("Laporan PDF Berhasil Disimpan!")
+            Catch ex As Exception
+                MessageBox.Show("Gagal Export PDF: " & ex.Message)
+            End Try
+        End If
     End Sub
 
     Private Sub txtNIP_TextChanged(sender As Object, e As EventArgs) Handles txtNIP.TextChanged
 
     End Sub
 
-#End Region
+    Private Sub cmbJenisKelamin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJenisKelamin.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub cmbMapelPengampu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapelPengampu.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub cmbSpesialisasi_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub txtNama_TextChanged(sender As Object, e As EventArgs) Handles txtNama.TextChanged
+
+    End Sub
+
+    Private Sub txtAlamat_TextChanged(sender As Object, e As EventArgs) Handles txtAlamat.TextChanged
+
+    End Sub
+
+    Private Sub cmbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStatus.SelectedIndexChanged
+
+    End Sub
 End Class

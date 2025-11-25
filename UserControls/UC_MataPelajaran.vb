@@ -1,250 +1,235 @@
-﻿' Impor pustaka konektor MySQL
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
+Imports System.IO
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
 
 Public Class UC_MataPelajaran
-    ' Variabel untuk menyimpan Kode Mapel yang dipilih
-    Private selectedKodeMapel As String = ""
+    Inherits UserControl
+    Private selectedKode As String = ""
+    Private oldKKM As Integer = 0
 
-#Region "Prosedur Bantuan (Hak Akses, Tampil, Kosongkan)"
+#Region "Load & Helper"
 
-    ' (READ-ONLY) Prosedur untuk mengatur hak akses
-    Private Sub AturHakAkses()
-        If ModuleKoneksi.CurrentUserLevel = "Siswa" Then
-            ' === MODE BACA-SAJA (READ-ONLY) UNTUK SISWA ===
-            txtKodeMapel.Enabled = False
-            txtMapel.Enabled = False ' Menggunakan txtMapel sesuai kode Anda
-            numKKM.Enabled = False
-
-            ' <<< PERUBAHAN DI SINI >>>
-            btnTambah.Enabled = False
-            btnUbah.Enabled = False
-            btnHapus.Enabled = False
-            btnBatal.Enabled = False
-
-            lblJudulUC.Text = "MELIHAT MATA PELAJARAN (Mode Siswa)"
-        Else
-            lblJudulUC.Text = "MANAJEMEN MATA PELAJARAN"
-        End If
+    Private Sub UC_MataPelajaran_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        TampilData()
+        Bersih()
     End Sub
 
-    ' (READ) Menampilkan data ke DataGridView
-    Private Sub TampilData()
-        Try
-            BukaKoneksi()
-            Dim query As String = "SELECT Kode_Mapel, Nama_Mapel, KKM FROM Tbl_Mapel"
-
-            Da = New MySqlDataAdapter(query, Conn)
-            Ds = New DataSet()
-            Da.Fill(Ds, "Mapel")
-            dgvMapel.DataSource = Ds.Tables("Mapel")
-
-        Catch ex As Exception
-            MsgBox("Gagal menampilkan data mata pelajaran: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-    End Sub
-
-    ' Membersihkan form input
-    Private Sub KosongkanForm()
+    Sub Bersih()
+        selectedKode = ""
+        oldKKM = 0
         txtKodeMapel.Clear()
-        txtMapel.Clear()
-        numKKM.Value = 75 ' Nilai default
+        txtNamaMapel.Clear()
+        txtKKM.Text = "75"
+        cmbJurusan.SelectedIndex = -1
+        cmbKategori.SelectedIndex = -1
+        cmbTingkat.SelectedIndex = -1
 
-        selectedKodeMapel = ""
+        txtKodeMapel.Enabled = True
+        btnSimpan.Text = "Simpan"
+        btnHapus.Enabled = False
+        btnLihatHistory.Enabled = False
+    End Sub
 
-        ' <<< PERUBAHAN DI SINI >>>
-        If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-            txtKodeMapel.Enabled = True
-            btnTambah.Enabled = True  ' Tombol Tambah AKTIF
-            btnUbah.Enabled = False   ' Tombol Ubah nonaktif
-            btnHapus.Enabled = False  ' Tombol Hapus nonaktif
-        End If
+    Sub TampilData()
+        Try
+            ModuleKoneksi.BukaKoneksi()
 
-        txtKodeMapel.Focus()
+            Dim query As String = "SELECT kode_mapel, nama_mapel, kkm, tingkat, jurusan, kategori FROM tbl_mapel ORDER BY jurusan, tingkat, nama_mapel"
+
+            ' Gunakan Global Cmd & Da
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Da = New MySqlDataAdapter(ModuleKoneksi.Cmd)
+
+            Dim dt As New DataTable()
+            ModuleKoneksi.Da.Fill(dt)
+            dgvMapel.DataSource = dt
+        Catch ex As Exception
+            MessageBox.Show("Error Tampil Data: " & ex.Message)
+        End Try
     End Sub
 
 #End Region
 
-#Region "Event Handler CRUD"
+#Region "CRUD & Logika KKM"
 
-    Private Sub UC_MataPelajaran_Load(sender As Object, e As EventArgs) Handles Me.Load
-        AturHakAkses()
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Tambah" >>>
-    ' (CREATE) Tombol Tambah: Hanya untuk menyimpan data BARU (INSERT)
-    ' ==========================================================
-    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
-        ' (Logika ini diambil dari btnSimpan Anda yang lama)
-        If String.IsNullOrWhiteSpace(txtKodeMapel.Text) OrElse String.IsNullOrWhiteSpace(txtMapel.Text) Then
-            MsgBox("Kode Mapel dan Nama Mapel wajib diisi!", vbExclamation)
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "INSERT INTO Tbl_Mapel (Kode_Mapel, Nama_Mapel, KKM) VALUES (@Kode, @Nama, @KKM)"
-            Cmd = New MySqlCommand(query, Conn)
-
-            Cmd.Parameters.AddWithValue("@Kode", txtKodeMapel.Text)
-            Cmd.Parameters.AddWithValue("@Nama", txtMapel.Text) ' Menggunakan txtMapel
-            Cmd.Parameters.AddWithValue("@KKM", numKKM.Value)
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data mapel baru berhasil disimpan.", vbInformation)
-
-        Catch ex As MySqlException
-            If ex.Number = 1062 Then ' Duplikat Kode Mapel (Primary Key)
-                MsgBox("Kode Mapel " & txtKodeMapel.Text & " sudah terdaftar.", vbCritical)
-            Else
-                MsgBox("Error MySQL saat menyimpan: " & ex.Message, vbCritical)
-            End If
-        Catch ex As Exception
-            MsgBox("Error umum: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Ubah" >>>
-    ' (UPDATE) Tombol Ubah: Hanya untuk menyimpan data EDITAN (UPDATE)
-    ' ==========================================================
-    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
-        ' (Logika ini diambil dari btnEdit Anda yang lama)
-        If String.IsNullOrWhiteSpace(selectedKodeMapel) Then
-            MsgBox("Pilih data mapel dari tabel terlebih dahulu.", vbExclamation)
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "UPDATE Tbl_Mapel SET Nama_Mapel = @Nama, KKM = @KKM WHERE Kode_Mapel = @Kode"
-            Cmd = New MySqlCommand(query, Conn)
-
-            Cmd.Parameters.AddWithValue("@Nama", txtMapel.Text) ' Menggunakan txtMapel
-            Cmd.Parameters.AddWithValue("@KKM", numKKM.Value)
-            Cmd.Parameters.AddWithValue("@Kode", selectedKodeMapel)
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data mapel berhasil diupdate.", vbInformation)
-
-        Catch ex As Exception
-            MsgBox("Error saat mengupdate: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' (DELETE) Tombol Hapus (Logika sudah benar)
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        If String.IsNullOrWhiteSpace(selectedKodeMapel) Then
-            MsgBox("Pilih data mapel dari tabel terlebih dahulu.", vbExclamation)
-            Return
-        End If
-
-        If MsgBox("Apakah Anda yakin ingin menghapus mapel " & txtMapel.Text & "?", vbQuestion + vbYesNo, "Konfirmasi Hapus") = vbNo Then
-            Return
-        End If
-
-        Try
-            BukaKoneksi()
-            Dim query As String = "DELETE FROM Tbl_Mapel WHERE Kode_Mapel = @Kode"
-            Cmd = New MySqlCommand(query, Conn)
-            Cmd.Parameters.AddWithValue("@Kode", selectedKodeMapel)
-
-            Cmd.ExecuteNonQuery()
-            MsgBox("Data mapel berhasil dihapus.", vbInformation)
-
-        Catch ex As MySqlException
-            If ex.Number = 1451 Then ' Error Foreign Key
-                MsgBox("Gagal menghapus! Mapel ini masih terdaftar di Jadwal.", vbCritical)
-            Else
-                MsgBox("Error MySQL saat menghapus: " & ex.Message, vbCritical)
-            End If
-        Catch ex As Exception
-            MsgBox("Error umum: " & ex.Message, vbCritical)
-        Finally
-            TutupKoneksi()
-        End Try
-
-        TampilData()
-        KosongkanForm()
-    End Sub
-
-    ' ==========================================================
-    ' <<< LOGIKA BARU UNTUK "Button Batal" >>>
-    ' (BATAL) Tombol untuk membersihkan form
-    ' ==========================================================
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
-        KosongkanForm()
-    End Sub
-
-    ' --- Tombol yang tidak terpakai lagi ---
-    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
-        ' KOSONGKAN ATAU HAPUS
-    End Sub
-
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
-        ' KOSONGKAN ATAU HAPUS
-    End Sub
-
-#End Region
-
-#Region "Event GridView dan Pencarian"
-
-    ' Ini adalah bagian dari logika "Button Ubah"
     Private Sub dgvMapel_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMapel.CellClick
         If e.RowIndex >= 0 Then
-            Dim baris As DataGridViewRow = dgvMapel.Rows(e.RowIndex)
+            Dim row As DataGridViewRow = dgvMapel.Rows(e.RowIndex)
 
-            selectedKodeMapel = baris.Cells("Kode_Mapel").Value.ToString()
-            txtKodeMapel.Text = selectedKodeMapel
-            txtMapel.Text = baris.Cells("Nama_Mapel").Value.ToString() ' Mengisi ke txtMapel
-            numKKM.Value = CDec(baris.Cells("KKM").Value)
+            selectedKode = row.Cells("kode_mapel").Value.ToString()
+            txtKodeMapel.Text = selectedKode
+            txtNamaMapel.Text = row.Cells("nama_mapel").Value.ToString()
 
-            ' <<< PERUBAHAN DI SINI >>>
-            If ModuleKoneksi.CurrentUserLevel <> "Siswa" Then
-                txtKodeMapel.Enabled = False ' Primary Key tidak boleh diedit
-                btnTambah.Enabled = False ' Tombol Tambah nonaktif
-                btnUbah.Enabled = True    ' Tombol Ubah AKTIF
-                btnHapus.Enabled = True   ' Tombol Hapus AKTIF
-            End If
+            oldKKM = Convert.ToInt32(row.Cells("kkm").Value)
+            txtKKM.Text = oldKKM.ToString()
+
+            cmbTingkat.Text = If(IsDBNull(row.Cells("tingkat").Value), "", row.Cells("tingkat").Value.ToString())
+            cmbJurusan.Text = If(IsDBNull(row.Cells("jurusan").Value), "", row.Cells("jurusan").Value.ToString())
+            cmbKategori.Text = If(IsDBNull(row.Cells("kategori").Value), "", row.Cells("kategori").Value.ToString())
+
+            txtKodeMapel.Enabled = False
+            btnSimpan.Text = "Update"
+            btnHapus.Enabled = True
+            btnLihatHistory.Enabled = True
         End If
     End Sub
 
-    ' (READ / Search) (Logika sudah benar)
-    Private Sub txtCariMapel_TextChanged(sender As Object, e As EventArgs) Handles txtCariMapel.TextChanged
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        If txtKodeMapel.Text = "" Or txtNamaMapel.Text = "" Or txtKKM.Text = "" Then
+            MessageBox.Show("Semua field wajib diisi!", "Peringatan", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
-            BukaKoneksi()
-            Dim query As String = "SELECT * FROM Tbl_Mapel WHERE Nama_Mapel LIKE @Search OR Kode_Mapel LIKE @Search"
+            Dim newKKM As Integer = Convert.ToInt32(txtKKM.Text)
+            Dim query As String = ""
 
-            Da = New MySqlDataAdapter(query, Conn)
-            Da.SelectCommand.Parameters.AddWithValue("@Search", "%" & txtCariMapel.Text & "%")
+            If selectedKode = "" Then
+                query = "INSERT INTO tbl_mapel (kode_mapel, nama_mapel, kkm, tingkat, jurusan, kategori) VALUES (@kode, @nama, @kkm, @tkt, @jur, @kat)"
+            Else
+                query = "UPDATE tbl_mapel SET nama_mapel=@nama, kkm=@kkm, tingkat=@tkt, jurusan=@jur, kategori=@kat WHERE kode_mapel=@kode"
+            End If
 
-            Ds = New DataSet()
-            Da.Fill(Ds, "MapelCari")
-            dgvMapel.DataSource = Ds.Tables("MapelCari")
+            ModuleKoneksi.BukaKoneksi()
+
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kode", txtKodeMapel.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@nama", txtNamaMapel.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kkm", newKKM)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@tkt", cmbTingkat.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@jur", cmbJurusan.Text)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kat", cmbKategori.Text)
+
+            ModuleKoneksi.Cmd.ExecuteNonQuery()
+
+            ' Logika History
+            If selectedKode <> "" AndAlso oldKKM <> newKKM Then
+                CatatHistoryKKM(selectedKode, oldKKM, newKKM)
+            End If
+
+            MessageBox.Show("Data Mapel berhasil disimpan!", "Sukses")
+            Bersih()
+            TampilData()
 
         Catch ex As Exception
-            ' Abaikan
-        Finally
-            TutupKoneksi()
+            MessageBox.Show("Gagal Simpan: " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub CatatHistoryKKM(kode As String, lama As Integer, baru As Integer)
+        Try
+            Dim queryLog As String = "INSERT INTO tbl_log_kkm (kode_mapel, kkm_lama, kkm_baru, tgl_ubah, user_pengubah) VALUES (@kd, @lama, @baru, NOW(), @user)"
+
+            ModuleKoneksi.Cmd = New MySqlCommand(queryLog, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kd", kode)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@lama", lama)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@baru", baru)
+
+            Dim userLogin As String = If(String.IsNullOrEmpty(ModuleKoneksi.CurrentUser), "Admin", ModuleKoneksi.CurrentUser)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@user", userLogin)
+
+            ModuleKoneksi.Cmd.ExecuteNonQuery()
+        Catch ex As Exception
+            ' Silent error
+        End Try
+    End Sub
+
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If selectedKode = "" Then Return
+        If MessageBox.Show("Hapus Mapel ini?", "Konfirmasi", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+            Try
+                ModuleKoneksi.BukaKoneksi()
+                Dim cmd As New MySqlCommand("DELETE FROM tbl_mapel WHERE kode_mapel=@kode", ModuleKoneksi.Conn)
+                cmd.Parameters.AddWithValue("@kode", selectedKode)
+                cmd.ExecuteNonQuery()
+
+                Bersih()
+                TampilData()
+            Catch ex As Exception
+                MessageBox.Show("Gagal Hapus: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+#End Region
+
+#Region "Fitur Tambahan"
+
+    Private Sub btnLihatHistory_Click(sender As Object, e As EventArgs) Handles btnLihatHistory.Click
+        If selectedKode = "" Then Return
+
+        Try
+            ModuleKoneksi.BukaKoneksi()
+            Dim query As String = "SELECT tgl_ubah, kkm_lama, kkm_baru, user_pengubah FROM tbl_log_kkm WHERE kode_mapel = @kode ORDER BY tgl_ubah DESC"
+
+            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+            ModuleKoneksi.Cmd.Parameters.AddWithValue("@kode", selectedKode)
+            ModuleKoneksi.Da = New MySqlDataAdapter(ModuleKoneksi.Cmd)
+
+            Dim dt As New DataTable()
+            ModuleKoneksi.Da.Fill(dt)
+
+            If dt.Rows.Count > 0 Then
+                Dim msg As String = "Riwayat Perubahan KKM (" & txtNamaMapel.Text & "):" & vbCrLf & vbCrLf
+                For Each row As DataRow In dt.Rows
+                    msg &= String.Format("[{0}] {1} -> {2} (oleh {3})", Convert.ToDateTime(row("tgl_ubah")).ToString("dd/MM/yy HH:mm"), row("kkm_lama"), row("kkm_baru"), row("user_pengubah")) & vbCrLf
+                Next
+                MessageBox.Show(msg, "History KKM", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("Belum ada riwayat perubahan KKM.", "Info")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Gagal Load History: " & ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
+        Dim sfd As New SaveFileDialog()
+        sfd.Filter = "PDF Files|*.pdf"
+        sfd.FileName = "DataMataPelajaran_" & DateTime.Now.ToString("yyyyMMdd")
+
+        If sfd.ShowDialog() = DialogResult.OK Then
+            Try
+                Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
+                Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(sfd.FileName, FileMode.Create))
+                doc.Open()
+
+                Dim p As New Paragraph("DATA MATA PELAJARAN")
+                p.Alignment = Element.ALIGN_CENTER
+                doc.Add(p)
+                doc.Add(New Paragraph(" "))
+
+                Dim table As New PdfPTable(dgvMapel.Columns.Count)
+                table.WidthPercentage = 100
+
+                For Each col As DataGridViewColumn In dgvMapel.Columns
+                    Dim cell As New PdfPCell(New Phrase(col.HeaderText))
+                    cell.BackgroundColor = BaseColor.LIGHT_GRAY
+                    table.AddCell(cell)
+                Next
+
+                For Each row As DataGridViewRow In dgvMapel.Rows
+                    For Each cell As DataGridViewCell In row.Cells
+                        table.AddCell(If(cell.Value Is Nothing, "", cell.Value.ToString()))
+                    Next
+                Next
+
+                doc.Add(table)
+                doc.Close()
+                MessageBox.Show("Laporan PDF Berhasil Disimpan!")
+
+            Catch ex As Exception
+                MessageBox.Show("Gagal Export PDF: " & ex.Message)
+            End Try
+        End If
+    End Sub
+
+    Private Sub txtKKM_TextChanged(sender As Object, e As EventArgs) Handles txtKKM.TextChanged
     End Sub
 
     Private Sub dgvMapel_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvMapel.CellContentClick
-
     End Sub
 
 #End Region

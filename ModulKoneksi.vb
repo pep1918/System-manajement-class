@@ -9,6 +9,7 @@ Module ModuleKoneksi
     Public Da As MySqlDataAdapter
     Public Ds As DataSet
     Public Rd As MySqlDataReader ' Ini adalah DataReader yang menyebabkan error
+    Public CurrentUser As String = ""
 
     ' 2. VARIABEL HAK AKSES GLOBAL
     Public CurrentUserLevel As String = "" ' (Admin, Guru, Siswa)

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_DataSiswa
     Inherits System.Windows.Forms.UserControl
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,17 +20,21 @@ Partial Class UC_DataSiswa
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.dgvSiswa = New System.Windows.Forms.DataGridView()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.cmbStatus = New System.Windows.Forms.ComboBox()
+        Me.txtTahunMasuk = New System.Windows.Forms.TextBox()
+        Me.dtpTanggalLahir = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbJenisKelamin = New System.Windows.Forms.ComboBox()
         Me.cmbKelas = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtAlamat = New System.Windows.Forms.TextBox()
-        Me.txtNamaSiswa = New System.Windows.Forms.TextBox()
+        Me.txtNama = New System.Windows.Forms.TextBox()
         Me.txtNIS = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -44,6 +48,9 @@ Partial Class UC_DataSiswa
         Me.lbjudul = New System.Windows.Forms.Label()
         Me.txtCariSiswa = New System.Windows.Forms.TextBox()
         Me.Cari = New System.Windows.Forms.Label()
+        Me.cmbFilterKelas = New System.Windows.Forms.ComboBox()
+        Me.btnExportPDF = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
         CType(Me.dgvSiswa, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
@@ -56,19 +63,23 @@ Partial Class UC_DataSiswa
         Me.dgvSiswa.Name = "dgvSiswa"
         Me.dgvSiswa.RowHeadersWidth = 51
         Me.dgvSiswa.RowTemplate.Height = 24
-        Me.dgvSiswa.Size = New System.Drawing.Size(942, 396)
+        Me.dgvSiswa.Size = New System.Drawing.Size(942, 493)
         Me.dgvSiswa.TabIndex = 0
         '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.SaddleBrown
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.cmbStatus)
+        Me.GroupBox1.Controls.Add(Me.txtTahunMasuk)
+        Me.GroupBox1.Controls.Add(Me.dtpTanggalLahir)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.cmbJenisKelamin)
         Me.GroupBox1.Controls.Add(Me.cmbKelas)
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.txtAlamat)
-        Me.GroupBox1.Controls.Add(Me.txtNamaSiswa)
+        Me.GroupBox1.Controls.Add(Me.txtNama)
         Me.GroupBox1.Controls.Add(Me.txtNIS)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.Controls.Add(Me.Label3)
@@ -80,23 +91,58 @@ Partial Class UC_DataSiswa
         Me.GroupBox1.Controls.Add(Me.btn_Tambah)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 94)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(248, 396)
+        Me.GroupBox1.Size = New System.Drawing.Size(248, 493)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
-        'DateTimePicker1
+        'Label9
         '
-        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker1.Location = New System.Drawing.Point(123, 221)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(100, 22)
-        Me.DateTimePicker1.TabIndex = 16
+        Me.Label9.AutoSize = True
+        Me.Label9.ForeColor = System.Drawing.Color.White
+        Me.Label9.Location = New System.Drawing.Point(26, 288)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(44, 16)
+        Me.Label9.TabIndex = 22
+        Me.Label9.Text = "Status"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.Color.White
+        Me.Label8.Location = New System.Drawing.Point(21, 255)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(88, 16)
+        Me.Label8.TabIndex = 21
+        Me.Label8.Text = "Tahun Masuk"
+        '
+        'cmbStatus
+        '
+        Me.cmbStatus.FormattingEnabled = True
+        Me.cmbStatus.Location = New System.Drawing.Point(123, 285)
+        Me.cmbStatus.Name = "cmbStatus"
+        Me.cmbStatus.Size = New System.Drawing.Size(100, 24)
+        Me.cmbStatus.TabIndex = 19
+        '
+        'txtTahunMasuk
+        '
+        Me.txtTahunMasuk.Location = New System.Drawing.Point(123, 255)
+        Me.txtTahunMasuk.Name = "txtTahunMasuk"
+        Me.txtTahunMasuk.Size = New System.Drawing.Size(100, 22)
+        Me.txtTahunMasuk.TabIndex = 18
+        '
+        'dtpTanggalLahir
+        '
+        Me.dtpTanggalLahir.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpTanggalLahir.Location = New System.Drawing.Point(123, 221)
+        Me.dtpTanggalLahir.Name = "dtpTanggalLahir"
+        Me.dtpTanggalLahir.Size = New System.Drawing.Size(100, 22)
+        Me.dtpTanggalLahir.TabIndex = 16
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(29, 219)
+        Me.Label6.Location = New System.Drawing.Point(21, 221)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(90, 16)
         Me.Label6.TabIndex = 15
@@ -136,12 +182,12 @@ Partial Class UC_DataSiswa
         Me.txtAlamat.Size = New System.Drawing.Size(100, 22)
         Me.txtAlamat.TabIndex = 11
         '
-        'txtNamaSiswa
+        'txtNama
         '
-        Me.txtNamaSiswa.Location = New System.Drawing.Point(123, 84)
-        Me.txtNamaSiswa.Name = "txtNamaSiswa"
-        Me.txtNamaSiswa.Size = New System.Drawing.Size(100, 22)
-        Me.txtNamaSiswa.TabIndex = 9
+        Me.txtNama.Location = New System.Drawing.Point(123, 84)
+        Me.txtNama.Name = "txtNama"
+        Me.txtNama.Size = New System.Drawing.Size(100, 22)
+        Me.txtNama.TabIndex = 9
         '
         'txtNIS
         '
@@ -192,7 +238,7 @@ Partial Class UC_DataSiswa
         '
         'btnHapus
         '
-        Me.btnHapus.Location = New System.Drawing.Point(36, 320)
+        Me.btnHapus.Location = New System.Drawing.Point(20, 432)
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Size = New System.Drawing.Size(75, 39)
         Me.btnHapus.TabIndex = 3
@@ -201,7 +247,7 @@ Partial Class UC_DataSiswa
         '
         'btnBatal
         '
-        Me.btnBatal.Location = New System.Drawing.Point(139, 320)
+        Me.btnBatal.Location = New System.Drawing.Point(123, 432)
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Size = New System.Drawing.Size(84, 39)
         Me.btnBatal.TabIndex = 2
@@ -210,7 +256,7 @@ Partial Class UC_DataSiswa
         '
         'btnEdit
         '
-        Me.btnEdit.Location = New System.Drawing.Point(139, 264)
+        Me.btnEdit.Location = New System.Drawing.Point(123, 376)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(84, 41)
         Me.btnEdit.TabIndex = 1
@@ -219,7 +265,7 @@ Partial Class UC_DataSiswa
         '
         'btn_Tambah
         '
-        Me.btn_Tambah.Location = New System.Drawing.Point(36, 264)
+        Me.btn_Tambah.Location = New System.Drawing.Point(20, 376)
         Me.btn_Tambah.Name = "btn_Tambah"
         Me.btn_Tambah.Size = New System.Drawing.Size(75, 41)
         Me.btn_Tambah.TabIndex = 0
@@ -230,7 +276,7 @@ Partial Class UC_DataSiswa
         '
         Me.btnSimpan.BackColor = System.Drawing.Color.SaddleBrown
         Me.btnSimpan.ForeColor = System.Drawing.Color.White
-        Me.btnSimpan.Location = New System.Drawing.Point(900, 496)
+        Me.btnSimpan.Location = New System.Drawing.Point(993, 593)
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Size = New System.Drawing.Size(87, 35)
         Me.btnSimpan.TabIndex = 2
@@ -251,7 +297,7 @@ Partial Class UC_DataSiswa
         '
         'txtCariSiswa
         '
-        Me.txtCariSiswa.Location = New System.Drawing.Point(795, 69)
+        Me.txtCariSiswa.Location = New System.Drawing.Point(693, 69)
         Me.txtCariSiswa.Name = "txtCariSiswa"
         Me.txtCariSiswa.Size = New System.Drawing.Size(192, 22)
         Me.txtCariSiswa.TabIndex = 17
@@ -260,17 +306,49 @@ Partial Class UC_DataSiswa
         '
         Me.Cari.AutoSize = True
         Me.Cari.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Cari.Location = New System.Drawing.Point(758, 72)
+        Me.Cari.Location = New System.Drawing.Point(640, 75)
         Me.Cari.Name = "Cari"
         Me.Cari.Size = New System.Drawing.Size(31, 16)
         Me.Cari.TabIndex = 18
         Me.Cari.Text = "Cari"
+        '
+        'cmbFilterKelas
+        '
+        Me.cmbFilterKelas.FormattingEnabled = True
+        Me.cmbFilterKelas.Location = New System.Drawing.Point(1016, 64)
+        Me.cmbFilterKelas.Name = "cmbFilterKelas"
+        Me.cmbFilterKelas.Size = New System.Drawing.Size(100, 24)
+        Me.cmbFilterKelas.TabIndex = 20
+        '
+        'btnExportPDF
+        '
+        Me.btnExportPDF.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnExportPDF.ForeColor = System.Drawing.Color.White
+        Me.btnExportPDF.Location = New System.Drawing.Point(1086, 593)
+        Me.btnExportPDF.Name = "btnExportPDF"
+        Me.btnExportPDF.Size = New System.Drawing.Size(87, 35)
+        Me.btnExportPDF.TabIndex = 24
+        Me.btnExportPDF.Text = "Print"
+        Me.btnExportPDF.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Label7.Location = New System.Drawing.Point(931, 69)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(73, 16)
+        Me.Label7.TabIndex = 26
+        Me.Label7.Text = "Filter Kelas"
         '
         'UC_DataSiswa
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.btnExportPDF)
+        Me.Controls.Add(Me.cmbFilterKelas)
         Me.Controls.Add(Me.Cari)
         Me.Controls.Add(Me.txtCariSiswa)
         Me.Controls.Add(Me.lbjudul)
@@ -278,7 +356,7 @@ Partial Class UC_DataSiswa
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.dgvSiswa)
         Me.Name = "UC_DataSiswa"
-        Me.Size = New System.Drawing.Size(1241, 541)
+        Me.Size = New System.Drawing.Size(1263, 703)
         CType(Me.dgvSiswa, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -293,7 +371,7 @@ Partial Class UC_DataSiswa
     Friend WithEvents cmbKelas As ComboBox
     Friend WithEvents Label5 As Label
     Friend WithEvents txtAlamat As TextBox
-    Friend WithEvents txtNamaSiswa As TextBox
+    Friend WithEvents txtNama As TextBox
     Friend WithEvents txtNIS As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -306,7 +384,14 @@ Partial Class UC_DataSiswa
     Friend WithEvents lbjudul As Label
     Friend WithEvents cmbJenisKelamin As ComboBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents dtpTanggalLahir As DateTimePicker
     Friend WithEvents txtCariSiswa As TextBox
     Friend WithEvents Cari As Label
+    Friend WithEvents txtTahunMasuk As TextBox
+    Friend WithEvents cmbStatus As ComboBox
+    Friend WithEvents cmbFilterKelas As ComboBox
+    Friend WithEvents btnExportPDF As Button
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label7 As Label
 End Class

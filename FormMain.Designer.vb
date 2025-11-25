@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class FormMain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,481 +20,518 @@ Partial Class FormMain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.PanelUtama = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.ListBox2 = New System.Windows.Forms.ListBox()
-        Me.pnlTotalSiswa = New System.Windows.Forms.Panel()
-        Me.lblTotalSiswa = New System.Windows.Forms.Label()
-        Me.lblTitleTotalSiswa = New System.Windows.Forms.Label()
-        Me.pnlTotalGuru = New System.Windows.Forms.Panel()
-        Me.lblTotalGuru = New System.Windows.Forms.Label()
-        Me.lblTitleTotalGuru = New System.Windows.Forms.Label()
-        Me.pnlTotalKelas = New System.Windows.Forms.Panel()
-        Me.lblTotalKelas = New System.Windows.Forms.Label()
-        Me.lblTitleTotalKelas = New System.Windows.Forms.Label()
-        Me.pnlChart = New System.Windows.Forms.Panel()
-        Me.lblJudulChart = New System.Windows.Forms.Label()
-        Me.chartSiswaKelas = New System.Windows.Forms.DataVisualization.Charting.Chart()
-        Me.pnlAktivitas = New System.Windows.Forms.Panel()
-        Me.lblJudulAktivitas = New System.Windows.Forms.Label()
-        Me.lstAktivitas = New System.Windows.Forms.ListBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.btnDataSiswa = New System.Windows.Forms.Button()
-        Me.btnManajemenPelajaran = New System.Windows.Forms.Button()
-        Me.btnDataGuru = New System.Windows.Forms.Button()
-        Me.btnLogout = New System.Windows.Forms.Button()
-        Me.btnMataPelajaran = New System.Windows.Forms.Button()
-        Me.btnDataKelas = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnDashboard = New System.Windows.Forms.Button()
+        Me.btnDataKelas = New System.Windows.Forms.Button()
+        Me.btnDataSiswa = New System.Windows.Forms.Button()
+        Me.btnMataPelajaran = New System.Windows.Forms.Button()
+        Me.btnDataGuru = New System.Windows.Forms.Button()
+        Me.btnManajemenPelajaran = New System.Windows.Forms.Button()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.LabelTentang = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.LabelAlamat = New System.Windows.Forms.Label()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.LabelNamaPerpustakaan = New System.Windows.Forms.Label()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.ButtonAnggota = New System.Windows.Forms.Button()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.lblJumlahKelas = New System.Windows.Forms.Label()
+        Me.lblJmlKelas = New System.Windows.Forms.Label()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.ButtonPeminjaman = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.ksks = New System.Windows.Forms.Label()
+        Me.lblJmlGuru = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.ButtonPetugas = New System.Windows.Forms.Button()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lblJmlSiswa = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.PanelUtama.SuspendLayout()
-        Me.Panel5.SuspendLayout()
-        Me.pnlTotalSiswa.SuspendLayout()
-        Me.pnlTotalGuru.SuspendLayout()
-        Me.pnlTotalKelas.SuspendLayout()
-        Me.pnlChart.SuspendLayout()
-        CType(Me.chartSiswaKelas, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlAktivitas.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.Transparent
-        Me.Panel1.Controls.Add(Me.GroupBox1)
+        Me.Panel1.Controls.Add(Me.Button3)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.Controls.Add(Me.btnDashboard)
+        Me.Panel1.Controls.Add(Me.btnDataKelas)
+        Me.Panel1.Controls.Add(Me.btnDataSiswa)
+        Me.Panel1.Controls.Add(Me.btnMataPelajaran)
+        Me.Panel1.Controls.Add(Me.btnDataGuru)
+        Me.Panel1.Controls.Add(Me.btnManajemenPelajaran)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(255, 655)
+        Me.Panel1.Size = New System.Drawing.Size(241, 715)
         Me.Panel1.TabIndex = 0
         '
-        'Panel2
+        'Button3
         '
-        Me.Panel2.BackColor = System.Drawing.Color.Transparent
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Panel2.Location = New System.Drawing.Point(255, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1078, 93)
-        Me.Panel2.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(13, 23)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(361, 48)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "3Manage Kelas"
-        '
-        'PanelUtama
-        '
-        Me.PanelUtama.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.PanelUtama.Controls.Add(Me.Panel5)
-        Me.PanelUtama.Controls.Add(Me.pnlTotalSiswa)
-        Me.PanelUtama.Controls.Add(Me.pnlTotalGuru)
-        Me.PanelUtama.Controls.Add(Me.pnlTotalKelas)
-        Me.PanelUtama.Controls.Add(Me.pnlChart)
-        Me.PanelUtama.Controls.Add(Me.pnlAktivitas)
-        Me.PanelUtama.Controls.Add(Me.Label2)
-        Me.PanelUtama.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelUtama.Location = New System.Drawing.Point(255, 93)
-        Me.PanelUtama.Name = "PanelUtama"
-        Me.PanelUtama.Size = New System.Drawing.Size(1078, 562)
-        Me.PanelUtama.TabIndex = 2
-        '
-        'Panel5
-        '
-        Me.Panel5.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel5.Controls.Add(Me.Label5)
-        Me.Panel5.Controls.Add(Me.ListBox2)
-        Me.Panel5.Location = New System.Drawing.Point(815, 51)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(251, 479)
-        Me.Panel5.TabIndex = 15
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(12, 14)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(90, 16)
-        Me.Label5.TabIndex = 6
-        Me.Label5.Text = "Pengumuman"
-        '
-        'ListBox2
-        '
-        Me.ListBox2.AccessibleName = ""
-        Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.ItemHeight = 16
-        Me.ListBox2.Location = New System.Drawing.Point(15, 39)
-        Me.ListBox2.Name = "ListBox2"
-        Me.ListBox2.Size = New System.Drawing.Size(216, 420)
-        Me.ListBox2.TabIndex = 3
-        '
-        'pnlTotalSiswa
-        '
-        Me.pnlTotalSiswa.BackColor = System.Drawing.Color.Sienna
-        Me.pnlTotalSiswa.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTotalSiswa.Controls.Add(Me.lblTotalSiswa)
-        Me.pnlTotalSiswa.Controls.Add(Me.lblTitleTotalSiswa)
-        Me.pnlTotalSiswa.Location = New System.Drawing.Point(21, 51)
-        Me.pnlTotalSiswa.Name = "pnlTotalSiswa"
-        Me.pnlTotalSiswa.Size = New System.Drawing.Size(253, 146)
-        Me.pnlTotalSiswa.TabIndex = 10
-        '
-        'lblTotalSiswa
-        '
-        Me.lblTotalSiswa.AutoSize = True
-        Me.lblTotalSiswa.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalSiswa.ForeColor = System.Drawing.Color.White
-        Me.lblTotalSiswa.Location = New System.Drawing.Point(12, 76)
-        Me.lblTotalSiswa.Name = "lblTotalSiswa"
-        Me.lblTotalSiswa.Size = New System.Drawing.Size(43, 46)
-        Me.lblTotalSiswa.TabIndex = 1
-        Me.lblTotalSiswa.Text = "0"
-        '
-        'lblTitleTotalSiswa
-        '
-        Me.lblTitleTotalSiswa.AutoSize = True
-        Me.lblTitleTotalSiswa.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleTotalSiswa.ForeColor = System.Drawing.Color.White
-        Me.lblTitleTotalSiswa.Location = New System.Drawing.Point(3, 15)
-        Me.lblTitleTotalSiswa.Name = "lblTitleTotalSiswa"
-        Me.lblTitleTotalSiswa.Size = New System.Drawing.Size(238, 46)
-        Me.lblTitleTotalSiswa.TabIndex = 0
-        Me.lblTitleTotalSiswa.Text = "Total Siswa"
-        '
-        'pnlTotalGuru
-        '
-        Me.pnlTotalGuru.BackColor = System.Drawing.SystemColors.Highlight
-        Me.pnlTotalGuru.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTotalGuru.Controls.Add(Me.lblTotalGuru)
-        Me.pnlTotalGuru.Controls.Add(Me.lblTitleTotalGuru)
-        Me.pnlTotalGuru.Location = New System.Drawing.Point(280, 51)
-        Me.pnlTotalGuru.Name = "pnlTotalGuru"
-        Me.pnlTotalGuru.Size = New System.Drawing.Size(253, 146)
-        Me.pnlTotalGuru.TabIndex = 11
-        '
-        'lblTotalGuru
-        '
-        Me.lblTotalGuru.AutoSize = True
-        Me.lblTotalGuru.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalGuru.ForeColor = System.Drawing.Color.White
-        Me.lblTotalGuru.Location = New System.Drawing.Point(16, 76)
-        Me.lblTotalGuru.Name = "lblTotalGuru"
-        Me.lblTotalGuru.Size = New System.Drawing.Size(43, 46)
-        Me.lblTotalGuru.TabIndex = 2
-        Me.lblTotalGuru.Text = "0"
-        '
-        'lblTitleTotalGuru
-        '
-        Me.lblTitleTotalGuru.AutoSize = True
-        Me.lblTitleTotalGuru.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleTotalGuru.ForeColor = System.Drawing.Color.White
-        Me.lblTitleTotalGuru.Location = New System.Drawing.Point(16, 15)
-        Me.lblTitleTotalGuru.Name = "lblTitleTotalGuru"
-        Me.lblTitleTotalGuru.Size = New System.Drawing.Size(218, 46)
-        Me.lblTitleTotalGuru.TabIndex = 1
-        Me.lblTitleTotalGuru.Text = "Total Guru"
-        '
-        'pnlTotalKelas
-        '
-        Me.pnlTotalKelas.BackColor = System.Drawing.SystemColors.HotTrack
-        Me.pnlTotalKelas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlTotalKelas.Controls.Add(Me.lblTotalKelas)
-        Me.pnlTotalKelas.Controls.Add(Me.lblTitleTotalKelas)
-        Me.pnlTotalKelas.Location = New System.Drawing.Point(539, 51)
-        Me.pnlTotalKelas.Name = "pnlTotalKelas"
-        Me.pnlTotalKelas.Size = New System.Drawing.Size(265, 146)
-        Me.pnlTotalKelas.TabIndex = 12
-        '
-        'lblTotalKelas
-        '
-        Me.lblTotalKelas.AutoSize = True
-        Me.lblTotalKelas.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTotalKelas.ForeColor = System.Drawing.Color.White
-        Me.lblTotalKelas.Location = New System.Drawing.Point(21, 85)
-        Me.lblTotalKelas.Name = "lblTotalKelas"
-        Me.lblTotalKelas.Size = New System.Drawing.Size(43, 46)
-        Me.lblTotalKelas.TabIndex = 3
-        Me.lblTotalKelas.Text = "0"
-        '
-        'lblTitleTotalKelas
-        '
-        Me.lblTitleTotalKelas.AutoSize = True
-        Me.lblTitleTotalKelas.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitleTotalKelas.ForeColor = System.Drawing.Color.White
-        Me.lblTitleTotalKelas.Location = New System.Drawing.Point(20, 27)
-        Me.lblTitleTotalKelas.Name = "lblTitleTotalKelas"
-        Me.lblTitleTotalKelas.Size = New System.Drawing.Size(230, 46)
-        Me.lblTitleTotalKelas.TabIndex = 2
-        Me.lblTitleTotalKelas.Text = "Total Kelas"
-        '
-        'pnlChart
-        '
-        Me.pnlChart.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlChart.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlChart.Controls.Add(Me.lblJudulChart)
-        Me.pnlChart.Controls.Add(Me.chartSiswaKelas)
-        Me.pnlChart.Location = New System.Drawing.Point(21, 214)
-        Me.pnlChart.Name = "pnlChart"
-        Me.pnlChart.Size = New System.Drawing.Size(517, 316)
-        Me.pnlChart.TabIndex = 13
-        '
-        'lblJudulChart
-        '
-        Me.lblJudulChart.AutoSize = True
-        Me.lblJudulChart.Location = New System.Drawing.Point(39, 14)
-        Me.lblJudulChart.Name = "lblJudulChart"
-        Me.lblJudulChart.Size = New System.Drawing.Size(149, 16)
-        Me.lblJudulChart.TabIndex = 5
-        Me.lblJudulChart.Text = "Jumlah Siswa per Kelas"
-        '
-        'chartSiswaKelas
-        '
-        ChartArea5.Name = "ChartArea1"
-        Me.chartSiswaKelas.ChartAreas.Add(ChartArea5)
-        Legend5.Name = "Legend1"
-        Me.chartSiswaKelas.Legends.Add(Legend5)
-        Me.chartSiswaKelas.Location = New System.Drawing.Point(39, 36)
-        Me.chartSiswaKelas.Name = "chartSiswaKelas"
-        Series5.ChartArea = "ChartArea1"
-        Series5.Legend = "Legend1"
-        Series5.Name = "Series1"
-        Me.chartSiswaKelas.Series.Add(Series5)
-        Me.chartSiswaKelas.Size = New System.Drawing.Size(472, 275)
-        Me.chartSiswaKelas.TabIndex = 4
-        Me.chartSiswaKelas.Text = "Chart1"
-        '
-        'pnlAktivitas
-        '
-        Me.pnlAktivitas.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.pnlAktivitas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlAktivitas.Controls.Add(Me.lblJudulAktivitas)
-        Me.pnlAktivitas.Controls.Add(Me.lstAktivitas)
-        Me.pnlAktivitas.Location = New System.Drawing.Point(544, 214)
-        Me.pnlAktivitas.Name = "pnlAktivitas"
-        Me.pnlAktivitas.Size = New System.Drawing.Size(265, 316)
-        Me.pnlAktivitas.TabIndex = 14
-        '
-        'lblJudulAktivitas
-        '
-        Me.lblJudulAktivitas.AutoSize = True
-        Me.lblJudulAktivitas.Location = New System.Drawing.Point(12, 14)
-        Me.lblJudulAktivitas.Name = "lblJudulAktivitas"
-        Me.lblJudulAktivitas.Size = New System.Drawing.Size(108, 16)
-        Me.lblJudulAktivitas.TabIndex = 6
-        Me.lblJudulAktivitas.Text = "Aktivitas Terbaru"
-        '
-        'lstAktivitas
-        '
-        Me.lstAktivitas.AccessibleName = ""
-        Me.lstAktivitas.FormattingEnabled = True
-        Me.lstAktivitas.ItemHeight = 16
-        Me.lstAktivitas.Location = New System.Drawing.Point(15, 36)
-        Me.lstAktivitas.Name = "lstAktivitas"
-        Me.lstAktivitas.Size = New System.Drawing.Size(234, 244)
-        Me.lstAktivitas.TabIndex = 3
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.Color.White
-        Me.Label2.Location = New System.Drawing.Point(247, -33)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(157, 25)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "DASHBOARD"
-        '
-        'btnDataSiswa
-        '
-        Me.btnDataSiswa.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnDataSiswa.ForeColor = System.Drawing.Color.White
-        Me.btnDataSiswa.Location = New System.Drawing.Point(10, 84)
-        Me.btnDataSiswa.Name = "btnDataSiswa"
-        Me.btnDataSiswa.Size = New System.Drawing.Size(225, 61)
-        Me.btnDataSiswa.TabIndex = 0
-        Me.btnDataSiswa.Text = "Data Siswa"
-        Me.btnDataSiswa.UseVisualStyleBackColor = False
-        '
-        'btnManajemenPelajaran
-        '
-        Me.btnManajemenPelajaran.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnManajemenPelajaran.ForeColor = System.Drawing.Color.White
-        Me.btnManajemenPelajaran.Location = New System.Drawing.Point(12, 343)
-        Me.btnManajemenPelajaran.Name = "btnManajemenPelajaran"
-        Me.btnManajemenPelajaran.Size = New System.Drawing.Size(223, 49)
-        Me.btnManajemenPelajaran.TabIndex = 4
-        Me.btnManajemenPelajaran.Text = "Manajemen Pelajaran"
-        Me.btnManajemenPelajaran.UseVisualStyleBackColor = False
-        '
-        'btnDataGuru
-        '
-        Me.btnDataGuru.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnDataGuru.ForeColor = System.Drawing.Color.White
-        Me.btnDataGuru.Location = New System.Drawing.Point(10, 151)
-        Me.btnDataGuru.Name = "btnDataGuru"
-        Me.btnDataGuru.Size = New System.Drawing.Size(225, 56)
-        Me.btnDataGuru.TabIndex = 1
-        Me.btnDataGuru.Text = "Data Guru"
-        Me.btnDataGuru.UseVisualStyleBackColor = False
-        '
-        'btnLogout
-        '
-        Me.btnLogout.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnLogout.ForeColor = System.Drawing.Color.White
-        Me.btnLogout.Location = New System.Drawing.Point(3, 578)
-        Me.btnLogout.Name = "btnLogout"
-        Me.btnLogout.Size = New System.Drawing.Size(249, 45)
-        Me.btnLogout.TabIndex = 5
-        Me.btnLogout.Text = "Keluar"
-        Me.btnLogout.UseVisualStyleBackColor = False
-        '
-        'btnMataPelajaran
-        '
-        Me.btnMataPelajaran.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnMataPelajaran.ForeColor = System.Drawing.Color.White
-        Me.btnMataPelajaran.Location = New System.Drawing.Point(12, 282)
-        Me.btnMataPelajaran.Name = "btnMataPelajaran"
-        Me.btnMataPelajaran.Size = New System.Drawing.Size(223, 55)
-        Me.btnMataPelajaran.TabIndex = 3
-        Me.btnMataPelajaran.Text = "Mata Pelajaran"
-        Me.btnMataPelajaran.UseVisualStyleBackColor = False
-        '
-        'btnDataKelas
-        '
-        Me.btnDataKelas.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnDataKelas.ForeColor = System.Drawing.Color.White
-        Me.btnDataKelas.Location = New System.Drawing.Point(12, 223)
-        Me.btnDataKelas.Name = "btnDataKelas"
-        Me.btnDataKelas.Size = New System.Drawing.Size(223, 53)
-        Me.btnDataKelas.TabIndex = 2
-        Me.btnDataKelas.Text = "Data Kelas"
-        Me.btnDataKelas.UseVisualStyleBackColor = False
+        Me.Button3.BackColor = System.Drawing.Color.SaddleBrown
+        Me.Button3.ForeColor = System.Drawing.Color.White
+        Me.Button3.Location = New System.Drawing.Point(10, 663)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(223, 49)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Keluar"
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.SaddleBrown
         Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(12, 409)
+        Me.Button1.Location = New System.Drawing.Point(10, 529)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(223, 49)
-        Me.Button1.TabIndex = 6
-        Me.Button1.Text = "Laporan"
+        Me.Button1.TabIndex = 24
+        Me.Button1.Text = "Absensi"
         Me.Button1.UseVisualStyleBackColor = False
         '
-        'Label3
+        'Button2
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(12, 23)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(234, 48)
-        Me.Label3.TabIndex = 1
-        Me.Label3.Text = "Dasboard"
+        Me.Button2.BackColor = System.Drawing.Color.SaddleBrown
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(10, 584)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(223, 49)
+        Me.Button2.TabIndex = 23
+        Me.Button2.Text = "Laporan"
+        Me.Button2.UseVisualStyleBackColor = False
         '
-        'GroupBox1
+        'btnDashboard
         '
-        Me.GroupBox1.BackColor = System.Drawing.Color.Sienna
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.btnDataKelas)
-        Me.GroupBox1.Controls.Add(Me.btnMataPelajaran)
-        Me.GroupBox1.Controls.Add(Me.btnLogout)
-        Me.GroupBox1.Controls.Add(Me.btnDataGuru)
-        Me.GroupBox1.Controls.Add(Me.btnManajemenPelajaran)
-        Me.GroupBox1.Controls.Add(Me.btnDataSiswa)
-        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(255, 655)
-        Me.GroupBox1.TabIndex = 6
-        Me.GroupBox1.TabStop = False
+        Me.btnDashboard.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDashboard.ForeColor = System.Drawing.Color.White
+        Me.btnDashboard.Location = New System.Drawing.Point(10, 144)
+        Me.btnDashboard.Name = "btnDashboard"
+        Me.btnDashboard.Size = New System.Drawing.Size(225, 61)
+        Me.btnDashboard.TabIndex = 22
+        Me.btnDashboard.Text = "Dashboard"
+        Me.btnDashboard.UseVisualStyleBackColor = False
+        '
+        'btnDataKelas
+        '
+        Me.btnDataKelas.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataKelas.ForeColor = System.Drawing.Color.White
+        Me.btnDataKelas.Location = New System.Drawing.Point(10, 350)
+        Me.btnDataKelas.Name = "btnDataKelas"
+        Me.btnDataKelas.Size = New System.Drawing.Size(223, 53)
+        Me.btnDataKelas.TabIndex = 19
+        Me.btnDataKelas.Text = "Data Kelas"
+        Me.btnDataKelas.UseVisualStyleBackColor = False
+        '
+        'btnDataSiswa
+        '
+        Me.btnDataSiswa.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataSiswa.ForeColor = System.Drawing.Color.White
+        Me.btnDataSiswa.Location = New System.Drawing.Point(8, 211)
+        Me.btnDataSiswa.Name = "btnDataSiswa"
+        Me.btnDataSiswa.Size = New System.Drawing.Size(225, 61)
+        Me.btnDataSiswa.TabIndex = 17
+        Me.btnDataSiswa.Text = "Data Siswa"
+        Me.btnDataSiswa.UseVisualStyleBackColor = False
+        '
+        'btnMataPelajaran
+        '
+        Me.btnMataPelajaran.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnMataPelajaran.ForeColor = System.Drawing.Color.White
+        Me.btnMataPelajaran.Location = New System.Drawing.Point(10, 409)
+        Me.btnMataPelajaran.Name = "btnMataPelajaran"
+        Me.btnMataPelajaran.Size = New System.Drawing.Size(223, 55)
+        Me.btnMataPelajaran.TabIndex = 20
+        Me.btnMataPelajaran.Text = "Mata Pelajaran"
+        Me.btnMataPelajaran.UseVisualStyleBackColor = False
+        '
+        'btnDataGuru
+        '
+        Me.btnDataGuru.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataGuru.ForeColor = System.Drawing.Color.White
+        Me.btnDataGuru.Location = New System.Drawing.Point(8, 278)
+        Me.btnDataGuru.Name = "btnDataGuru"
+        Me.btnDataGuru.Size = New System.Drawing.Size(225, 56)
+        Me.btnDataGuru.TabIndex = 18
+        Me.btnDataGuru.Text = "Data Guru"
+        Me.btnDataGuru.UseVisualStyleBackColor = False
+        '
+        'btnManajemenPelajaran
+        '
+        Me.btnManajemenPelajaran.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnManajemenPelajaran.ForeColor = System.Drawing.Color.White
+        Me.btnManajemenPelajaran.Location = New System.Drawing.Point(10, 470)
+        Me.btnManajemenPelajaran.Name = "btnManajemenPelajaran"
+        Me.btnManajemenPelajaran.Size = New System.Drawing.Size(223, 49)
+        Me.btnManajemenPelajaran.TabIndex = 21
+        Me.btnManajemenPelajaran.Text = "Manajemen Pelajaran"
+        Me.btnManajemenPelajaran.UseVisualStyleBackColor = False
+        '
+        'Panel2
+        '
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(241, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1226, 122)
+        Me.Panel2.TabIndex = 1
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.GroupBox6)
+        Me.Panel3.Controls.Add(Me.GroupBox2)
+        Me.Panel3.Controls.Add(Me.GroupBox3)
+        Me.Panel3.Controls.Add(Me.GroupBox4)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(241, 122)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1226, 593)
+        Me.Panel3.TabIndex = 2
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.BackColor = System.Drawing.Color.Silver
+        Me.GroupBox6.Controls.Add(Me.LabelTentang)
+        Me.GroupBox6.Controls.Add(Me.Label15)
+        Me.GroupBox6.Controls.Add(Me.LabelAlamat)
+        Me.GroupBox6.Controls.Add(Me.Label13)
+        Me.GroupBox6.Controls.Add(Me.LabelNamaPerpustakaan)
+        Me.GroupBox6.Controls.Add(Me.Panel8)
+        Me.GroupBox6.Controls.Add(Me.Label7)
+        Me.GroupBox6.Controls.Add(Me.Label10)
+        Me.GroupBox6.Location = New System.Drawing.Point(66, 280)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(1148, 235)
+        Me.GroupBox6.TabIndex = 33
+        Me.GroupBox6.TabStop = False
+        '
+        'LabelTentang
+        '
+        Me.LabelTentang.AutoSize = True
+        Me.LabelTentang.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelTentang.ForeColor = System.Drawing.Color.Black
+        Me.LabelTentang.Location = New System.Drawing.Point(65, 182)
+        Me.LabelTentang.Name = "LabelTentang"
+        Me.LabelTentang.Size = New System.Drawing.Size(283, 20)
+        Me.LabelTentang.TabIndex = 9
+        Me.LabelTentang.Text = "Di bawah naungan Pemkot Surabaya"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.Black
+        Me.Label15.Location = New System.Drawing.Point(46, 157)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(76, 20)
+        Me.Label15.TabIndex = 8
+        Me.Label15.Text = "Tentang"
+        '
+        'LabelAlamat
+        '
+        Me.LabelAlamat.AutoSize = True
+        Me.LabelAlamat.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelAlamat.ForeColor = System.Drawing.Color.Black
+        Me.LabelAlamat.Location = New System.Drawing.Point(65, 133)
+        Me.LabelAlamat.Name = "LabelAlamat"
+        Me.LabelAlamat.Size = New System.Drawing.Size(64, 20)
+        Me.LabelAlamat.TabIndex = 7
+        Me.LabelAlamat.Text = "Jl Jagir"
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label13.ForeColor = System.Drawing.Color.Black
+        Me.Label13.Location = New System.Drawing.Point(46, 108)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(67, 20)
+        Me.Label13.TabIndex = 6
+        Me.Label13.Text = "Alamat"
+        '
+        'LabelNamaPerpustakaan
+        '
+        Me.LabelNamaPerpustakaan.AutoSize = True
+        Me.LabelNamaPerpustakaan.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelNamaPerpustakaan.ForeColor = System.Drawing.Color.Black
+        Me.LabelNamaPerpustakaan.Location = New System.Drawing.Point(65, 82)
+        Me.LabelNamaPerpustakaan.Name = "LabelNamaPerpustakaan"
+        Me.LabelNamaPerpustakaan.Size = New System.Drawing.Size(86, 20)
+        Me.LabelNamaPerpustakaan.TabIndex = 5
+        Me.LabelNamaPerpustakaan.Text = "LIB Scholl"
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.Transparent
+        Me.Panel8.BackgroundImage = CType(resources.GetObject("Panel8.BackgroundImage"), System.Drawing.Image)
+        Me.Panel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel8.Location = New System.Drawing.Point(13, 21)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(26, 22)
+        Me.Panel8.TabIndex = 3
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.Black
+        Me.Label7.Location = New System.Drawing.Point(45, 21)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(215, 26)
+        Me.Label7.TabIndex = 4
+        Me.Label7.Text = "Data Perpustakaan"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.Location = New System.Drawing.Point(46, 57)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(177, 20)
+        Me.Label10.TabIndex = 3
+        Me.Label10.Text = "Nama Perpustakaan"
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.BackColor = System.Drawing.Color.Crimson
+        Me.GroupBox2.Controls.Add(Me.ButtonAnggota)
+        Me.GroupBox2.Controls.Add(Me.Panel5)
+        Me.GroupBox2.Controls.Add(Me.lblJumlahKelas)
+        Me.GroupBox2.Controls.Add(Me.lblJmlKelas)
+        Me.GroupBox2.Location = New System.Drawing.Point(639, 76)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(270, 138)
+        Me.GroupBox2.TabIndex = 32
+        Me.GroupBox2.TabStop = False
+        '
+        'ButtonAnggota
+        '
+        Me.ButtonAnggota.Location = New System.Drawing.Point(0, 116)
+        Me.ButtonAnggota.Name = "ButtonAnggota"
+        Me.ButtonAnggota.Size = New System.Drawing.Size(270, 23)
+        Me.ButtonAnggota.TabIndex = 5
+        Me.ButtonAnggota.Text = "Lihat Detail"
+        Me.ButtonAnggota.UseVisualStyleBackColor = True
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.Transparent
+        Me.Panel5.BackgroundImage = CType(resources.GetObject("Panel5.BackgroundImage"), System.Drawing.Image)
+        Me.Panel5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel5.Location = New System.Drawing.Point(194, 51)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(56, 57)
+        Me.Panel5.TabIndex = 3
+        '
+        'lblJumlahKelas
+        '
+        Me.lblJumlahKelas.AutoSize = True
+        Me.lblJumlahKelas.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJumlahKelas.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblJumlahKelas.Location = New System.Drawing.Point(8, 17)
+        Me.lblJumlahKelas.Name = "lblJumlahKelas"
+        Me.lblJumlahKelas.Size = New System.Drawing.Size(156, 26)
+        Me.lblJumlahKelas.TabIndex = 4
+        Me.lblJumlahKelas.Text = "Jumlah Kelas"
+        '
+        'lblJmlKelas
+        '
+        Me.lblJmlKelas.AutoSize = True
+        Me.lblJmlKelas.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJmlKelas.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblJmlKelas.Location = New System.Drawing.Point(79, 61)
+        Me.lblJmlKelas.Name = "lblJmlKelas"
+        Me.lblJmlKelas.Size = New System.Drawing.Size(31, 32)
+        Me.lblJmlKelas.TabIndex = 3
+        Me.lblJmlKelas.Text = "5"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.BackColor = System.Drawing.Color.DeepPink
+        Me.GroupBox3.Controls.Add(Me.ButtonPeminjaman)
+        Me.GroupBox3.Controls.Add(Me.Panel4)
+        Me.GroupBox3.Controls.Add(Me.ksks)
+        Me.GroupBox3.Controls.Add(Me.lblJmlGuru)
+        Me.GroupBox3.Location = New System.Drawing.Point(363, 75)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(270, 138)
+        Me.GroupBox3.TabIndex = 31
+        Me.GroupBox3.TabStop = False
+        '
+        'ButtonPeminjaman
+        '
+        Me.ButtonPeminjaman.Location = New System.Drawing.Point(0, 116)
+        Me.ButtonPeminjaman.Name = "ButtonPeminjaman"
+        Me.ButtonPeminjaman.Size = New System.Drawing.Size(270, 23)
+        Me.ButtonPeminjaman.TabIndex = 8
+        Me.ButtonPeminjaman.Text = "Lihat Detail"
+        Me.ButtonPeminjaman.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.Transparent
+        Me.Panel4.BackgroundImage = CType(resources.GetObject("Panel4.BackgroundImage"), System.Drawing.Image)
+        Me.Panel4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel4.Location = New System.Drawing.Point(193, 51)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(71, 57)
+        Me.Panel4.TabIndex = 5
+        '
+        'ksks
+        '
+        Me.ksks.AutoSize = True
+        Me.ksks.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ksks.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.ksks.Location = New System.Drawing.Point(6, 19)
+        Me.ksks.Name = "ksks"
+        Me.ksks.Size = New System.Drawing.Size(148, 26)
+        Me.ksks.TabIndex = 7
+        Me.ksks.Text = "Jumlah Guru"
+        '
+        'lblJmlGuru
+        '
+        Me.lblJmlGuru.AutoSize = True
+        Me.lblJmlGuru.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJmlGuru.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblJmlGuru.Location = New System.Drawing.Point(96, 59)
+        Me.lblJmlGuru.Name = "lblJmlGuru"
+        Me.lblJmlGuru.Size = New System.Drawing.Size(31, 32)
+        Me.lblJmlGuru.TabIndex = 6
+        Me.lblJmlGuru.Text = "5"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.BackColor = System.Drawing.Color.Orange
+        Me.GroupBox4.Controls.Add(Me.ButtonPetugas)
+        Me.GroupBox4.Controls.Add(Me.Panel6)
+        Me.GroupBox4.Controls.Add(Me.Label11)
+        Me.GroupBox4.Controls.Add(Me.lblJmlSiswa)
+        Me.GroupBox4.Location = New System.Drawing.Point(67, 74)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(270, 138)
+        Me.GroupBox4.TabIndex = 30
+        Me.GroupBox4.TabStop = False
+        '
+        'ButtonPetugas
+        '
+        Me.ButtonPetugas.Location = New System.Drawing.Point(0, 116)
+        Me.ButtonPetugas.Name = "ButtonPetugas"
+        Me.ButtonPetugas.Size = New System.Drawing.Size(270, 23)
+        Me.ButtonPetugas.TabIndex = 9
+        Me.ButtonPetugas.Text = "Lihat Detail"
+        Me.ButtonPetugas.UseVisualStyleBackColor = True
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.Transparent
+        Me.Panel6.BackgroundImage = CType(resources.GetObject("Panel6.BackgroundImage"), System.Drawing.Image)
+        Me.Panel6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Panel6.Location = New System.Drawing.Point(200, 44)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(64, 58)
+        Me.Panel6.TabIndex = 8
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label11.Location = New System.Drawing.Point(6, 18)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(160, 26)
+        Me.Label11.TabIndex = 7
+        Me.Label11.Text = "Jumlah Siswa"
+        '
+        'lblJmlSiswa
+        '
+        Me.lblJmlSiswa.AutoSize = True
+        Me.lblJmlSiswa.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblJmlSiswa.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblJmlSiswa.Location = New System.Drawing.Point(95, 62)
+        Me.lblJmlSiswa.Name = "lblJmlSiswa"
+        Me.lblJmlSiswa.Size = New System.Drawing.Size(31, 32)
+        Me.lblJmlSiswa.TabIndex = 6
+        Me.lblJmlSiswa.Text = "5"
         '
         'FormMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSize = True
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(1333, 655)
-        Me.Controls.Add(Me.PanelUtama)
+        Me.ClientSize = New System.Drawing.Size(1467, 715)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FormMain"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MenuUtama"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        Me.PanelUtama.ResumeLayout(False)
-        Me.PanelUtama.PerformLayout()
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
-        Me.pnlTotalSiswa.ResumeLayout(False)
-        Me.pnlTotalSiswa.PerformLayout()
-        Me.pnlTotalGuru.ResumeLayout(False)
-        Me.pnlTotalGuru.PerformLayout()
-        Me.pnlTotalKelas.ResumeLayout(False)
-        Me.pnlTotalKelas.PerformLayout()
-        Me.pnlChart.ResumeLayout(False)
-        Me.pnlChart.PerformLayout()
-        CType(Me.chartSiswaKelas, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlAktivitas.ResumeLayout(False)
-        Me.pnlAktivitas.PerformLayout()
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents PanelUtama As Panel
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents pnlTotalSiswa As Panel
-    Friend WithEvents lblTotalSiswa As Label
-    Friend WithEvents lblTitleTotalSiswa As Label
-    Friend WithEvents pnlTotalGuru As Panel
-    Friend WithEvents lblTotalGuru As Label
-    Friend WithEvents lblTitleTotalGuru As Label
-    Friend WithEvents pnlTotalKelas As Panel
-    Friend WithEvents lblTotalKelas As Label
-    Friend WithEvents lblTitleTotalKelas As Label
-    Friend WithEvents pnlChart As Panel
-    Friend WithEvents lblJudulChart As Label
-    Friend WithEvents chartSiswaKelas As DataVisualization.Charting.Chart
-    Friend WithEvents pnlAktivitas As Panel
-    Friend WithEvents lblJudulAktivitas As Label
-    Friend WithEvents lstAktivitas As ListBox
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents Label5 As Label
-    Friend WithEvents ListBox2 As ListBox
-    Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents Label3 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Button2 As Button
+    Friend WithEvents btnDashboard As Button
     Friend WithEvents btnDataKelas As Button
+    Friend WithEvents btnDataSiswa As Button
     Friend WithEvents btnMataPelajaran As Button
-    Friend WithEvents btnLogout As Button
     Friend WithEvents btnDataGuru As Button
     Friend WithEvents btnManajemenPelajaran As Button
-    Friend WithEvents btnDataSiswa As Button
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents LabelTentang As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents LabelAlamat As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents LabelNamaPerpustakaan As Label
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents ButtonAnggota As Button
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents lblJumlahKelas As Label
+    Friend WithEvents lblJmlKelas As Label
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents ButtonPeminjaman As Button
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents ksks As Label
+    Friend WithEvents lblJmlGuru As Label
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents ButtonPetugas As Button
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Label11 As Label
+    Friend WithEvents lblJmlSiswa As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button1 As Button
 End Class
