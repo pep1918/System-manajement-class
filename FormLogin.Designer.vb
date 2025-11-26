@@ -30,7 +30,6 @@ Partial Class FormLogin
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.BtnBatal = New System.Windows.Forms.Button()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -43,9 +42,9 @@ Partial Class FormLogin
         Me.Label1.ForeColor = System.Drawing.Color.White
         Me.Label1.Location = New System.Drawing.Point(83, 95)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(70, 25)
+        Me.Label1.Size = New System.Drawing.Size(114, 25)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Nama"
+        Me.Label1.Text = "Username"
         '
         'btnLogin
         '
@@ -111,23 +110,11 @@ Partial Class FormLogin
         Me.BtnBatal.Text = "Batal"
         Me.BtnBatal.UseVisualStyleBackColor = False
         '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.ForeColor = System.Drawing.Color.White
-        Me.CheckBox1.Location = New System.Drawing.Point(91, 276)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(93, 20)
-        Me.CheckBox1.TabIndex = 9
-        Me.CheckBox1.Text = "Ingat Saya"
-        Me.CheckBox1.UseVisualStyleBackColor = True
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.txtUsername)
-        Me.Panel1.Controls.Add(Me.CheckBox1)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.BtnBatal)
         Me.Panel1.Controls.Add(Me.btnLogin)
@@ -165,6 +152,5 @@ Partial Class FormLogin
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents BtnBatal As Button
-    Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Panel1 As Panel
 End Class

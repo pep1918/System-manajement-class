@@ -24,20 +24,17 @@ Partial Class FormMain
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormMain))
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnLogOut = New System.Windows.Forms.Button()
+        Me.btnLaporan = New System.Windows.Forms.Button()
         Me.btnDashboard = New System.Windows.Forms.Button()
         Me.btnDataKelas = New System.Windows.Forms.Button()
         Me.btnDataSiswa = New System.Windows.Forms.Button()
-        Me.btnMataPelajaran = New System.Windows.Forms.Button()
         Me.btnDataGuru = New System.Windows.Forms.Button()
         Me.btnManajemenPelajaran = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.PanelUtama = New System.Windows.Forms.Panel()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.LabelTentang = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.LabelAlamat = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.LabelNamaPerpustakaan = New System.Windows.Forms.Label()
@@ -60,7 +57,8 @@ Partial Class FormMain
         Me.Label11 = New System.Windows.Forms.Label()
         Me.lblJmlSiswa = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.PanelUtama.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
@@ -69,59 +67,47 @@ Partial Class FormMain
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Button3)
-        Me.Panel1.Controls.Add(Me.Button1)
-        Me.Panel1.Controls.Add(Me.Button2)
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnLogOut)
+        Me.Panel1.Controls.Add(Me.btnLaporan)
         Me.Panel1.Controls.Add(Me.btnDashboard)
         Me.Panel1.Controls.Add(Me.btnDataKelas)
         Me.Panel1.Controls.Add(Me.btnDataSiswa)
-        Me.Panel1.Controls.Add(Me.btnMataPelajaran)
         Me.Panel1.Controls.Add(Me.btnDataGuru)
         Me.Panel1.Controls.Add(Me.btnManajemenPelajaran)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(241, 715)
+        Me.Panel1.Size = New System.Drawing.Size(259, 810)
         Me.Panel1.TabIndex = 0
         '
-        'Button3
+        'btnLogOut
         '
-        Me.Button3.BackColor = System.Drawing.Color.SaddleBrown
-        Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Location = New System.Drawing.Point(10, 663)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(223, 49)
-        Me.Button3.TabIndex = 25
-        Me.Button3.Text = "Keluar"
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnLogOut.BackColor = System.Drawing.Color.FromArgb(CType(CType(52, Byte), Integer), CType(CType(73, Byte), Integer), CType(CType(94, Byte), Integer))
+        Me.btnLogOut.ForeColor = System.Drawing.Color.White
+        Me.btnLogOut.Location = New System.Drawing.Point(14, 736)
+        Me.btnLogOut.Name = "btnLogOut"
+        Me.btnLogOut.Size = New System.Drawing.Size(223, 49)
+        Me.btnLogOut.TabIndex = 25
+        Me.btnLogOut.Text = "Keluar"
+        Me.btnLogOut.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnLaporan
         '
-        Me.Button1.BackColor = System.Drawing.Color.SaddleBrown
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(10, 529)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(223, 49)
-        Me.Button1.TabIndex = 24
-        Me.Button1.Text = "Absensi"
-        Me.Button1.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.SaddleBrown
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(10, 584)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(223, 49)
-        Me.Button2.TabIndex = 23
-        Me.Button2.Text = "Laporan"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnLaporan.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.btnLaporan.ForeColor = System.Drawing.Color.White
+        Me.btnLaporan.Location = New System.Drawing.Point(14, 548)
+        Me.btnLaporan.Name = "btnLaporan"
+        Me.btnLaporan.Size = New System.Drawing.Size(223, 49)
+        Me.btnLaporan.TabIndex = 23
+        Me.btnLaporan.Text = "Laporan"
+        Me.btnLaporan.UseVisualStyleBackColor = False
         '
         'btnDashboard
         '
-        Me.btnDashboard.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDashboard.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.btnDashboard.ForeColor = System.Drawing.Color.White
-        Me.btnDashboard.Location = New System.Drawing.Point(10, 144)
+        Me.btnDashboard.Location = New System.Drawing.Point(12, 237)
         Me.btnDashboard.Name = "btnDashboard"
         Me.btnDashboard.Size = New System.Drawing.Size(225, 61)
         Me.btnDashboard.TabIndex = 22
@@ -130,9 +116,9 @@ Partial Class FormMain
         '
         'btnDataKelas
         '
-        Me.btnDataKelas.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataKelas.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.btnDataKelas.ForeColor = System.Drawing.Color.White
-        Me.btnDataKelas.Location = New System.Drawing.Point(10, 350)
+        Me.btnDataKelas.Location = New System.Drawing.Point(14, 434)
         Me.btnDataKelas.Name = "btnDataKelas"
         Me.btnDataKelas.Size = New System.Drawing.Size(223, 53)
         Me.btnDataKelas.TabIndex = 19
@@ -141,31 +127,20 @@ Partial Class FormMain
         '
         'btnDataSiswa
         '
-        Me.btnDataSiswa.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataSiswa.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.btnDataSiswa.ForeColor = System.Drawing.Color.White
-        Me.btnDataSiswa.Location = New System.Drawing.Point(8, 211)
+        Me.btnDataSiswa.Location = New System.Drawing.Point(12, 304)
         Me.btnDataSiswa.Name = "btnDataSiswa"
         Me.btnDataSiswa.Size = New System.Drawing.Size(225, 61)
         Me.btnDataSiswa.TabIndex = 17
         Me.btnDataSiswa.Text = "Data Siswa"
         Me.btnDataSiswa.UseVisualStyleBackColor = False
         '
-        'btnMataPelajaran
-        '
-        Me.btnMataPelajaran.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnMataPelajaran.ForeColor = System.Drawing.Color.White
-        Me.btnMataPelajaran.Location = New System.Drawing.Point(10, 409)
-        Me.btnMataPelajaran.Name = "btnMataPelajaran"
-        Me.btnMataPelajaran.Size = New System.Drawing.Size(223, 55)
-        Me.btnMataPelajaran.TabIndex = 20
-        Me.btnMataPelajaran.Text = "Mata Pelajaran"
-        Me.btnMataPelajaran.UseVisualStyleBackColor = False
-        '
         'btnDataGuru
         '
-        Me.btnDataGuru.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnDataGuru.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.btnDataGuru.ForeColor = System.Drawing.Color.White
-        Me.btnDataGuru.Location = New System.Drawing.Point(8, 278)
+        Me.btnDataGuru.Location = New System.Drawing.Point(12, 372)
         Me.btnDataGuru.Name = "btnDataGuru"
         Me.btnDataGuru.Size = New System.Drawing.Size(225, 56)
         Me.btnDataGuru.TabIndex = 18
@@ -174,9 +149,9 @@ Partial Class FormMain
         '
         'btnManajemenPelajaran
         '
-        Me.btnManajemenPelajaran.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnManajemenPelajaran.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.btnManajemenPelajaran.ForeColor = System.Drawing.Color.White
-        Me.btnManajemenPelajaran.Location = New System.Drawing.Point(10, 470)
+        Me.btnManajemenPelajaran.Location = New System.Drawing.Point(14, 493)
         Me.btnManajemenPelajaran.Name = "btnManajemenPelajaran"
         Me.btnManajemenPelajaran.Size = New System.Drawing.Size(223, 49)
         Me.btnManajemenPelajaran.TabIndex = 21
@@ -185,79 +160,69 @@ Partial Class FormMain
         '
         'Panel2
         '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(241, 0)
+        Me.Panel2.Location = New System.Drawing.Point(259, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1226, 122)
+        Me.Panel2.Size = New System.Drawing.Size(1312, 122)
         Me.Panel2.TabIndex = 1
         '
-        'Panel3
+        'Label1
         '
-        Me.Panel3.Controls.Add(Me.GroupBox6)
-        Me.Panel3.Controls.Add(Me.GroupBox2)
-        Me.Panel3.Controls.Add(Me.GroupBox3)
-        Me.Panel3.Controls.Add(Me.GroupBox4)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(241, 122)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1226, 593)
-        Me.Panel3.TabIndex = 2
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 25.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ButtonFace
+        Me.Label1.Location = New System.Drawing.Point(57, 41)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(456, 53)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Manajemen Kelas"
+        '
+        'PanelUtama
+        '
+        Me.PanelUtama.BackColor = System.Drawing.Color.FromArgb(CType(CType(45, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(80, Byte), Integer))
+        Me.PanelUtama.Controls.Add(Me.GroupBox6)
+        Me.PanelUtama.Controls.Add(Me.GroupBox2)
+        Me.PanelUtama.Controls.Add(Me.GroupBox3)
+        Me.PanelUtama.Controls.Add(Me.GroupBox4)
+        Me.PanelUtama.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.PanelUtama.Location = New System.Drawing.Point(259, 122)
+        Me.PanelUtama.Name = "PanelUtama"
+        Me.PanelUtama.Size = New System.Drawing.Size(1312, 688)
+        Me.PanelUtama.TabIndex = 2
         '
         'GroupBox6
         '
-        Me.GroupBox6.BackColor = System.Drawing.Color.Silver
-        Me.GroupBox6.Controls.Add(Me.LabelTentang)
-        Me.GroupBox6.Controls.Add(Me.Label15)
+        Me.GroupBox6.BackColor = System.Drawing.Color.FromArgb(CType(CType(65, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(119, Byte), Integer))
         Me.GroupBox6.Controls.Add(Me.LabelAlamat)
         Me.GroupBox6.Controls.Add(Me.Label13)
         Me.GroupBox6.Controls.Add(Me.LabelNamaPerpustakaan)
         Me.GroupBox6.Controls.Add(Me.Panel8)
         Me.GroupBox6.Controls.Add(Me.Label7)
         Me.GroupBox6.Controls.Add(Me.Label10)
-        Me.GroupBox6.Location = New System.Drawing.Point(66, 280)
+        Me.GroupBox6.Location = New System.Drawing.Point(42, 280)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(1148, 235)
+        Me.GroupBox6.Size = New System.Drawing.Size(1115, 277)
         Me.GroupBox6.TabIndex = 33
         Me.GroupBox6.TabStop = False
-        '
-        'LabelTentang
-        '
-        Me.LabelTentang.AutoSize = True
-        Me.LabelTentang.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelTentang.ForeColor = System.Drawing.Color.Black
-        Me.LabelTentang.Location = New System.Drawing.Point(65, 182)
-        Me.LabelTentang.Name = "LabelTentang"
-        Me.LabelTentang.Size = New System.Drawing.Size(283, 20)
-        Me.LabelTentang.TabIndex = 9
-        Me.LabelTentang.Text = "Di bawah naungan Pemkot Surabaya"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.ForeColor = System.Drawing.Color.Black
-        Me.Label15.Location = New System.Drawing.Point(46, 157)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(76, 20)
-        Me.Label15.TabIndex = 8
-        Me.Label15.Text = "Tentang"
         '
         'LabelAlamat
         '
         Me.LabelAlamat.AutoSize = True
         Me.LabelAlamat.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelAlamat.ForeColor = System.Drawing.Color.Black
+        Me.LabelAlamat.ForeColor = System.Drawing.Color.White
         Me.LabelAlamat.Location = New System.Drawing.Point(65, 133)
         Me.LabelAlamat.Name = "LabelAlamat"
-        Me.LabelAlamat.Size = New System.Drawing.Size(64, 20)
+        Me.LabelAlamat.Size = New System.Drawing.Size(107, 20)
         Me.LabelAlamat.TabIndex = 7
-        Me.LabelAlamat.Text = "Jl Jagir"
+        Me.LabelAlamat.Text = "Jalan Mexico"
         '
         'Label13
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.ForeColor = System.Drawing.Color.Black
+        Me.Label13.ForeColor = System.Drawing.Color.White
         Me.Label13.Location = New System.Drawing.Point(46, 108)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(67, 20)
@@ -268,12 +233,12 @@ Partial Class FormMain
         '
         Me.LabelNamaPerpustakaan.AutoSize = True
         Me.LabelNamaPerpustakaan.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelNamaPerpustakaan.ForeColor = System.Drawing.Color.Black
+        Me.LabelNamaPerpustakaan.ForeColor = System.Drawing.Color.White
         Me.LabelNamaPerpustakaan.Location = New System.Drawing.Point(65, 82)
         Me.LabelNamaPerpustakaan.Name = "LabelNamaPerpustakaan"
-        Me.LabelNamaPerpustakaan.Size = New System.Drawing.Size(86, 20)
+        Me.LabelNamaPerpustakaan.Size = New System.Drawing.Size(152, 20)
         Me.LabelNamaPerpustakaan.TabIndex = 5
-        Me.LabelNamaPerpustakaan.Text = "LIB Scholl"
+        Me.LabelNamaPerpustakaan.Text = "SMA 200 Surabaya"
         '
         'Panel8
         '
@@ -289,18 +254,18 @@ Partial Class FormMain
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.Black
+        Me.Label7.ForeColor = System.Drawing.Color.White
         Me.Label7.Location = New System.Drawing.Point(45, 21)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(215, 26)
+        Me.Label7.Size = New System.Drawing.Size(328, 26)
         Me.Label7.TabIndex = 4
-        Me.Label7.Text = "Data Perpustakaan"
+        Me.Label7.Text = "Data Untuk Manajemen Kelas"
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.Color.Black
+        Me.Label10.ForeColor = System.Drawing.Color.White
         Me.Label10.Location = New System.Drawing.Point(46, 57)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(177, 20)
@@ -322,11 +287,11 @@ Partial Class FormMain
         '
         'ButtonAnggota
         '
+        Me.ButtonAnggota.Enabled = False
         Me.ButtonAnggota.Location = New System.Drawing.Point(0, 116)
         Me.ButtonAnggota.Name = "ButtonAnggota"
         Me.ButtonAnggota.Size = New System.Drawing.Size(270, 23)
         Me.ButtonAnggota.TabIndex = 5
-        Me.ButtonAnggota.Text = "Lihat Detail"
         Me.ButtonAnggota.UseVisualStyleBackColor = True
         '
         'Panel5
@@ -376,11 +341,11 @@ Partial Class FormMain
         '
         'ButtonPeminjaman
         '
+        Me.ButtonPeminjaman.Enabled = False
         Me.ButtonPeminjaman.Location = New System.Drawing.Point(0, 116)
         Me.ButtonPeminjaman.Name = "ButtonPeminjaman"
         Me.ButtonPeminjaman.Size = New System.Drawing.Size(270, 23)
         Me.ButtonPeminjaman.TabIndex = 8
-        Me.ButtonPeminjaman.Text = "Lihat Detail"
         Me.ButtonPeminjaman.UseVisualStyleBackColor = True
         '
         'Panel4
@@ -430,11 +395,11 @@ Partial Class FormMain
         '
         'ButtonPetugas
         '
+        Me.ButtonPetugas.Enabled = False
         Me.ButtonPetugas.Location = New System.Drawing.Point(0, 116)
         Me.ButtonPetugas.Name = "ButtonPetugas"
         Me.ButtonPetugas.Size = New System.Drawing.Size(270, 23)
         Me.ButtonPetugas.TabIndex = 9
-        Me.ButtonPetugas.Text = "Lihat Detail"
         Me.ButtonPetugas.UseVisualStyleBackColor = True
         '
         'Panel6
@@ -476,8 +441,8 @@ Partial Class FormMain
         Me.AutoSize = True
         Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(1467, 715)
-        Me.Controls.Add(Me.Panel3)
+        Me.ClientSize = New System.Drawing.Size(1571, 810)
+        Me.Controls.Add(Me.PanelUtama)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "FormMain"
@@ -485,7 +450,9 @@ Partial Class FormMain
         Me.Text = "MenuUtama"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.Panel1.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.PanelUtama.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -500,17 +467,14 @@ Partial Class FormMain
 
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button2 As Button
+    Friend WithEvents PanelUtama As Panel
+    Friend WithEvents btnLaporan As Button
     Friend WithEvents btnDashboard As Button
     Friend WithEvents btnDataKelas As Button
     Friend WithEvents btnDataSiswa As Button
-    Friend WithEvents btnMataPelajaran As Button
     Friend WithEvents btnDataGuru As Button
     Friend WithEvents btnManajemenPelajaran As Button
     Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents LabelTentang As Label
-    Friend WithEvents Label15 As Label
     Friend WithEvents LabelAlamat As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents LabelNamaPerpustakaan As Label
@@ -528,10 +492,10 @@ Partial Class FormMain
     Friend WithEvents ksks As Label
     Friend WithEvents lblJmlGuru As Label
     Friend WithEvents GroupBox4 As GroupBox
-    Friend WithEvents ButtonPetugas As Button
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents lblJmlSiswa As Label
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnLogOut As Button
+    Friend WithEvents ButtonPetugas As Button
+    Friend WithEvents Label1 As Label
 End Class

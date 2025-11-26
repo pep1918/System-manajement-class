@@ -1,109 +1,131 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.IO
-Imports iTextSharp.text
-Imports iTextSharp.text.pdf
+﻿Imports System.IO
+Imports MySql.Data.MySqlClient
+Imports Org.BouncyCastle.Asn1.Cmp
+' Namespace iTextSharp kita panggil lengkap di dalam kode agar tidak bentrok
 
-' Pastikan nama Class sama dengan nama File
 Public Class UC_DataGuru
-    Inherits UserControl ' <--- BARIS INI SANGAT PENTING AGAR TIDAK ERROR
 
+    ' --- VARIABEL GLOBAL ---
     Private selectedNIP As String = ""
+    Private IsEditMode As Boolean = False ' False=Tambah, True=Ubah
 
-    ' ==========================================
-    ' 1. SAAT LOAD HALAMAN
-    ' ==========================================
+    ' =================================================================
+    ' 1. SAAT FORM DIMUAT (LOAD)
+    ' =================================================================
     Private Sub UC_DataGuru_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Cek apakah kita sedang dalam Mode Desain atau Running
         If Me.DesignMode Then Return
 
-        Try
-            TampilData()
-            IsiComboMapel()
-            Bersih()
-
-            ' Isi manual combo status & pendidikan jika kosong
-            If cmbStatus.Items.Count = 0 Then
-                cmbStatus.Items.AddRange(New String() {"PNS", "GTY", "Honorer", "Tetap Yayasan"})
-            End If
-            If cmbPendidikan.Items.Count = 0 Then
-                cmbPendidikan.Items.AddRange(New String() {"D3", "S1", "S2", "S3"})
-            End If
-        Catch ex As Exception
-            ' Abaikan error saat loading awal desain
-        End Try
+        SiapkanComboBox() ' <--- Pastikan ini dipanggil
+        TampilData()
+        Bersih()
     End Sub
 
-    ' Mengisi Pilihan Mapel dari Database
-    Sub IsiComboMapel()
-        Try
-            ModuleKoneksi.BukaKoneksi()
-            ModuleKoneksi.Cmd = New MySqlCommand("SELECT Nama_Mapel FROM tbl_mapel ORDER BY Nama_Mapel", ModuleKoneksi.Conn)
-            ModuleKoneksi.Rd = ModuleKoneksi.Cmd.ExecuteReader()
+    Sub SiapkanComboBox()
+        ' 1. Isi Manual (Wajib di-Clear dulu biar gak dobel)
+        cmbJK.Items.Clear()
+        cmbJK.Items.AddRange({"Laki-laki", "Perempuan"})
 
-            cmbMapelPengampu.Items.Clear()
+        cmbStatus.Items.Clear()
+        cmbStatus.Items.AddRange({"PNS", "GTY", "Honorer", "Tetap Yayasan"})
+
+        cmbPendidikan.Items.Clear()
+        cmbPendidikan.Items.AddRange({"D3", "S1", "S2", "S3"})
+
+        ' 2. Isi Mapel dari Database (Lewat Module)
+        Try
+            ModuleKoneksi.IsiCombo("SELECT Nama_Mapel FROM tbl_mapel ORDER BY Nama_Mapel", cmbMapelPengampu)
+
+            ' Isi Filter Mapel juga
             cmbFilterMapel.Items.Clear()
             cmbFilterMapel.Items.Add("Semua")
-
-            While ModuleKoneksi.Rd.Read()
-                cmbMapelPengampu.Items.Add(ModuleKoneksi.Rd("Nama_Mapel").ToString())
-                cmbFilterMapel.Items.Add(ModuleKoneksi.Rd("Nama_Mapel").ToString())
-            End While
-            ModuleKoneksi.Rd.Close()
+            For Each item In cmbMapelPengampu.Items : cmbFilterMapel.Items.Add(item) : Next
+            cmbFilterMapel.SelectedIndex = 0
         Catch ex As Exception
-            If ModuleKoneksi.Rd IsNot Nothing AndAlso Not ModuleKoneksi.Rd.IsClosed Then ModuleKoneksi.Rd.Close()
         End Try
     End Sub
 
-    ' ==========================================
-    ' 2. BERSIHKAN INPUT
-    ' ==========================================
+    ' =================================================================
+    ' 2. BERSIHKAN FORM
+    ' =================================================================
     Sub Bersih()
-        txtNIP.Clear()
-        txtNama.Clear()
-        cmbJenisKelamin.SelectedIndex = -1
-        txtAlamat.Clear()
-        txtTelepon.Clear()
-        txtEmail.Clear()
+        ' Kosongkan Input
+        txtNIP.Clear() : txtAlamat.Clear() : txtAlamat.Clear()
+        txtTelepon.Clear() : txtEmail.Clear()
+        cmbJK.SelectedIndex = -1 : cmbMapelPengampu.SelectedIndex = -1
+        cmbPendidikan.SelectedIndex = -1 : cmbMapelPengampu.SelectedIndex = -1
 
-        cmbStatus.SelectedIndex = -1
-        cmbPendidikan.SelectedIndex = -1
-        cmbMapelPengampu.SelectedIndex = -1
-
-        txtNIP.Enabled = True
         selectedNIP = ""
+        IsEditMode = False
 
+        ' Matikan Input (User harus klik Tambah/Ubah dulu)
+        AturInput(False)
+
+        ' Atur Tombol
         btnTambah.Enabled = True
         btnUbah.Enabled = False
         btnHapus.Enabled = False
+        btnSimpan.Enabled = False
+        btnBatal.Enabled = True
+    End Sub
+
+    Sub AturInput(aktif As Boolean)
+        txtNIP.Enabled = aktif
+        txtAlamat.Enabled = aktif
+        cmbJK.Enabled = aktif
+        txtAlamat.Enabled = aktif
+        txtTelepon.Enabled = aktif
+        txtEmail.Enabled = aktif
+        cmbMapelPengampu.Enabled = aktif
+        cmbPendidikan.Enabled = aktif
+        cmbMapelPengampu.Enabled = aktif
+    End Sub
+
+    ' =================================================================
+    ' 3. TAMPIL DATA (READ & FILTER)
+    ' =================================================================
+    Sub TampilData()
+        Dim q As String = "SELECT NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, " &
+                          "Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu " &
+                          "FROM tbl_guru WHERE 1=1 "
+
+        ' Filter Pencarian Nama/NIP
+        If txtCari.Text <> "" Then
+            q &= $" AND (Nama_Guru LIKE '%{txtCari.Text}%' OR NIP LIKE '%{txtCari.Text}%')"
+        End If
+
+        ' Filter Mapel
+        If cmbFilterMapel.SelectedIndex > 0 And cmbFilterMapel.Text <> "Semua" Then
+            q &= $" AND Mapel_Pengampu = '{cmbFilterMapel.Text}'"
+        End If
+
+        q &= " ORDER BY Nama_Guru ASC"
+
+        dgvGuru.DataSource = ModuleKoneksi.AmbilData(q)
+        AturGrid()
     End Sub
 
     ' ==========================================
-    ' 3. TAMPIL DATA
+    ' SUB UNTUK MERAPIKAN JUDUL KOLOM TABEL
     ' ==========================================
-    Sub TampilData()
-        Try
-            ModuleKoneksi.BukaKoneksi()
+    Sub AturGrid()
+        If dgvGuru.Columns.Count > 0 Then
+            ' Ubah Judul Kolom agar lebih rapi
+            dgvGuru.Columns("NIP").HeaderText = "NIP"
+            dgvGuru.Columns("Nama_Guru").HeaderText = "Nama Guru"
+            dgvGuru.Columns("Jenis_Kelamin").HeaderText = "L/P"
+            dgvGuru.Columns("Status_Kepegawaian").HeaderText = "Status"
+            dgvGuru.Columns("Pendidikan_Terakhir").HeaderText = "Pendidikan"
+            dgvGuru.Columns("Mapel_Pengampu").HeaderText = "Mapel"
 
-            Dim query As String = "SELECT NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu FROM tbl_guru WHERE 1=1 "
+            ' Sembunyikan kolom yang tidak perlu ditampilkan agar tabel tidak penuh
+            If dgvGuru.Columns.Contains("Alamat") Then dgvGuru.Columns("Alamat").Visible = False
+            If dgvGuru.Columns.Contains("Telepon") Then dgvGuru.Columns("Telepon").Visible = False
+            If dgvGuru.Columns.Contains("Email") Then dgvGuru.Columns("Email").Visible = False
+            If dgvGuru.Columns.Contains("Foto") Then dgvGuru.Columns("Foto").Visible = False
 
-            If txtCari.Text <> "" Then
-                query &= " AND (Nama_Guru LIKE '%" & txtCari.Text & "%' OR NIP LIKE '%" & txtCari.Text & "%')"
-            End If
-
-            If cmbFilterMapel.SelectedIndex > 0 And cmbFilterMapel.Text <> "Semua" Then
-                query &= " AND Mapel_Pengampu = '" & cmbFilterMapel.Text & "'"
-            End If
-
-            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
-            ModuleKoneksi.Da = New MySqlDataAdapter(ModuleKoneksi.Cmd)
-
-            Dim dt As New DataTable()
-            ModuleKoneksi.Da.Fill(dt)
-            dgvGuru.DataSource = dt
-
-        Catch ex As Exception
-            MessageBox.Show("Gagal Tampil: " & ex.Message)
-        End Try
+            ' Atur lebar otomatis
+            dgvGuru.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+        End If
     End Sub
 
     Private Sub txtCari_TextChanged(sender As Object, e As EventArgs) Handles txtCari.TextChanged
@@ -114,126 +136,161 @@ Public Class UC_DataGuru
         TampilData()
     End Sub
 
-    ' ==========================================
-    ' 4. PILIH DATA
-    ' ==========================================
+    ' =================================================================
+    ' 4. LOGIKA TOMBOL (CRUD)
+    ' =================================================================
+
+    ' [A] TAMBAH
+    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
+        Bersih()
+        IsEditMode = False
+        AturInput(True)
+        txtNIP.Focus()
+
+        btnTambah.Enabled = False
+        btnSimpan.Enabled = True
+    End Sub
+
+    ' [B] UBAH
+    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
+        If selectedNIP = "" Then MsgBox("Pilih data dulu!") : Return
+
+        IsEditMode = True
+        AturInput(True)
+        txtNIP.Enabled = False ' NIP tidak boleh diedit (PK)
+        txtAlamat.Focus()
+
+        btnTambah.Enabled = False
+        btnUbah.Enabled = False
+        btnSimpan.Enabled = True
+    End Sub
+
+    ' [C] SIMPAN
+    Private Sub btnSimpan_Click(sender As Object, e As EventArgs) Handles btnSimpan.Click
+        ' 1. Validasi Wajib
+        If txtNIP.Text = "" Or txtNama.Text = "" Then
+            MsgBox("NIP dan Nama Guru wajib diisi!", vbExclamation)
+            Return
+        End If
+
+        ' 2. Siapkan Parameter
+        Dim p As New List(Of MySqlParameter) From {
+            New MySqlParameter("@nip", txtNIP.Text),
+            New MySqlParameter("@nm", txtNama.Text),
+            New MySqlParameter("@jk", cmbJK.Text),
+            New MySqlParameter("@almt", txtAlamat.Text),
+            New MySqlParameter("@tlp", txtTelepon.Text),
+            New MySqlParameter("@eml", txtEmail.Text),
+            New MySqlParameter("@stat", cmbStatus.Text),
+            New MySqlParameter("@didik", cmbPendidikan.Text),
+            New MySqlParameter("@mpl", cmbMapelPengampu.Text)
+        }
+
+        Dim query As String = ""
+
+        If IsEditMode = False Then
+            ' --- MODE TAMBAH ---
+            ' Cek Duplikat NIP
+            Dim cek As String = ModuleKoneksi.AmbilNilai($"SELECT COUNT(*) FROM tbl_guru WHERE NIP='{txtNIP.Text}'")
+            If Convert.ToInt32(cek) > 0 Then MsgBox("NIP sudah ada!", vbCritical) : Return
+
+            query = "INSERT INTO tbl_guru (NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu) " &
+                    "VALUES (@nip, @nm, @jk, @almt, @tlp, @eml, @stat, @didik, @mpl)"
+        Else
+            ' --- MODE UBAH ---
+            query = "UPDATE tbl_guru SET Nama_Guru=@nm, Jenis_Kelamin=@jk, Alamat=@almt, Telepon=@tlp, Email=@eml, Status_Kepegawaian=@stat, Pendidikan_Terakhir=@didik, Mapel_Pengampu=@mpl WHERE NIP=@nip"
+        End If
+
+        ' 3. Eksekusi
+        If ModuleKoneksi.EksekusiQuery(query, p) Then
+            MsgBox("Data Guru Berhasil Disimpan", vbInformation)
+            Bersih()
+            TampilData()
+        End If
+    End Sub
+
+    ' [D] HAPUS
+    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+        If selectedNIP = "" Then Return
+
+        If MsgBox($"Yakin hapus Guru {txtAlamat.Text}?", MsgBoxStyle.YesNo + MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+            Dim p As New List(Of MySqlParameter) From {New MySqlParameter("@nip", selectedNIP)}
+            If ModuleKoneksi.EksekusiQuery("DELETE FROM tbl_guru WHERE NIP=@nip", p) Then
+                Bersih()
+                TampilData()
+            End If
+        End If
+    End Sub
+
+    ' [E] BATAL
+    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
+        Bersih()
+    End Sub
+
+    ' =================================================================
+    ' 5. KLIK TABEL (TRANSFER DATA KE FORM)
+    ' =================================================================
     Private Sub dgvGuru_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvGuru.CellClick
         If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = dgvGuru.Rows(e.RowIndex)
-            selectedNIP = row.Cells("NIP").Value.ToString()
+            Dim r = dgvGuru.Rows(e.RowIndex)
+            selectedNIP = r.Cells("NIP").Value.ToString()
 
-            txtNIP.Text = row.Cells("NIP").Value.ToString()
-            txtNama.Text = row.Cells("Nama_Guru").Value.ToString()
+            txtNIP.Text = selectedNIP
+            txtAlamat.Text = r.Cells("Nama_Guru").Value.ToString()
 
-            cmbJenisKelamin.Text = If(IsDBNull(row.Cells("Jenis_Kelamin").Value), "", row.Cells("Jenis_Kelamin").Value.ToString())
-            txtAlamat.Text = If(IsDBNull(row.Cells("Alamat").Value), "", row.Cells("Alamat").Value.ToString())
-            txtTelepon.Text = If(IsDBNull(row.Cells("Telepon").Value), "", row.Cells("Telepon").Value.ToString())
-            txtEmail.Text = If(IsDBNull(row.Cells("Email").Value), "", row.Cells("Email").Value.ToString())
+            ' Handle NULL value dengan aman
+            txtAlamat.Text = If(IsDBNull(r.Cells("Alamat").Value), "", r.Cells("Alamat").Value.ToString())
+            txtTelepon.Text = If(IsDBNull(r.Cells("Telepon").Value), "", r.Cells("Telepon").Value.ToString())
+            txtEmail.Text = If(IsDBNull(r.Cells("Email").Value), "", r.Cells("Email").Value.ToString())
 
-            cmbStatus.Text = If(IsDBNull(row.Cells("Status_Kepegawaian").Value), "", row.Cells("Status_Kepegawaian").Value.ToString())
-            cmbPendidikan.Text = If(IsDBNull(row.Cells("Pendidikan_Terakhir").Value), "", row.Cells("Pendidikan_Terakhir").Value.ToString())
-            cmbMapelPengampu.Text = If(IsDBNull(row.Cells("Mapel_Pengampu").Value), "", row.Cells("Mapel_Pengampu").Value.ToString())
+            cmbJK.Text = If(IsDBNull(r.Cells("Jenis_Kelamin").Value), "", r.Cells("Jenis_Kelamin").Value.ToString())
+            cmbMapelPengampu.Text = If(IsDBNull(r.Cells("Status_Kepegawaian").Value), "", r.Cells("Status_Kepegawaian").Value.ToString())
+            cmbPendidikan.Text = If(IsDBNull(r.Cells("Pendidikan_Terakhir").Value), "", r.Cells("Pendidikan_Terakhir").Value.ToString())
+            cmbMapelPengampu.Text = If(IsDBNull(r.Cells("Mapel_Pengampu").Value), "", r.Cells("Mapel_Pengampu").Value.ToString())
 
-            txtNIP.Enabled = False
-            btnTambah.Enabled = False
+            AturInput(False)
+            btnTambah.Enabled = True
+            btnSimpan.Enabled = False
             btnUbah.Enabled = True
             btnHapus.Enabled = True
         End If
     End Sub
 
-    ' ==========================================
-    ' 5. CRUD
-    ' ==========================================
-    Sub JalankanQuery(query As String, pesan As String)
-        Try
-            ModuleKoneksi.BukaKoneksi()
-            ModuleKoneksi.Cmd = New MySqlCommand(query, ModuleKoneksi.Conn)
+    ' =================================================================
+    ' 6. CETAK PDF (ANTI CRASH & AMBIGUOUS)
+    ' =================================================================
+    Private Sub btnCetak_Click(sender As Object, e As EventArgs) Handles btnCetak.Click
+        If dgvGuru.Rows.Count = 0 Then MsgBox("Data kosong!", vbExclamation) : Return
 
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@nip", txtNIP.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@nama", txtNama.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@jk", cmbJenisKelamin.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@alamat", txtAlamat.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@telp", txtTelepon.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@email", txtEmail.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@stat", cmbStatus.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@didik", cmbPendidikan.Text)
-            ModuleKoneksi.Cmd.Parameters.AddWithValue("@mapel", cmbMapelPengampu.Text)
-
-            ModuleKoneksi.Cmd.ExecuteNonQuery()
-            MessageBox.Show("Data Berhasil " & pesan)
-            Bersih()
-            TampilData()
-        Catch ex As Exception
-            MessageBox.Show("Gagal Eksekusi: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub btnTambah_Click(sender As Object, e As EventArgs) Handles btnTambah.Click
-        If txtNIP.Text = "" Or txtNama.Text = "" Then
-            MessageBox.Show("NIP dan Nama wajib diisi!")
-            Return
-        End If
-        Dim query As String = "INSERT INTO tbl_guru (NIP, Nama_Guru, Jenis_Kelamin, Alamat, Telepon, Email, Status_Kepegawaian, Pendidikan_Terakhir, Mapel_Pengampu) VALUES (@nip, @nama, @jk, @alamat, @telp, @email, @stat, @didik, @mapel)"
-        JalankanQuery(query, "Ditambahkan")
-    End Sub
-
-    Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
-        If selectedNIP = "" Then Return
-        Dim query As String = "UPDATE tbl_guru SET Nama_Guru=@nama, Jenis_Kelamin=@jk, Alamat=@alamat, Telepon=@telp, Email=@email, Status_Kepegawaian=@stat, Pendidikan_Terakhir=@didik, Mapel_Pengampu=@mapel WHERE NIP=@nip"
-        JalankanQuery(query, "Diubah")
-    End Sub
-
-    Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
-        If selectedNIP = "" Then Return
-        If MessageBox.Show("Hapus Guru ini?", "Konfirmasi", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Try
-                ModuleKoneksi.BukaKoneksi()
-                ModuleKoneksi.Cmd = New MySqlCommand("DELETE FROM tbl_guru WHERE NIP=@nip", ModuleKoneksi.Conn)
-                ModuleKoneksi.Cmd.Parameters.AddWithValue("@nip", selectedNIP)
-                ModuleKoneksi.Cmd.ExecuteNonQuery()
-
-                MessageBox.Show("Data Berhasil Dihapus")
-                Bersih()
-                TampilData()
-            Catch ex As Exception
-                MessageBox.Show("Gagal Hapus: " & ex.Message)
-            End Try
-        End If
-    End Sub
-
-    Private Sub btnBatal_Click(sender As Object, e As EventArgs) Handles btnBatal.Click
-        Bersih()
-    End Sub
-
-    ' ==========================================
-    ' 6. EXPORT PDF
-    ' ==========================================
-    Private Sub btnExportPDF_Click(sender As Object, e As EventArgs) Handles btnExportPDF.Click
-        Dim sfd As New SaveFileDialog()
-        sfd.Filter = "PDF Files|*.pdf"
-        sfd.FileName = "DataGuru_" & DateTime.Now.ToString("yyyyMMdd")
+        Dim sfd As New SaveFileDialog() With {.Filter = "PDF Files|*.pdf", .FileName = "DataGuru_" & DateTime.Now.ToString("yyyyMMdd")}
 
         If sfd.ShowDialog() = DialogResult.OK Then
             Try
-                Dim doc As New Document(PageSize.A4.Rotate(), 10, 10, 10, 10)
-                Dim writer As PdfWriter = PdfWriter.GetInstance(doc, New FileStream(sfd.FileName, FileMode.Create))
+                ' Menggunakan Namespace Lengkap untuk menghindari error "Ambiguous"
+                Dim doc As New iTextSharp.text.Document(iTextSharp.text.PageSize.A4.Rotate(), 10, 10, 10, 10)
+                iTextSharp.text.pdf.PdfWriter.GetInstance(doc, New FileStream(sfd.FileName, FileMode.Create))
                 doc.Open()
 
-                Dim p As New Paragraph("LAPORAN DATA GURU")
-                p.Alignment = Element.ALIGN_CENTER
+                Dim p As New iTextSharp.text.Paragraph("LAPORAN DATA GURU")
+                p.Alignment = iTextSharp.text.Element.ALIGN_CENTER
                 doc.Add(p)
-                doc.Add(New Paragraph(" "))
+                doc.Add(New iTextSharp.text.Paragraph(" "))
 
-                Dim table As New PdfPTable(dgvGuru.Columns.Count)
+                ' Tabel
+                Dim table As New iTextSharp.text.pdf.PdfPTable(dgvGuru.Columns.Count)
                 table.WidthPercentage = 100
 
+                ' Header
                 For Each col As DataGridViewColumn In dgvGuru.Columns
-                    Dim cell As New PdfPCell(New Phrase(col.HeaderText))
-                    cell.BackgroundColor = BaseColor.LIGHT_GRAY
+                    Dim cell As New iTextSharp.text.pdf.PdfPCell(New iTextSharp.text.Phrase(col.HeaderText))
+                    cell.BackgroundColor = iTextSharp.text.BaseColor.LIGHT_GRAY
                     table.AddCell(cell)
                 Next
 
+                ' Isi Data
                 For Each row As DataGridViewRow In dgvGuru.Rows
+                    If row.IsNewRow Then Continue For
+
                     For Each cell As DataGridViewCell In row.Cells
                         table.AddCell(If(cell.Value Is Nothing, "", cell.Value.ToString()))
                     Next
@@ -241,38 +298,40 @@ Public Class UC_DataGuru
 
                 doc.Add(table)
                 doc.Close()
-                MessageBox.Show("Laporan PDF Berhasil Disimpan!")
+                MsgBox("PDF Berhasil Disimpan!", vbInformation)
+                Process.Start(sfd.FileName)
+
             Catch ex As Exception
-                MessageBox.Show("Gagal Export PDF: " & ex.Message)
+                MsgBox("Gagal Cetak: " & ex.Message, vbCritical)
             End Try
         End If
     End Sub
 
+    Private Sub dgvGuru_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvGuru.CellContentClick
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
+
+    End Sub
+
+    Private Sub Label5_Click(sender As Object, e As EventArgs) Handles Label5.Click
+
+    End Sub
+
+    Private Sub Label6_Click(sender As Object, e As EventArgs) Handles Label6.Click
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
+
     Private Sub txtNIP_TextChanged(sender As Object, e As EventArgs) Handles txtNIP.TextChanged
-
-    End Sub
-
-    Private Sub cmbJenisKelamin_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJenisKelamin.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub cmbMapelPengampu_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMapelPengampu.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub cmbSpesialisasi_SelectedIndexChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub txtNama_TextChanged(sender As Object, e As EventArgs) Handles txtNama.TextChanged
-
-    End Sub
-
-    Private Sub txtAlamat_TextChanged(sender As Object, e As EventArgs) Handles txtAlamat.TextChanged
-
-    End Sub
-
-    Private Sub cmbStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbStatus.SelectedIndexChanged
 
     End Sub
 End Class

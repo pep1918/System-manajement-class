@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class UC_DataKelas
     Inherits System.Windows.Forms.UserControl
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,30 +20,25 @@ Partial Class UC_DataKelas
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.btnSimpan = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cmbKelasTujuan = New System.Windows.Forms.ComboBox()
-        Me.cmbTingkat = New System.Windows.Forms.ComboBox()
+        Me.dtpTahunAjaran = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtTahunAjaran = New System.Windows.Forms.TextBox()
         Me.cmbWaliKelas = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.txtNamaKelas = New System.Windows.Forms.TextBox()
+        Me.txtKelas = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnHapus = New System.Windows.Forms.Button()
         Me.btnBatal = New System.Windows.Forms.Button()
         Me.btnUbah = New System.Windows.Forms.Button()
         Me.btnTambah = New System.Windows.Forms.Button()
-        Me.dgvKelas = New System.Windows.Forms.DataGridView()
+        Me.txtCari = New System.Windows.Forms.TextBox()
         Me.lblJudulUC = New System.Windows.Forms.Label()
-        Me.txtCariKelas = New System.Windows.Forms.TextBox()
         Me.Cari = New System.Windows.Forms.Label()
-        Me.lblNamaKelasTerpilih = New System.Windows.Forms.Label()
-        Me.btnPindahSiswa = New System.Windows.Forms.Button()
+        Me.btnCetak = New System.Windows.Forms.Button()
+        Me.dgvKelas = New System.Windows.Forms.DataGridView()
         Me.cmbFilterKelas = New System.Windows.Forms.ComboBox()
         Me.GroupBox1.SuspendLayout()
         CType(Me.dgvKelas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,7 +48,7 @@ Partial Class UC_DataKelas
         '
         Me.btnSimpan.BackColor = System.Drawing.Color.SaddleBrown
         Me.btnSimpan.ForeColor = System.Drawing.Color.White
-        Me.btnSimpan.Location = New System.Drawing.Point(1095, 607)
+        Me.btnSimpan.Location = New System.Drawing.Point(1107, 618)
         Me.btnSimpan.Name = "btnSimpan"
         Me.btnSimpan.Size = New System.Drawing.Size(111, 47)
         Me.btnSimpan.TabIndex = 6
@@ -63,62 +58,30 @@ Partial Class UC_DataKelas
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.SaddleBrown
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.cmbKelasTujuan)
-        Me.GroupBox1.Controls.Add(Me.cmbTingkat)
+        Me.GroupBox1.Controls.Add(Me.dtpTahunAjaran)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.txtTahunAjaran)
         Me.GroupBox1.Controls.Add(Me.cmbWaliKelas)
         Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.txtNamaKelas)
+        Me.GroupBox1.Controls.Add(Me.txtKelas)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.btnHapus)
         Me.GroupBox1.Controls.Add(Me.btnBatal)
         Me.GroupBox1.Controls.Add(Me.btnUbah)
         Me.GroupBox1.Controls.Add(Me.btnTambah)
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 93)
+        Me.GroupBox1.Location = New System.Drawing.Point(12, 104)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(354, 508)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "\"
         '
-        'Label6
+        'dtpTahunAjaran
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.Color.White
-        Me.Label6.Location = New System.Drawing.Point(24, 199)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(41, 16)
-        Me.Label6.TabIndex = 21
-        Me.Label6.Text = "Kelas"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.Color.White
-        Me.Label3.Location = New System.Drawing.Point(24, 156)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(48, 16)
-        Me.Label3.TabIndex = 19
-        Me.Label3.Text = "Tingjat"
-        '
-        'cmbKelasTujuan
-        '
-        Me.cmbKelasTujuan.FormattingEnabled = True
-        Me.cmbKelasTujuan.Location = New System.Drawing.Point(149, 191)
-        Me.cmbKelasTujuan.Name = "cmbKelasTujuan"
-        Me.cmbKelasTujuan.Size = New System.Drawing.Size(189, 24)
-        Me.cmbKelasTujuan.TabIndex = 18
-        '
-        'cmbTingkat
-        '
-        Me.cmbTingkat.FormattingEnabled = True
-        Me.cmbTingkat.Location = New System.Drawing.Point(149, 152)
-        Me.cmbTingkat.Name = "cmbTingkat"
-        Me.cmbTingkat.Size = New System.Drawing.Size(189, 24)
-        Me.cmbTingkat.TabIndex = 16
+        Me.dtpTahunAjaran.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpTahunAjaran.Location = New System.Drawing.Point(148, 77)
+        Me.dtpTahunAjaran.Name = "dtpTahunAjaran"
+        Me.dtpTahunAjaran.Size = New System.Drawing.Size(190, 22)
+        Me.dtpTahunAjaran.TabIndex = 16
         '
         'Label1
         '
@@ -130,17 +93,10 @@ Partial Class UC_DataKelas
         Me.Label1.TabIndex = 15
         Me.Label1.Text = "Kelas"
         '
-        'txtTahunAjaran
-        '
-        Me.txtTahunAjaran.Location = New System.Drawing.Point(149, 76)
-        Me.txtTahunAjaran.Name = "txtTahunAjaran"
-        Me.txtTahunAjaran.Size = New System.Drawing.Size(189, 22)
-        Me.txtTahunAjaran.TabIndex = 14
-        '
         'cmbWaliKelas
         '
         Me.cmbWaliKelas.FormattingEnabled = True
-        Me.cmbWaliKelas.Location = New System.Drawing.Point(149, 113)
+        Me.cmbWaliKelas.Location = New System.Drawing.Point(148, 116)
         Me.cmbWaliKelas.Name = "cmbWaliKelas"
         Me.cmbWaliKelas.Size = New System.Drawing.Size(189, 24)
         Me.cmbWaliKelas.TabIndex = 13
@@ -155,12 +111,12 @@ Partial Class UC_DataKelas
         Me.Label5.TabIndex = 12
         Me.Label5.Text = "WaliKelas"
         '
-        'txtNamaKelas
+        'txtKelas
         '
-        Me.txtNamaKelas.Location = New System.Drawing.Point(149, 39)
-        Me.txtNamaKelas.Name = "txtNamaKelas"
-        Me.txtNamaKelas.Size = New System.Drawing.Size(189, 22)
-        Me.txtNamaKelas.TabIndex = 9
+        Me.txtKelas.Location = New System.Drawing.Point(148, 42)
+        Me.txtKelas.Name = "txtKelas"
+        Me.txtKelas.Size = New System.Drawing.Size(189, 22)
+        Me.txtKelas.TabIndex = 9
         '
         'Label2
         '
@@ -174,7 +130,7 @@ Partial Class UC_DataKelas
         '
         'btnHapus
         '
-        Me.btnHapus.Location = New System.Drawing.Point(41, 444)
+        Me.btnHapus.Location = New System.Drawing.Point(53, 452)
         Me.btnHapus.Name = "btnHapus"
         Me.btnHapus.Size = New System.Drawing.Size(119, 45)
         Me.btnHapus.TabIndex = 3
@@ -183,7 +139,7 @@ Partial Class UC_DataKelas
         '
         'btnBatal
         '
-        Me.btnBatal.Location = New System.Drawing.Point(166, 444)
+        Me.btnBatal.Location = New System.Drawing.Point(203, 452)
         Me.btnBatal.Name = "btnBatal"
         Me.btnBatal.Size = New System.Drawing.Size(119, 45)
         Me.btnBatal.TabIndex = 2
@@ -192,7 +148,7 @@ Partial Class UC_DataKelas
         '
         'btnUbah
         '
-        Me.btnUbah.Location = New System.Drawing.Point(166, 397)
+        Me.btnUbah.Location = New System.Drawing.Point(203, 384)
         Me.btnUbah.Name = "btnUbah"
         Me.btnUbah.Size = New System.Drawing.Size(119, 45)
         Me.btnUbah.TabIndex = 1
@@ -201,23 +157,19 @@ Partial Class UC_DataKelas
         '
         'btnTambah
         '
-        Me.btnTambah.Location = New System.Drawing.Point(41, 397)
+        Me.btnTambah.Location = New System.Drawing.Point(53, 384)
         Me.btnTambah.Name = "btnTambah"
         Me.btnTambah.Size = New System.Drawing.Size(119, 45)
         Me.btnTambah.TabIndex = 0
         Me.btnTambah.Text = "Tambah"
         Me.btnTambah.UseVisualStyleBackColor = True
         '
-        'dgvKelas
+        'txtCari
         '
-        Me.dgvKelas.BackgroundColor = System.Drawing.Color.SaddleBrown
-        Me.dgvKelas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvKelas.Location = New System.Drawing.Point(372, 93)
-        Me.dgvKelas.Name = "dgvKelas"
-        Me.dgvKelas.RowHeadersWidth = 51
-        Me.dgvKelas.RowTemplate.Height = 24
-        Me.dgvKelas.Size = New System.Drawing.Size(846, 508)
-        Me.dgvKelas.TabIndex = 4
+        Me.txtCari.Location = New System.Drawing.Point(731, 55)
+        Me.txtCari.Name = "txtCari"
+        Me.txtCari.Size = New System.Drawing.Size(167, 22)
+        Me.txtCari.TabIndex = 14
         '
         'lblJudulUC
         '
@@ -231,52 +183,44 @@ Partial Class UC_DataKelas
         Me.lblJudulUC.TabIndex = 9
         Me.lblJudulUC.Text = "Data Kelas"
         '
-        'txtCariKelas
-        '
-        Me.txtCariKelas.Location = New System.Drawing.Point(797, 65)
-        Me.txtCariKelas.Name = "txtCariKelas"
-        Me.txtCariKelas.Size = New System.Drawing.Size(202, 22)
-        Me.txtCariKelas.TabIndex = 16
-        '
         'Cari
         '
         Me.Cari.AutoSize = True
-        Me.Cari.Location = New System.Drawing.Point(760, 68)
+        Me.Cari.Location = New System.Drawing.Point(1104, 76)
         Me.Cari.Name = "Cari"
-        Me.Cari.Size = New System.Drawing.Size(31, 16)
+        Me.Cari.Size = New System.Drawing.Size(36, 16)
         Me.Cari.TabIndex = 17
-        Me.Cari.Text = "Cari"
+        Me.Cari.Text = "Filter"
         '
-        'lblNamaKelasTerpilih
+        'btnCetak
         '
-        Me.lblNamaKelasTerpilih.AutoSize = True
-        Me.lblNamaKelasTerpilih.BackColor = System.Drawing.Color.Transparent
-        Me.lblNamaKelasTerpilih.Font = New System.Drawing.Font("Verdana", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNamaKelasTerpilih.ForeColor = System.Drawing.Color.White
-        Me.lblNamaKelasTerpilih.Location = New System.Drawing.Point(421, 29)
-        Me.lblNamaKelasTerpilih.Name = "lblNamaKelasTerpilih"
-        Me.lblNamaKelasTerpilih.Size = New System.Drawing.Size(262, 48)
-        Me.lblNamaKelasTerpilih.TabIndex = 18
-        Me.lblNamaKelasTerpilih.Text = "Data Kelas"
+        Me.btnCetak.BackColor = System.Drawing.Color.SaddleBrown
+        Me.btnCetak.ForeColor = System.Drawing.Color.White
+        Me.btnCetak.Location = New System.Drawing.Point(990, 618)
+        Me.btnCetak.Name = "btnCetak"
+        Me.btnCetak.Size = New System.Drawing.Size(111, 47)
+        Me.btnCetak.TabIndex = 19
+        Me.btnCetak.Text = "Print"
+        Me.btnCetak.UseVisualStyleBackColor = False
         '
-        'btnPindahSiswa
+        'dgvKelas
         '
-        Me.btnPindahSiswa.BackColor = System.Drawing.Color.SaddleBrown
-        Me.btnPindahSiswa.ForeColor = System.Drawing.Color.White
-        Me.btnPindahSiswa.Location = New System.Drawing.Point(978, 607)
-        Me.btnPindahSiswa.Name = "btnPindahSiswa"
-        Me.btnPindahSiswa.Size = New System.Drawing.Size(111, 47)
-        Me.btnPindahSiswa.TabIndex = 19
-        Me.btnPindahSiswa.Text = "Print"
-        Me.btnPindahSiswa.UseVisualStyleBackColor = False
+        Me.dgvKelas.BackgroundColor = System.Drawing.Color.FromArgb(CType(CType(201, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(243, Byte), Integer))
+        Me.dgvKelas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvKelas.Location = New System.Drawing.Point(385, 104)
+        Me.dgvKelas.Name = "dgvKelas"
+        Me.dgvKelas.RowHeadersWidth = 51
+        Me.dgvKelas.RowTemplate.Height = 24
+        Me.dgvKelas.Size = New System.Drawing.Size(943, 508)
+        Me.dgvKelas.TabIndex = 20
         '
         'cmbFilterKelas
         '
         Me.cmbFilterKelas.FormattingEnabled = True
-        Me.cmbFilterKelas.Location = New System.Drawing.Point(1019, 29)
+        Me.cmbFilterKelas.Location = New System.Drawing.Point(1164, 68)
         Me.cmbFilterKelas.Name = "cmbFilterKelas"
-        Me.cmbFilterKelas.Size = New System.Drawing.Size(100, 24)
-        Me.cmbFilterKelas.TabIndex = 19
+        Me.cmbFilterKelas.Size = New System.Drawing.Size(141, 24)
+        Me.cmbFilterKelas.TabIndex = 17
         '
         'UC_DataKelas
         '
@@ -285,16 +229,15 @@ Partial Class UC_DataKelas
         Me.AutoSize = True
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Controls.Add(Me.cmbFilterKelas)
-        Me.Controls.Add(Me.btnPindahSiswa)
-        Me.Controls.Add(Me.lblNamaKelasTerpilih)
+        Me.Controls.Add(Me.dgvKelas)
+        Me.Controls.Add(Me.btnCetak)
         Me.Controls.Add(Me.Cari)
-        Me.Controls.Add(Me.txtCariKelas)
+        Me.Controls.Add(Me.txtCari)
         Me.Controls.Add(Me.lblJudulUC)
         Me.Controls.Add(Me.btnSimpan)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.dgvKelas)
         Me.Name = "UC_DataKelas"
-        Me.Size = New System.Drawing.Size(1243, 688)
+        Me.Size = New System.Drawing.Size(1383, 688)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         CType(Me.dgvKelas, System.ComponentModel.ISupportInitialize).EndInit()
@@ -306,23 +249,18 @@ Partial Class UC_DataKelas
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents cmbWaliKelas As ComboBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents txtNamaKelas As TextBox
+    Friend WithEvents txtKelas As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents btnHapus As Button
+    Friend WithEvents lblJudulUC As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtCari As TextBox
+    Friend WithEvents Cari As Label
+    Friend WithEvents btnCetak As Button
     Friend WithEvents btnBatal As Button
     Friend WithEvents btnUbah As Button
     Friend WithEvents btnTambah As Button
+    Friend WithEvents dtpTahunAjaran As DateTimePicker
     Friend WithEvents dgvKelas As DataGridView
-    Friend WithEvents lblJudulUC As Label
-    Friend WithEvents Label1 As Label
-    Friend WithEvents txtTahunAjaran As TextBox
-    Friend WithEvents txtCariKelas As TextBox
-    Friend WithEvents Cari As Label
-    Friend WithEvents cmbTingkat As ComboBox
-    Friend WithEvents cmbKelasTujuan As ComboBox
-    Friend WithEvents lblNamaKelasTerpilih As Label
-    Friend WithEvents btnPindahSiswa As Button
     Friend WithEvents cmbFilterKelas As ComboBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label3 As Label
 End Class

@@ -151,7 +151,6 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClassLaporan.vb" />
     <Compile Include="FormLogin.Designer.vb">
       <DependentUpon>FormLogin.vb</DependentUpon>
     </Compile>
@@ -186,23 +185,15 @@
     <Compile Include="UserControls\UC_Laporan.Designer.vb">
       <DependentUpon>UC_Laporan.vb</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\UC_Laporan.vb" />
-    <Compile Include="UserControls\UC_ManajemenPelajaran.Designer.vb">
-      <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UC_ManajemenPelajaran.vb">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControls\UC_MataPelajaran.Designer.vb">
-      <DependentUpon>UC_MataPelajaran.vb</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\UC_MataPelajaran.vb">
+    <Compile Include="UserControls\UC_Laporan.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="FormMain.Designer.vb">
       <DependentUpon>FormMain.vb</DependentUpon>
     </Compile>
-    <Compile Include="FormMain.vb" />
+    <Compile Include="FormMain.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -218,6 +209,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserControls\UC_ManajemenPelajaran.Designer.vb">
+      <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UC_ManajemenPelajaran.vb">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -239,12 +236,6 @@
     <EmbeddedResource Include="UserControls\UC_Laporan.resx">
       <DependentUpon>UC_Laporan.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UC_ManajemenPelajaran.resx">
-      <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UserControls\UC_MataPelajaran.resx">
-      <DependentUpon>UC_MataPelajaran.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.vb</DependentUpon>
     </EmbeddedResource>
@@ -253,6 +244,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UC_ManajemenPelajaran.resx">
+      <DependentUpon>UC_ManajemenPelajaran.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
